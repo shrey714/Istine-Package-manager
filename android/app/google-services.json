@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "6484832530",
+    "firebase_url": "https://istine-c91ac-default-rtdb.firebaseio.com",
+    "project_id": "istine-c91ac",
+    "storage_bucket": "istine-c91ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:6484832530:android:8bc3e1bb45947c6a52c3cb",
+        "android_client_info": {
+          "package_name": "com.second"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "6484832530-fmjo4h8vt403sqn8lgj0se7tbve6dru5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDagqK5AU21QBktjhwEWjDx9kaBMPHTalw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "6484832530-fmjo4h8vt403sqn8lgj0se7tbve6dru5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
