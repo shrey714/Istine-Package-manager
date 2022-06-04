@@ -1,39 +1,40 @@
-import React, {useEffect} from 'react';
-import {StyleSheet, SafeAreaView, ScrollView} from 'react-native';
-import Packagebox from './Packagebox';
-import COMPOSER from '../../assets/images/COMPOSER.png';
-import docker from '../../assets/images/docker.png';
-import FLUTTER from '../../assets/images/FLUTTER.png';
-import GO from '../../assets/images/GO.png';
-import NPM from '../../assets/images/NPM.png';
-import PYPI from '../../assets/images/PYPI.png';
+import React from 'react';
+// import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
+import {createSharedElementStackNavigator} from 'react-navigation-shared-element';
+import QuizCards from './QuizCards';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
+import Quiz from '../Quizscreen/Quiz';
+
+const Stack = createSharedElementStackNavigator();
 
 const Second = ({navigation, colorlist}) => {
   let PC = colorlist.Primarycolor;
   let SC = colorlist.Secondarycolor;
   let TC = colorlist.Ternarycolor;
-  useEffect(() => {
-    navigation.setOptions({
-      title: 'Quiz',
-    });
-  });
   return (
-    <>
-      <>
-        <SafeAreaView style={[styles.container, {backgroundColor: PC}]}>
-          <ScrollView contentContainerStyle={styles.contentcontainer}>
-            <Packagebox name={'NPM'} bg={NPM} />
-            <Packagebox name={'FLUTTER'} bg={FLUTTER} />
-            <Packagebox name={'PYPI'} bg={PYPI} />
-            <Packagebox name={'COMPOSER'} bg={COMPOSER} />
-            <Packagebox name={'DOCKER'} bg={docker} />
-            <Packagebox name={'GO'} bg={GO} />
-          </ScrollView>
-        </SafeAreaView>
-      </>
-    </>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: PC,
+        },
+        headerTintColor: '#000',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          fontSize: 25,
+        },
+      }}>
+      <Stack.Screen
+        name="Home"
+        component={QuizCards}
+        options={{title: 'Quiz'}}
+      />
+      <Stack.Screen
+        name="Quiz"
+        options={{headerShown: false}}
+        component={Quiz}
+      />
+    </Stack.Navigator>
   );
 };
 
@@ -46,15 +47,3 @@ Second.prototype = {
 };
 
 export default connect(mapStateToProps)(Second);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  contentcontainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    flexWrap: 'wrap',
-  },
-});

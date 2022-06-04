@@ -14,7 +14,7 @@ import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 const windowWidth = Dimensions.get('screen').width;
 
-const Favbox = ({details, navigation, colorlist}) => {
+const Favbox = ({details, index, navigation, colorlist}) => {
   let PC = colorlist.Primarycolor;
   let SC = colorlist.Secondarycolor;
   let TC = colorlist.Ternarycolor;
@@ -35,56 +35,54 @@ const Favbox = ({details, navigation, colorlist}) => {
   };
 
   return (
-    <>
-      <TouchableOpacity
-        disabled={olele ? true : false}
-        style={[styles.box, {backgroundColor: TC}]}
-        onPress={() =>
-          navigation.navigate('Infoandsearch', {
-            screen: 'Infopage',
-            params: {
-              packagename: details.packagename,
-              packageversion: details.packageversion,
-            },
-          })
-        }>
-        <Animated.View
-          style={[
-            styles.manubox,
-            {
-              opacity: Anim,
-            },
-            {
-              // transform: [{scale: Anim}],
-            },
-          ]}>
-          <TouchableOpacity
-            disabled={olele ? false : true}
-            style={[styles.trashbtn, {borderColor: SC}]}>
-            <Icon name="trash" size={35} color={SC} />
-          </TouchableOpacity>
-        </Animated.View>
-
+    <TouchableOpacity
+      disabled={olele ? true : false}
+      style={[styles.box, {backgroundColor: TC}]}
+      onPress={() =>
+        navigation.navigate('Infoandsearch', {
+          screen: 'Infopage',
+          params: {
+            packagename: details.packagename,
+            packageversion: details.packageversion,
+          },
+        })
+      }>
+      <Animated.View
+        style={[
+          styles.manubox,
+          {
+            opacity: Anim,
+          },
+          {
+            // transform: [{scale: Anim}],
+          },
+        ]}>
         <TouchableOpacity
-          style={[
-            styles.menubtn,
-            {backgroundColor: !olele ? TC : '#000', borderColor: SC},
-          ]}
-          onPress={() => toggleHandle()}>
-          <Icon name="ellipsis-v" size={22} color={SC} />
+          disabled={olele ? false : true}
+          style={[styles.trashbtn, {borderColor: SC}]}>
+          <Icon name="trash" size={35} color={SC} />
         </TouchableOpacity>
+      </Animated.View>
 
-        <View style={styles.packagebox}>
-          <Text style={styles.packagetext}>{details?.packagename}</Text>
-        </View>
-
-        <View style={[styles.versionbox, {backgroundColor: PC}]}>
-          <Text style={[styles.versiontext, {color: SC}]}>
-            {details?.packageversion}
-          </Text>
-        </View>
+      <TouchableOpacity
+        style={[
+          styles.menubtn,
+          {backgroundColor: !olele ? TC : '#000', borderColor: SC},
+        ]}
+        onPress={() => toggleHandle()}>
+        <Icon name="ellipsis-v" size={22} color={SC} />
       </TouchableOpacity>
-    </>
+
+      <View style={styles.packagebox}>
+        <Text style={styles.packagetext}>{details?.packagename}</Text>
+      </View>
+
+      <View style={[styles.versionbox, {backgroundColor: PC}]}>
+        <Text style={[styles.versiontext, {color: SC}]}>
+          {details?.packageversion}
+        </Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 
@@ -100,9 +98,9 @@ export default connect(mapStateToProps)(Favbox);
 
 const styles = StyleSheet.create({
   box: {
-    width: '46%',
+    width: (windowWidth * 46) / 100,
     height: 210,
-    margin: '2%',
+    margin: (windowWidth * 2) / 100,
     alignItems: 'center',
     borderRadius: 6,
     borderWidth: 0.5,

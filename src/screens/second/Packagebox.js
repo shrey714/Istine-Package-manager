@@ -2,24 +2,37 @@ import React from 'react';
 import {
   Text,
   StyleSheet,
+  View,
   Image,
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
+import * as Animatable from 'react-native-animatable';
+import {SharedElement} from 'react-navigation-shared-element';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-const screenWidth = Dimensions.get('screen').width;
+const screenWidth = Dimensions.get('window').width;
 
 const Packagebox = props => {
   let PC = props.colorlist.Primarycolor;
   let SC = props.colorlist.Secondarycolor;
   let TC = props.colorlist.Ternarycolor;
   return (
-    <TouchableOpacity style={styles.packagebox}>
-      <Image source={props.bg} style={styles.back} />
-      <Text style={styles.packagename}>{props.name}</Text>
-    </TouchableOpacity>
+    <Animatable.View animation="zoomIn" duration={500} useNativeDriver={true}>
+      <TouchableOpacity
+        style={styles.packagebox}
+        onPress={() =>
+          props.navigation.navigate('Quiz', {name: props.name, bg: props.bg})
+        }>
+        <View style={[styles.namebox, {backgroundColor: TC}]}>
+          <Text style={styles.packagename}>{props.name}</Text>
+        </View>
+        <SharedElement id={`item.${props.name}.image_url`}>
+          <Image source={props.bg} style={styles.back} />
+        </SharedElement>
+      </TouchableOpacity>
+    </Animatable.View>
   );
 };
 
@@ -42,18 +55,21 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   back: {
-    position: 'absolute',
+    height: 280,
+    // flex: 1,
+    // position: 'absolute',
     width: screenWidth / 2,
     resizeMode: 'cover',
   },
+  namebox: {
+    width: screenWidth / 2,
+    height: 70,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   packagename: {
     color: 'white',
-    width: screenWidth / 2,
     fontSize: screenWidth / 15,
-    lineHeight: 84,
     fontWeight: 'bold',
-    textAlign: 'center',
-    backgroundColor: '#000',
-    opacity: 0.7,
   },
 });

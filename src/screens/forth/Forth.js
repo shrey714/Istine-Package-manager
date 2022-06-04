@@ -6,6 +6,7 @@ import OnlyLoading from '../../components/OnlyLoading';
 import {connect} from 'react-redux';
 import propTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import * as Animatable from 'react-native-animatable';
 
 const Forth = ({navigation, getpackages, packageState, colorlist}) => {
   let PC = colorlist.Primarycolor;
@@ -35,8 +36,15 @@ const Forth = ({navigation, getpackages, packageState, colorlist}) => {
           </View>
         ) : (
           <ScrollView contentContainerStyle={styles.contentcontainer}>
-            {packageState.packages.map(item => (
-              <Favbox details={item} navigation={navigation} key={item.id} />
+            {packageState.packages.map((item, index) => (
+              <Animatable.View
+                animation="zoomIn"
+                duration={800}
+                key={item.id}
+                useNativeDriver={true}
+                delay={index * 200}>
+                <Favbox index={index} details={item} navigation={navigation} />
+              </Animatable.View>
             ))}
           </ScrollView>
         )}

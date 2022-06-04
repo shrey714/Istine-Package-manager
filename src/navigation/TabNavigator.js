@@ -45,10 +45,9 @@ const TabNavigator = ({colorlist}) => {
             tabBarShowLabel: false,
             tabBarStyle: [
               {
-                // display: 'flex',
                 backgroundColor: PC,
                 height: 58,
-                // marginBottom: 0,
+                marginBottom: 0,
                 borderTopWidth: 0.5,
                 borderTopColor: '#000',
               },
@@ -57,7 +56,12 @@ const TabNavigator = ({colorlist}) => {
           };
         }}>
         <Tab.Screen name="First" listeners={btnvibration} component={First} />
-        <Tab.Screen name="Second" listeners={btnvibration} component={Second} />
+        <Tab.Screen
+          name="Second"
+          component={Second}
+          options={{headerShown: false}}
+          listeners={btnvibration}
+        />
         <Tab.Screen
           name="Infoandsearch"
           listeners={btnvibration}

@@ -9,7 +9,7 @@ const TabBarIcon = (focused, color, size, tabname) => {
   if (tabname === 'First') {
     iconName = 'home';
   } else if (tabname === 'Second') {
-    iconName = 'first-order';
+    iconName = 'question-circle';
   } else if (tabname === 'Infoandsearch') {
     iconName = 'wpexplorer';
   } else if (tabname === 'Forth') {

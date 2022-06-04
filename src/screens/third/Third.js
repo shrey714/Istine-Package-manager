@@ -5,9 +5,8 @@ import {
   Dimensions,
   SafeAreaView,
   StyleSheet,
-  ScrollView,
+  Animated,
   TextInput,
-  FlatList,
   Vibration,
 } from 'react-native';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
@@ -19,6 +18,10 @@ import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 const shortid = require('shortid');
 const screenheight = Dimensions.get('screen').height;
+const marginBottomItem = 20;
+const paddingItem = 10;
+const imgHeight = 100;
+const sizeOfItem = imgHeight + paddingItem * 2 + marginBottomItem;
 
 const Third = ({navigation, colorlist}) => {
   let PC = colorlist.Primarycolor;
@@ -41,27 +44,32 @@ const Third = ({navigation, colorlist}) => {
     }
     setloading(false);
   };
-
+  const Yscroll = React.useRef(new Animated.Value(0)).current;
   // useEffect(() => {
   //   fetchdetails();
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [startsearch]);
 
-  const renderaccordian = item => {
+  const renderaccordian = (item, index) => {
+    const scale = Yscroll.interpolate({
+      inputRange: [-1, 0, sizeOfItem * index, sizeOfItem * (index + 2)],
+      outputRange: [1, 1, 1, 0],
+    });
     return (
-      <Accordion navigation={navigation} key={shortid.generate()} item={item} />
+      <Animated.View
+        style={[
+          {
+            transform: [{scale}],
+          },
+        ]}>
+        <Accordion
+          index={index}
+          navigation={navigation}
+          key={index}
+          item={item}
+        />
+      </Animated.View>
     );
-    // return (
-    //   <View
-    //     key={shortid.generate()}
-    //     style={{
-    //       width: '90%',
-    //       height: 150,
-    //       backgroundColor: '#ADADAD',
-    //       margin: 10,
-    //       alignSelf: 'center',
-    //     }}></View>
-    // );
   };
 
   return (
@@ -69,7 +77,12 @@ const Third = ({navigation, colorlist}) => {
       <SafeAreaView style={[styles.container, {backgroundColor: PC}]}>
         {!loading ? (
           <NativeBaseProvider>
-            <FlatList
+            <Animated.FlatList
+              onScroll={Animated.event(
+                [{nativeEvent: {contentOffset: {y: Yscroll}}}],
+                {useNativeDriver: true},
+              )}
+              initialScrollIndex={0}
               contentContainerStyle={{
                 paddingBottom: getStatusBarHeight() + 5,
                 marginTop: getStatusBarHeight(),
@@ -81,7 +94,7 @@ const Third = ({navigation, colorlist}) => {
                     style={[styles.searchbox, {backgroundColor: TC}]}
                     value={inputSearch}
                     onChangeText={setInputSearch}
-                    onEndEditing={() => {
+                    onSubmitEditing={() => {
                       // setstartsearch(inputSearch);
                       fetchdetails();
                     }}
@@ -90,7 +103,7 @@ const Third = ({navigation, colorlist}) => {
                 </View>
               }
               data={details}
-              renderItem={({item}) => renderaccordian(item)}
+              renderItem={({item, index}) => renderaccordian(item, index)}
               stickyHeaderIndices={[0]}
               keyExtractor={() => shortid.generate()}
               showsVerticalScrollIndicator={false}

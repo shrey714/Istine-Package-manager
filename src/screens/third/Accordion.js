@@ -7,7 +7,9 @@ import {
   LayoutAnimation,
   Platform,
   UIManager,
+  TouchableOpacity,
 } from 'react-native';
+// import * as Animatable from 'react-native-animatable';
 import {Divider, Box, Heading, Button, Flex} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import propTypes from 'prop-types';
@@ -49,8 +51,15 @@ const Accordion = props => {
   };
 
   return (
-    <Box style={[styles.box, {backgroundColor: PC}]}>
-      <Button
+    // <Animatable.View
+    //   animation="zoomIn"
+    //   duration={500}
+    //   key={props.index.id}
+    //   useNativeDriver={true}
+    //   // delay={index * 100}
+    // >
+    <View style={[styles.box, {backgroundColor: PC}]}>
+      <TouchableOpacity
         style={[
           {
             backgroundColor: TC,
@@ -66,7 +75,7 @@ const Accordion = props => {
         <Heading style={[styles.firsttext, {color: SC}]}>
           {props.item.package.name}
         </Heading>
-      </Button>
+      </TouchableOpacity>
       <Divider my="2" />
       <Flex
         mx="3"
@@ -103,7 +112,8 @@ const Accordion = props => {
           </Text>
         </View>
       )}
-    </Box>
+    </View>
+    //</Animatable.View>
   );
 };
 
