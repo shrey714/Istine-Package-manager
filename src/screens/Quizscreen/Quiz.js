@@ -336,7 +336,7 @@ const Quiz = ({route, colorlist}) => {
           <View
             style={{
               flex: 1,
-              backgroundColor: PC,
+              backgroundColor: 'rgba(0,0,0,0.6)',
               hardwareAccelerated: true,
               alignItems: 'center',
               justifyContent: 'center',
@@ -350,7 +350,12 @@ const Quiz = ({route, colorlist}) => {
                 padding: 20,
                 alignItems: 'center',
               }}>
-              <Text style={{fontSize: 30, fontWeight: 'bold'}}>
+              <Text
+                style={{
+                  fontSize: 30,
+                  fontWeight: 'bold',
+                  color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+                }}>
                 {score > allQuestions.length / 2 ? 'Congratulations!' : 'Oops!'}
               </Text>
 
@@ -372,7 +377,7 @@ const Quiz = ({route, colorlist}) => {
                 <Text
                   style={{
                     fontSize: 20,
-                    color: '#000',
+                    color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
                   }}>
                   / {allQuestions.length}
                 </Text>
@@ -389,7 +394,7 @@ const Quiz = ({route, colorlist}) => {
                 <Text
                   style={{
                     textAlign: 'center',
-                    color: '#fff',
+                    color: TC === '#000' ? '#fff' : '#000',
                     fontSize: 20,
                   }}>
                   Retry Quiz

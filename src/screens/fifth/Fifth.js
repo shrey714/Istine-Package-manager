@@ -14,7 +14,7 @@ const Fifth = ({navigation, colorlist}) => {
   let TC = colorlist.Ternarycolor;
   useEffect(() => {
     navigation.setOptions({
-      title: 'settings',
+      title: 'Settings',
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

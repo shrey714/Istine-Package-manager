@@ -4,7 +4,7 @@ import TabNavigator from './TabNavigator';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Accdetails from '../components/Accdetails';
-import {Dimensions} from 'react-native';
+import {Dimensions, useWindowDimensions} from 'react-native';
 const windowWidth = Dimensions.get('window').width;
 const Drawer = createDrawerNavigator();
 
@@ -13,6 +13,8 @@ const DrawerNavigator = ({colorlist}) => {
   let SC = colorlist.Secondarycolor;
   let TC = colorlist.Ternarycolor;
 
+  const winwidth = useWindowDimensions();
+
   return (
     <>
       <Drawer.Navigator
@@ -20,7 +22,7 @@ const DrawerNavigator = ({colorlist}) => {
           return <Accdetails />;
         }}
         screenOptions={{
-          drawerType: 'back',
+          drawerType: winwidth.width >= 810 ? 'permanent' : 'back',
           headerShown: false,
           swipeEnabled: true,
           swipeEdgeWidth: windowWidth / 3,

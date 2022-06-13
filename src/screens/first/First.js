@@ -28,7 +28,7 @@ const First = ({navigation, colorlist, onPress, initialState}) => {
     // console.log(colorlist.colours);
     navigation.setOptions({
       title: greettext,
-      headerRight: () => <FirstHeader SC={SC} />,
+      headerRight: () => <FirstHeader />,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -52,7 +52,9 @@ const First = ({navigation, colorlist, onPress, initialState}) => {
             space={8}
             overflow="hidden"
             rounded="md"
-            borderColor="#000">
+            borderColor={
+              PC === '#000' || PC === '#1F1B24' ? '#F9F9F9' : '#000'
+            }>
             <Skeleton h="40" isLoaded={isLoaded}>
               <Image
                 alt="image here"
@@ -63,7 +65,13 @@ const First = ({navigation, colorlist, onPress, initialState}) => {
               />
             </Skeleton>
             <Skeleton.Text lines={4} px="4" isLoaded={isLoaded}>
-              <Text px="4" fontSize={'md'} lineHeight={'20px'}>
+              <Text
+                style={{
+                  color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+                }}
+                px="4"
+                fontSize={'md'}
+                lineHeight={'20px'}>
                 {item.data}
               </Text>
             </Skeleton.Text>
@@ -79,7 +87,9 @@ const First = ({navigation, colorlist, onPress, initialState}) => {
                 onPress={() => {
                   Linking.openURL(item.url);
                 }}>
-                Explore
+                <Text style={{color: TC === '#000' ? '#fff' : '#000'}}>
+                  Explore
+                </Text>
               </Button>
             </Skeleton>
           </VStack>

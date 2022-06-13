@@ -37,7 +37,13 @@ const Favbox = ({details, index, navigation, colorlist}) => {
   return (
     <TouchableOpacity
       disabled={olele ? true : false}
-      style={[styles.box, {backgroundColor: TC}]}
+      style={[
+        styles.box,
+        {
+          backgroundColor: TC,
+          borderColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+        },
+      ]}
       onPress={() =>
         navigation.navigate('Infoandsearch', {
           screen: 'Infopage',
@@ -74,7 +80,9 @@ const Favbox = ({details, index, navigation, colorlist}) => {
       </TouchableOpacity>
 
       <View style={styles.packagebox}>
-        <Text style={styles.packagetext}>{details?.packagename}</Text>
+        <Text style={[styles.packagetext, {color: SC}]}>
+          {details?.packagename}
+        </Text>
       </View>
 
       <View style={[styles.versionbox, {backgroundColor: PC}]}>
@@ -98,17 +106,17 @@ export default connect(mapStateToProps)(Favbox);
 
 const styles = StyleSheet.create({
   box: {
+    elevation: 2,
     width: (windowWidth * 46) / 100,
     height: 210,
     margin: (windowWidth * 2) / 100,
     alignItems: 'center',
     borderRadius: 6,
-    borderWidth: 0.5,
+    borderWidth: 1.1,
     overflow: 'hidden',
   },
   packagetext: {
-    color: '#212121',
-    fontSize: 24,
+    fontSize: 25,
   },
   versiontext: {
     fontSize: 28,

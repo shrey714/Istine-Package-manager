@@ -34,13 +34,13 @@ const styles = StyleSheet.create({
     borderRadius: 150,
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowOpacity: 0,
-    shadowRadius: 0,
+    // shadowColor: '#000',
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 0,
+    // },
+    // shadowOpacity: 0,
+    // shadowRadius: 0,
     elevation: 2,
   },
 });

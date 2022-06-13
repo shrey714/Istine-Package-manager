@@ -88,10 +88,24 @@ const Third = ({navigation, colorlist}) => {
                 marginTop: getStatusBarHeight(),
               }}
               ListHeaderComponent={
-                <View style={[styles.heading, {backgroundColor: PC}]}>
+                <View
+                  style={[
+                    styles.heading,
+                    {
+                      backgroundColor: PC,
+                      borderColor:
+                        PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+                    },
+                  ]}>
                   <TextInput
-                    placeholderTextColor={'gray'}
-                    style={[styles.searchbox, {backgroundColor: TC}]}
+                    placeholderTextColor={TC === '#000' ? '#ADADAD' : 'gray'}
+                    style={[
+                      styles.searchbox,
+                      {
+                        backgroundColor: TC,
+                        color: TC === '#000' ? '#fff' : '#000',
+                      },
+                    ]}
                     value={inputSearch}
                     onChangeText={setInputSearch}
                     onSubmitEditing={() => {
@@ -142,7 +156,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderBottomWidth: 0.5,
-    borderColor: '#000',
   },
   emptybox: {
     marginTop: (screenheight - 250) / 2,
@@ -150,7 +163,6 @@ const styles = StyleSheet.create({
   },
   searchbox: {
     width: '95.23%',
-    color: '#000',
     marginHorizontal: 40,
     height: 40,
     paddingLeft: 10,

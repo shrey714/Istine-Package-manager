@@ -26,7 +26,13 @@ const Packagebox = props => {
           props.navigation.navigate('Quiz', {name: props.name, bg: props.bg})
         }>
         <View style={[styles.namebox, {backgroundColor: TC}]}>
-          <Text style={styles.packagename}>{props.name}</Text>
+          <Text
+            style={[
+              styles.packagename,
+              {color: TC === '#000' ? '#fff' : '#000'},
+            ]}>
+            {props.name}
+          </Text>
         </View>
         <SharedElement id={`item.${props.name}.image_url`}>
           <Image source={props.bg} style={styles.back} />
@@ -68,7 +74,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   packagename: {
-    color: 'white',
     fontSize: screenWidth / 15,
     fontWeight: 'bold',
   },

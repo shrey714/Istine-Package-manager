@@ -40,7 +40,11 @@ const Settings = ({signOut, navigation, colorlist}) => {
       <ScrollView
         contentContainerStyle={[
           styles.settingsbox,
-          {flexGrow: 1, backgroundColor: TC},
+          {
+            flexGrow: 1,
+            backgroundColor: TC,
+            borderColor: TC === '#000' ? '#fff' : '#000',
+          },
         ]}>
         <View style={styles.bottombox}>
           <Image source={LOGO} style={styles.image} />
@@ -49,26 +53,72 @@ const Settings = ({signOut, navigation, colorlist}) => {
           <TouchableOpacity
             disabled={true}
             onPress={() => navigation.navigate('Sett1')}
-            style={styles.settings}>
-            <Icon style={styles.icon} name="bell" size={18} color={SC} />
-            <Text style={[styles.text, {color: SC}]}>Notifications</Text>
+            style={[styles.settings, {backgroundColor: PC}]}>
+            <Icon
+              style={styles.icon}
+              name="bell"
+              size={18}
+              color={PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'}
+            />
+            <Text
+              style={[
+                styles.text,
+                {color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'},
+              ]}>
+              Notifications
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => navigation.navigate('Sett2')}
-            style={styles.settings}>
-            <Icon2 style={styles.icon} name="palette" size={18} color={SC} />
-            <Text style={[styles.text, {color: SC}]}>Theme</Text>
+            style={[styles.settings, {backgroundColor: PC}]}>
+            <Icon2
+              style={styles.icon}
+              name="palette"
+              size={18}
+              color={PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'}
+            />
+            <Text
+              style={[
+                styles.text,
+                {color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'},
+              ]}>
+              Theme
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             disabled={true}
             onPress={() => navigation.navigate('Sett3')}
-            style={styles.settings}>
-            <Icon3 style={styles.icon} name="bug-report" size={18} color={SC} />
-            <Text style={[styles.text, {color: SC}]}>Bug Report</Text>
+            style={[styles.settings, {backgroundColor: PC}]}>
+            <Icon3
+              style={styles.icon}
+              name="bug-report"
+              size={18}
+              color={PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'}
+            />
+            <Text
+              style={[
+                styles.text,
+                {color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'},
+              ]}>
+              Bug Report
+            </Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => signOut()} style={styles.settings}>
-            <Icon style={styles.icon} name="sign-out" size={18} color={SC} />
-            <Text style={[styles.text, {color: SC}]}>Sign Out</Text>
+          <TouchableOpacity
+            onPress={() => signOut()}
+            style={[styles.settings, {backgroundColor: PC}]}>
+            <Icon
+              style={styles.icon}
+              name="sign-out"
+              size={18}
+              color={PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'}
+            />
+            <Text
+              style={[
+                styles.text,
+                {color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'},
+              ]}>
+              Sign Out
+            </Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -98,20 +148,20 @@ const styles = StyleSheet.create({
   },
   settingsbox: {
     width: '100%',
-    borderColor: '#000',
-    borderWidth: 0.5,
+    borderWidth: 1,
     borderRadius: 8,
     padding: 10,
     overflow: 'hidden',
     justifyContent: 'space-between',
   },
   settings: {
+    elevation: 2,
     width: '100%',
     height: 50,
     borderRadius: 4,
     borderColor: '#000',
     backgroundColor: '#fff',
-    borderWidth: 0.5,
+    borderWidth: 1,
     marginVertical: 5,
     flexDirection: 'row',
     alignItems: 'center',

@@ -1,8 +1,12 @@
 import React from 'react';
-import {TouchableOpacity, Text, StyleSheet, Vibration} from 'react-native';
+import {TouchableOpacity, StyleSheet, Vibration} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import propTypes from 'prop-types';
+import {connect} from 'react-redux';
 
-const FirstHeader = ({SC}) => {
+const FirstHeader = ({colorlist}) => {
+  let SC = colorlist.Secondarycolor;
+
   return (
     <TouchableOpacity
       style={styles.buttonarea}
@@ -12,7 +16,15 @@ const FirstHeader = ({SC}) => {
   );
 };
 
-export default FirstHeader;
+const mapStateToProps = state => ({
+  colorlist: state.colorreducer.colours,
+});
+
+FirstHeader.prototype = {
+  colorlist: propTypes.object.isRequired,
+};
+export default connect(mapStateToProps)(FirstHeader);
+
 const styles = StyleSheet.create({
   buttonarea: {
     marginRight: 8,

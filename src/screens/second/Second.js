@@ -17,10 +17,13 @@ const Second = ({navigation, colorlist}) => {
       screenOptions={{
         headerStyle: {
           backgroundColor: PC,
+          borderBottomWidth: 0.5,
+          borderBottomColor:
+            PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
         },
-        headerTintColor: '#000',
+        headerTintColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
         headerTitleStyle: {
-          fontWeight: 'bold',
+          fontWeight: '200',
           fontSize: 25,
         },
       }}>

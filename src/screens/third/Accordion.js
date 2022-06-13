@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 // import * as Animatable from 'react-native-animatable';
-import {Divider, Box, Heading, Button, Flex} from 'native-base';
+import {Divider, Heading, Flex} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
@@ -58,7 +58,14 @@ const Accordion = props => {
     //   useNativeDriver={true}
     //   // delay={index * 100}
     // >
-    <View style={[styles.box, {backgroundColor: PC}]}>
+    <View
+      style={[
+        styles.box,
+        {
+          backgroundColor: PC,
+          borderColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+        },
+      ]}>
       <TouchableOpacity
         style={[
           {
@@ -72,7 +79,9 @@ const Accordion = props => {
             packageversion: props.item.package.version,
           })
         }>
-        <Heading style={[styles.firsttext, {color: SC}]}>
+        <Heading
+          isTruncated
+          style={[styles.firsttext, {color: TC === SC ? '#000' : SC}]}>
           {props.item.package.name}
         </Heading>
       </TouchableOpacity>
@@ -84,10 +93,20 @@ const Accordion = props => {
         alignItems="center"
         h="60">
         <View style={styles.secondbox}>
-          <Heading style={styles.secondtext}>
+          <Heading
+            isTruncated
+            style={[
+              styles.secondtext,
+              {color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'},
+            ]}>
             Latest Version : {props.item.package.version}
           </Heading>
-          <Heading style={styles.secondtext}>
+          <Heading
+            isTruncated
+            style={[
+              styles.secondtext,
+              {color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'},
+            ]}>
             Released Date :{' '}
             {props.item.package.date
               .slice(0, 10)
@@ -106,8 +125,19 @@ const Accordion = props => {
         </Pressable>
       </Flex>
       {expanded && (
-        <View style={styles.expandbox}>
-          <Text style={styles.expandtext}>
+        <View
+          style={[
+            styles.expandbox,
+            {
+              borderTopColor:
+                PC === '#000' || PC === '#1F1B24' ? '#9c9c9c' : '#636363',
+            },
+          ]}>
+          <Text
+            style={[
+              styles.expandtext,
+              {color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'},
+            ]}>
             {props.item.package.description}
           </Text>
         </View>
@@ -163,19 +193,16 @@ const styles = StyleSheet.create({
   },
   secondtext: {
     fontSize: 18,
-    color: '#000',
     fontWeight: '500',
   },
   expandbox: {
     marginTop: 8,
     width: '100%',
     borderTopWidth: 0.5,
-    borderTopColor: '#000',
     paddingTop: 8,
   },
   expandtext: {
     fontSize: 17,
     fontWeight: '400',
-    color: '#212121',
   },
 });

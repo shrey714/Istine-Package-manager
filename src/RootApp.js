@@ -32,10 +32,19 @@ const RootApp = ({authState, colorlist}) => {
       });
     }
   };
-  changeNavigationBarColor('black', true, true);
+  // changeNavigationBarColor(
+  //   colorScheme === 'light' ? 'white' : 'black',
+  //   true,
+  //   true,
+  // );
+  changeNavigationBarColor(
+    PC === '#000' || PC === '#1F1B24' ? 'black' : 'white',
+    true,
+    true,
+  );
   useEffect(() => {
     StatusBar.setBarStyle(
-      colorScheme === 'light' ? 'dark-content' : 'light-content',
+      PC === '#000' || PC === '#1F1B24' ? 'light-content' : 'dark-content',
     );
 
     const susbcriber = auth().onAuthStateChanged(onAuthStateChanged);
@@ -53,13 +62,17 @@ const RootApp = ({authState, colorlist}) => {
         onReady={async () => {
           SplashScreen.hide();
           StatusBar.setBarStyle(
-            colorScheme === 'light' ? 'dark-content' : 'light-content',
+            PC === '#000' || PC === '#1F1B24'
+              ? 'light-content'
+              : 'dark-content',
           );
         }}>
         <StatusBar
           translucent={true}
           backgroundColor={PC}
-          barStyle={colorScheme === 'light' ? 'dark-content' : 'light-content'}
+          barStyle={
+            PC === '#000' || PC === '#1F1B24' ? 'light-content' : 'dark-content'
+          }
           // animated={true}
         />
         <Stack.Navigator screenOptions={{headerShown: false}}>

@@ -1,27 +1,10 @@
 const ColorTheme = {
-  colour1: [
-    '#000',
-    '#fff',
-    '#ADADAD',
-    '#659dbd',
-    '#8ee4af',
-    '#97caef',
-    '#c2cad0',
-    '#1f2833',
-    '#eae7dc',
-  ],
-  colour2: ['#fff', '#900', '#2f2fa2', '#8ee4af', '#97caef', '#eae7dc'],
-  colour3: [
-    '#000',
-    '#fff',
-    '#ADADAD',
-    '#659dbd',
-    '#8ee4af',
-    '#97caef',
-    '#c2cad0',
-    '#1f2833',
-    '#eae7dc',
-  ],
+  colour1: ['#000', '#1F1B24', '#949398FF', '#CDF0EA', '#F9F9F9', '#ffffff'],
+  colour2: ['#ffffff', '#900', '#F4DF4EFF', '#00239CFF', '#006B38FF'],
+  colour3: ['#000', '#ADADAD', '#8ee4af', '#97caef', '#eae7dc', '#fff'],
 };
 
 export default ColorTheme;
+
+// color: TC === '#000' ? '#fff' : '#000'
+// PC === '#000' || PC==='#1F1B24' ? '#fff' : '#000'

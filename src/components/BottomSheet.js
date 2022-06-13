@@ -47,7 +47,13 @@ const BottomSheett = props => {
         }}
         key={shortid.generate()}
         style={[styles.box, {backgroundColor: PC}]}>
-        <Text style={styles.text}>{item}</Text>
+        <Text
+          style={[
+            styles.text,
+            {color: PC === '#000' || PC === '#1f1b24' ? '#fff' : '#000'},
+          ]}>
+          {item}
+        </Text>
       </TouchableOpacity>
     ),
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -99,6 +105,5 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 26,
     fontWeight: 'bold',
-    color: '#000',
   },
 });

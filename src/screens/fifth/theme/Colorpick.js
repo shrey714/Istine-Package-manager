@@ -66,10 +66,17 @@ function ColorPickerDemo({type, setPST, colorlist, ColorTheme}) {
 
   return (
     <View style={[styles.container]}>
-      <Text style={[styles.text, {alignSelf: 'flex-start', color: SC}]}>
+      {/* <Text style={[styles.text, {alignSelf: 'flex-start', color: SC}]}>
         {type}
-      </Text>
-      <View style={[styles.wrapper, {backgroundColor: `${selectedColor}`}]}>
+      </Text> */}
+      <View
+        style={[
+          styles.wrapper,
+          {
+            backgroundColor: `${selectedColor}`,
+            borderColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+          },
+        ]}>
         <ColorPicker
           colors={ColorTheme}
           selectedColor={selectedColor}
@@ -77,9 +84,19 @@ function ColorPickerDemo({type, setPST, colorlist, ColorTheme}) {
         />
       </View>
       <TouchableOpacity
-        style={[styles.setbox, {backgroundColor: btnback}]}
+        style={[
+          styles.setbox,
+          {
+            backgroundColor: btnback,
+            borderColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+          },
+        ]}
         onPress={letsadd}>
-        <Icon name="check" size={30} color={SC} />
+        <Icon
+          name="circle-o"
+          size={30}
+          color={type === 'Secondary' ? '#000' : SC}
+        />
       </TouchableOpacity>
     </View>
   );
@@ -100,6 +117,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(ColorPickerDemo);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -116,6 +134,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   setbox: {
+    elevation: 5,
     width: 60,
     marginTop: 10,
     height: 60,

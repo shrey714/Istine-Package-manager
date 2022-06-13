@@ -33,24 +33,59 @@ const Accdetails = ({getpackages, packageState, colorlist}) => {
       <View style={[styles.container, {backgroundColor: PC}]}>
         <ScrollView
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={[styles.settingsbox, {backgroundColor: TC}]}>
+          contentContainerStyle={[
+            styles.settingsbox,
+            {
+              backgroundColor: TC,
+              borderColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+            },
+          ]}>
           <View style={styles.bottombox}>
             <Image source={LOGO} style={styles.image} />
           </View>
-          <View style={styles.settings}>
-            <Icon style={styles.icon} name="user-o" size={18} color={SC} />
-            <Text numberOfLines={1} style={[styles.text, {color: SC}]}>
+          <View
+            style={[
+              styles.settings,
+              {
+                backgroundColor: PC,
+                borderColor: TC === '#000' ? '#fff' : '#000',
+              },
+            ]}>
+            <Icon
+              style={styles.icon}
+              name="user-o"
+              size={18}
+              color={PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'}
+            />
+            <Text
+              numberOfLines={1}
+              style={[
+                styles.text,
+                {color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'},
+              ]}>
               {firebase.auth()._user.email}
             </Text>
           </View>
-          <View style={styles.settings}>
+          <View
+            style={[
+              styles.settings,
+              {
+                backgroundColor: PC,
+                borderColor: TC === '#000' ? '#fff' : '#000',
+              },
+            ]}>
             <Icon
               style={styles.icon}
               name="dot-circle-o"
               size={18}
-              color={SC}
+              color={PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'}
             />
-            <Text numberOfLines={1} style={[styles.text, {color: SC}]}>
+            <Text
+              numberOfLines={1}
+              style={[
+                styles.text,
+                {color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'},
+              ]}>
               Favourite : {obj.added}
             </Text>
           </View>
@@ -59,7 +94,13 @@ const Accdetails = ({getpackages, packageState, colorlist}) => {
         <View style={[styles.bottomsettings]}>
           <Text
             numberOfLines={1}
-            style={[styles.text, {fontSize: 15, color: '#212121'}]}>
+            style={[
+              styles.text,
+              {
+                fontSize: 15,
+                color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+              },
+            ]}>
             {firebase.auth()._user.uid}
           </Text>
         </View>
@@ -93,7 +134,6 @@ const styles = StyleSheet.create({
   settingsbox: {
     flexGrow: 1,
     width: '100%',
-    borderColor: '#000',
     borderWidth: 1,
     borderRadius: 8,
     overflow: 'hidden',
@@ -113,18 +153,19 @@ const styles = StyleSheet.create({
   settings: {
     width: '100%',
     height: 50,
+    elevation: 2,
     overflow: 'hidden',
     borderRadius: 4,
-    borderColor: '#000',
     borderWidth: 1,
     marginVertical: 5,
-    paddingRight: '3%',
+    paddingRight: 20,
     flexDirection: 'row',
     alignItems: 'center',
   },
   text: {
     fontWeight: 'bold',
     fontSize: 18,
+    width: '80%',
   },
   icon: {
     marginHorizontal: 10,

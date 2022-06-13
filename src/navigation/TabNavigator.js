@@ -35,9 +35,11 @@ const TabNavigator = ({colorlist}) => {
             headerStyle: {
               backgroundColor: PC,
               borderBottomWidth: 0.5,
-              borderBottomColor: '#000',
+              borderBottomColor:
+                PC === '#000' || PC === '#1F1B24' ? '#ADADAD' : '#000',
             },
-            headerTintColor: '#000',
+            headerTintColor:
+              PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
             headerTitleStyle: {
               fontWeight: '200',
               fontSize: 25,
@@ -49,7 +51,8 @@ const TabNavigator = ({colorlist}) => {
                 height: 58,
                 marginBottom: 0,
                 borderTopWidth: 0.5,
-                borderTopColor: '#000',
+                borderTopColor:
+                  PC === '#000' || PC === '#1F1B24' ? '#ADADAD' : '#000',
               },
               null,
             ],
