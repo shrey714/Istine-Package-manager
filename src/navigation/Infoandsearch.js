@@ -18,9 +18,10 @@ const Infoandsearch = ({navigation, colorlist}) => {
         headerStyle: {
           backgroundColor: PC,
           borderBottomWidth: 0.5,
-          borderBottomColor: '#000',
+          borderBottomColor:
+            PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
         },
-        headerTintColor: '#000',
+        headerTintColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
         headerTitleStyle: {
           fontWeight: '200',
           fontSize: 25,
@@ -29,14 +30,14 @@ const Infoandsearch = ({navigation, colorlist}) => {
       initialRouteName="Third">
       <Stack.Screen
         name="Third"
-        options={{headerShown: false}}
+        options={{headerShown: false, cardStyle: {backgroundColor: PC}}}
         component={Third}
       />
       <Stack.Screen
         name="Infopage"
         options={{
-          presentation: 'transparentModal',
           ...TransitionPresets.ModalSlideFromBottomIOS,
+          cardStyle: {backgroundColor: PC},
         }}
         component={Infopage}
       />

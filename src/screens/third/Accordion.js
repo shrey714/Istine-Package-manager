@@ -63,6 +63,7 @@ const Accordion = props => {
         styles.box,
         {
           backgroundColor: PC,
+          elevation: 2,
           borderColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
         },
       ]}>

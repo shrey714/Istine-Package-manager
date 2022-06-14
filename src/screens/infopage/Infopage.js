@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
-import {View, ScrollView, StyleSheet, Text} from 'react-native';
+import {View} from 'react-native';
 import BottomSheet from '../../components/BottomSheet';
 import axios from 'axios';
 import OnlyLoading from '../../components/OnlyLoading';
@@ -62,45 +62,19 @@ const Infopage = ({route, navigation, colorlist}) => {
   }, [route]);
   return details ? (
     <>
-      <View style={[styles.contentbox, {backgroundColor: PC}]}>
-        <ScrollView
-          contentContainerStyle={[styles.container, {backgroundColor: PC}]}>
-          {maindata ? (
-            <NPMscreen detailsdata={maindata} readme={readme} />
-          ) : (
-            <></>
-          )}
-        </ScrollView>
-        <BottomSheet
-          packagename={packagename}
-          navigation={navigation}
-          package={details}
-        />
-      </View>
+      <NPMscreen detailsdata={maindata} readme={readme} />
+      {/* <BottomSheet
+        packagename={packagename}
+        navigation={navigation}
+        package={details}
+      /> */}
     </>
   ) : (
-    <View
-      style={[
-        styles.contentbox,
-        {alignItems: 'center', justifyContent: 'center'},
-      ]}>
+    <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
       <OnlyLoading />
     </View>
   );
 };
-const styles = StyleSheet.create({
-  contentbox: {
-    flex: 1,
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    fontSize: 40,
-  },
-});
 
 const mapStateToProps = state => ({
   colorlist: state.colorreducer.colours,

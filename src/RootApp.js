@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {StatusBar, Appearance} from 'react-native';
+import {StatusBar} from 'react-native';
 import changeNavigationBarColor from 'react-native-navigation-bar-color';
 import DrawerNavigator from './navigation/DrawerNavigator';
 import AuthNavigation from './navigation/AuthNavigation';
@@ -12,7 +12,7 @@ import propTypes from 'prop-types';
 import SplashScreen from 'react-native-splash-screen';
 import auth from '@react-native-firebase/auth';
 import {NavigationContainer} from '@react-navigation/native';
-const colorScheme = Appearance.getColorScheme();
+// const colorScheme = Appearance.getColorScheme();
 
 const RootApp = ({authState, colorlist}) => {
   const dispatch = useDispatch();

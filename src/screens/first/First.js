@@ -44,7 +44,10 @@ const First = ({navigation, colorlist, onPress, initialState}) => {
 
   const Shrey = item => {
     return (
-      <Center key={shortid.generate()} w="100%" style={{marginTop: 10}}>
+      <Center
+        key={shortid.generate()}
+        w="100%"
+        style={{marginTop: 10, elevation: 2}}>
         <Box w="90%" maxWidth="400">
           <VStack
             maxWidth="400"
@@ -83,7 +86,7 @@ const First = ({navigation, colorlist, onPress, initialState}) => {
               isLoaded={isLoaded}>
               <Button
                 m="4"
-                style={{backgroundColor: TC}}
+                style={{backgroundColor: TC, elevation: 2}}
                 onPress={() => {
                   Linking.openURL(item.url);
                 }}>

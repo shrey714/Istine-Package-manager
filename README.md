@@ -9,6 +9,13 @@
   <img src="https://img.shields.io/badge/license-MIT-red" />
 </p>
 
+## DOWNLOAD APK
+
+With a single click of the button below, and download ISTINE apk(suitable for your mobile architecture).
+<!-- BEGIN LATEST DOWNLOAD BUTTON -->
+[![Download zip](https://custom-icon-badges.herokuapp.com/badge/-Download-blue?style=for-the-badge&logo=download&logoColor=white "Download zip")](https://drive.google.com/drive/folders/1aI15rwsxlFoEcswGoKKOaOGj1bPAxuxg?usp=sharing)
+<!-- END LATEST DOWNLOAD BUTTON -->
+
 ## Overview
 
 NPM package manager apk. Developed using [React Native](https://facebook.github.io/react-native/) and NPM-REGISTRY API.

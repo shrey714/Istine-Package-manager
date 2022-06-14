@@ -28,217 +28,397 @@ const NPMscreen = ({detailsdata, readme, colorlist}) => {
     };
     loaddata();
   }, [detailsdata, readme]);
-  const Separator = () => <View style={styles.separator} />;
+  const Separator = () => (
+    <View
+      style={[
+        styles.separator,
+        {
+          borderBottomColor:
+            PC === '#000' || PC === '#1F1B24' ? '#fff' : '#737373',
+        },
+      ]}
+    />
+  );
   return (
-    <>
-      <ScrollView style={[styles.container, {backgroundColor: PC}]}>
-        <Text style={styles.titletext}>DETAILS</Text>
-        <View style={styles.mainbox}>
+    <ScrollView style={[styles.container]}>
+      <Text
+        style={[
+          styles.titletext,
+          {color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'},
+        ]}>
+        DETAILS
+      </Text>
+      <View
+        style={[
+          styles.mainbox,
+          {borderColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'},
+        ]}>
+        <Text
+          style={[styles.text, {fontSize: 18, fontWeight: 'bold', color: SC}]}>
+          {data.name}
+        </Text>
+        <Separator />
+        <Text
+          style={[styles.text, {fontSize: 18, fontWeight: 'bold', color: SC}]}>
+          v{data.version}
+        </Text>
+        <Separator />
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <Text
             style={[
               styles.text,
-              {fontSize: 18, fontWeight: 'bold', color: SC},
+              {
+                fontSize: 18,
+                fontWeight: 'bold',
+                marginRight: 4,
+                color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+              },
             ]}>
-            {data.name}
+            {data.license}
           </Text>
-          <Separator />
-          <Text
-            style={[
-              styles.text,
-              {fontSize: 18, fontWeight: 'bold', color: SC},
-            ]}>
-            v{data.version}
-          </Text>
-          <Separator />
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <Icon
+            name={'bookmark'}
+            size={16}
+            color={PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'}
+          />
+        </View>
+        <Separator />
+        <Text
+          style={[
+            styles.text,
+            {
+              fontSize: 14,
+              color: PC === '#000' || PC === '#1F1B24' ? '#ffffff' : '#212121',
+            },
+          ]}>
+          {data.description}
+        </Text>
+      </View>
+      <Separator />
+      <Text
+        style={[
+          styles.titletext,
+          {color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'},
+        ]}>
+        LINKS
+      </Text>
+      <View
+        style={[
+          styles.secondbox,
+          styles.mainbox,
+          {borderColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'},
+        ]}>
+        <TouchableOpacity
+          onPress={() => {
+            Linking.openURL(data?.homepage);
+          }}
+          style={[styles.buttonbox, {backgroundColor: TC}]}>
+          <Icon
+            name={'external-link-square'}
+            size={25}
+            color={TC === '#000' ? '#fff' : '#000'}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            Linking.openURL('https://www.npmjs.com/package/' + data?.name);
+          }}
+          style={[styles.buttonbox, {backgroundColor: TC}]}>
+          <Icon2
+            name={'npm'}
+            size={35}
+            color={TC === '#000' ? '#fff' : '#000'}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            Linking.openURL(data?.repository?.url.substr(4));
+          }}
+          style={[styles.buttonbox, {backgroundColor: TC}]}>
+          <Icon
+            name={'github-square'}
+            size={25}
+            color={TC === '#000' ? '#fff' : '#000'}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            Linking.openURL(data?.bugs?.url);
+          }}
+          style={[styles.buttonbox, {backgroundColor: TC}]}>
+          <Icon
+            name={'bug'}
+            size={25}
+            color={TC === '#000' ? '#fff' : '#000'}
+          />
+        </TouchableOpacity>
+      </View>
+      <Separator />
+      <Text
+        style={[
+          styles.titletext,
+          {color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'},
+        ]}>
+        INSTALL
+      </Text>
+      <View
+        style={[
+          styles.thirdbox,
+          styles.mainbox,
+          {borderColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'},
+        ]}>
+        <Text
+          style={[styles.text, {fontSize: 19, fontWeight: 'bold', color: SC}]}>
+          npm install {data.name}
+        </Text>
+      </View>
+      <Separator />
+      <View
+        style={[
+          styles.forthbox,
+          styles.mainbox,
+          {borderColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'},
+        ]}>
+        <Text
+          style={[
+            styles.text,
+            {
+              color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+              fontWeight: 'bold',
+            },
+          ]}>
+          KEYWORDS
+        </Text>
+        <Separator />
+        <View style={[styles.spebox, {backgroundColor: TC}]}>
+          {data.keywords?.map(e => (
+            <View
+              key={shortid.generate()}
+              style={[styles.textbox, {backgroundColor: PC}]}>
+              <Text
+                style={[
+                  styles.text,
+                  {
+                    fontSize: 16,
+                    color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+                  },
+                ]}>
+                {e}
+              </Text>
+            </View>
+          ))}
+        </View>
+        <Text
+          style={[
+            styles.text,
+            {
+              color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+              fontWeight: 'bold',
+            },
+          ]}>
+          ENGINES
+        </Text>
+        <Separator />
+        <View style={[styles.spebox, {backgroundColor: TC}]}>
+          {data.engines ? (
+            Object.entries(data?.engines).map(val => (
+              <View
+                key={shortid.generate()}
+                style={[styles.textbox, {backgroundColor: PC}]}>
+                <Text
+                  key={shortid.generate()}
+                  style={[
+                    styles.text,
+                    {
+                      color:
+                        PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+                      fontSize: 16,
+                    },
+                  ]}>
+                  {val[0]} = {val[1]}
+                </Text>
+              </View>
+            ))
+          ) : (
+            <></>
+          )}
+        </View>
+        <Text
+          style={[
+            styles.text,
+            {
+              color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+              fontWeight: 'bold',
+            },
+          ]}>
+          DEPENDENCIES
+        </Text>
+        <Separator />
+        <View style={[styles.spebox, {backgroundColor: TC}]}>
+          {data.dependencies ? (
+            Object.entries(data?.dependencies).map(val => (
+              <View
+                key={shortid.generate()}
+                style={[styles.textbox, {backgroundColor: PC}]}>
+                <Text
+                  key={shortid.generate()}
+                  style={[
+                    styles.text,
+                    {
+                      color:
+                        PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+                      fontSize: 16,
+                    },
+                  ]}>
+                  {val[0]} = {val[1]}
+                </Text>
+              </View>
+            ))
+          ) : (
+            <></>
+          )}
+        </View>
+      </View>
+      <Separator />
+      <View
+        style={[
+          styles.fifthbox,
+          styles.mainbox,
+          {borderColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'},
+        ]}>
+        <Text
+          style={[
+            styles.text,
+            {
+              color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+              fontWeight: 'bold',
+            },
+          ]}>
+          TOTALFILES
+        </Text>
+        <Separator />
+        <View style={[styles.spebox, {backgroundColor: TC}]}>
+          <View
+            key={shortid.generate()}
+            style={[styles.textbox, {backgroundColor: PC}]}>
             <Text
               style={[
                 styles.text,
                 {
-                  fontSize: 18,
-                  fontWeight: 'bold',
-                  marginRight: 4,
-                  color: '#000',
+                  fontSize: 16,
+                  color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
                 },
               ]}>
-              {data.license}
+              {data?.dist?.fileCount}
             </Text>
-            <Icon name={'bookmark'} size={16} color={'#000'} />
           </View>
-          <Separator />
-          <Text style={[styles.text, {fontSize: 14, color: '#212121'}]}>
-            {data.description}
-          </Text>
         </View>
+        <Text
+          style={[
+            styles.text,
+            {
+              color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+              fontWeight: 'bold',
+            },
+          ]}>
+          SIZE
+        </Text>
         <Separator />
-        <Text style={styles.titletext}>LINKS</Text>
-        <View style={[styles.secondbox, styles.mainbox]}>
-          <TouchableOpacity
-            onPress={() => {
-              Linking.openURL(data?.homepage);
-            }}
-            style={[styles.buttonbox, {backgroundColor: TC}]}>
+        <View style={[styles.spebox, {backgroundColor: TC}]}>
+          <View
+            key={shortid.generate()}
+            style={[styles.textbox, {backgroundColor: PC}]}>
             <Text
               style={[
                 styles.text,
-                {fontSize: 16, fontWeight: '500', color: '#000'},
+                {
+                  color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+                  fontSize: 16,
+                },
               ]}>
-              <Icon name={'external-link-square'} size={25} color={'#000'} />
+              {data?.dist?.unpackedSize}
             </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              Linking.openURL('https://www.npmjs.com/package/' + data?.name);
-            }}
-            style={[styles.buttonbox, {backgroundColor: TC}]}>
+          </View>
+        </View>
+        <Text
+          style={[
+            styles.text,
+            {
+              color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+              fontWeight: 'bold',
+            },
+          ]}>
+          DOWNLOADS
+        </Text>
+        <Separator />
+        <View style={[styles.spebox, {backgroundColor: TC}]}>
+          <View
+            key={shortid.generate()}
+            style={[styles.textbox, {backgroundColor: PC}]}>
             <Text
               style={[
                 styles.text,
-                {fontSize: 16, fontWeight: '500', color: '#000'},
+                {
+                  color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+                  fontSize: 16,
+                },
               ]}>
-              <Icon2 name={'npm'} size={35} color={'#000'} />
+              23,24,000
             </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              Linking.openURL(data?.repository?.url.substr(4));
-            }}
-            style={[styles.buttonbox, {backgroundColor: TC}]}>
-            <Text
-              style={[
-                styles.text,
-                {fontSize: 16, fontWeight: '500', color: '#000'},
-              ]}>
-              <Icon name={'github-square'} size={25} color={'#000'} />
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              Linking.openURL(data?.bugs?.url);
-            }}
-            style={[styles.buttonbox, {backgroundColor: TC}]}>
-            <Text
-              style={[
-                styles.text,
-                {fontSize: 16, fontWeight: '500', color: '#000'},
-              ]}>
-              <Icon name={'bug'} size={25} color={'#000'} />
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <Separator />
-        <Text style={styles.titletext}>INSTALL</Text>
-        <View style={[styles.thirdbox, styles.mainbox]}>
-          <Text
-            style={[
-              styles.text,
-              {fontSize: 19, fontWeight: 'bold', color: SC},
-            ]}>
-            npm install {data.name}
-          </Text>
-        </View>
-        <Separator />
-        <View style={[styles.forthbox, styles.mainbox]}>
-          <Text style={[styles.text, {color: '#000', fontWeight: 'bold'}]}>
-            KEYWORDS
-          </Text>
-          <Separator />
-          <View style={[styles.spebox, {backgroundColor: TC}]}>
-            {data.keywords?.map(e => (
-              <View key={shortid.generate()} style={styles.textbox}>
-                <Text style={[styles.text, {fontSize: 14, color: '#212121'}]}>
-                  {e}
-                </Text>
-              </View>
-            ))}
-          </View>
-          <Text style={[styles.text, {color: '#000', fontWeight: 'bold'}]}>
-            ENGINES
-          </Text>
-          <Separator />
-          <View style={[styles.spebox, {backgroundColor: TC}]}>
-            {data.engines ? (
-              Object.entries(data?.engines).map(val => (
-                <View key={shortid.generate()} style={styles.textbox}>
-                  <Text
-                    key={shortid.generate()}
-                    style={[styles.text, {color: '#212121', fontSize: 14}]}>
-                    {val[0]} = {val[1]}
-                  </Text>
-                </View>
-              ))
-            ) : (
-              <></>
-            )}
-          </View>
-          <Text style={[styles.text, {color: '#000', fontWeight: 'bold'}]}>
-            DEPENDENCIES
-          </Text>
-          <Separator />
-          <View style={[styles.spebox, {backgroundColor: TC}]}>
-            {data.dependencies ? (
-              Object.entries(data?.dependencies).map(val => (
-                <View key={shortid.generate()} style={styles.textbox}>
-                  <Text
-                    key={shortid.generate()}
-                    style={[styles.text, {color: '#212121', fontSize: 14}]}>
-                    {val[0]} = {val[1]}
-                  </Text>
-                </View>
-              ))
-            ) : (
-              <></>
-            )}
           </View>
         </View>
-        <Separator />
-        <View style={[styles.fifthbox, styles.mainbox]}>
-          <Text style={[styles.text, {color: '#000', fontWeight: 'bold'}]}>
-            TOTALFILES
-          </Text>
-          <Separator />
-          <View style={[styles.spebox, {backgroundColor: TC}]}>
-            <View key={shortid.generate()} style={styles.textbox}>
-              <Text style={[styles.text, {fontSize: 14, color: '#212121'}]}>
-                {data?.dist?.fileCount}
-              </Text>
-            </View>
-          </View>
-          <Text style={[styles.text, {color: '#000', fontWeight: 'bold'}]}>
-            SIZE
-          </Text>
-          <Separator />
-          <View style={[styles.spebox, {backgroundColor: TC}]}>
-            <View key={shortid.generate()} style={styles.textbox}>
-              <Text style={[styles.text, {color: '#212121', fontSize: 14}]}>
-                {data?.dist?.unpackedSize}
-              </Text>
-            </View>
-          </View>
-          <Text style={[styles.text, {color: '#000', fontWeight: 'bold'}]}>
-            DOWNLOADS
-          </Text>
-          <Separator />
-          <View style={[styles.spebox, {backgroundColor: TC}]}>
-            <View key={shortid.generate()} style={styles.textbox}>
-              <Text style={[styles.text, {color: '#212121', fontSize: 14}]}>
-                23,24,000
-              </Text>
-            </View>
-          </View>
-        </View>
-        <Separator />
-        <Text style={styles.titletext}>README</Text>
-        <View style={[styles.sixthbox, styles.mainbox]}>
-          <Markdown
-            style={{
-              body: {color: '#212121'},
-            }}>
-            {readdata}
-          </Markdown>
-        </View>
-      </ScrollView>
-    </>
+      </View>
+      <Separator />
+      <Text
+        style={[
+          styles.titletext,
+          {color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'},
+        ]}>
+        README
+      </Text>
+      <View
+        style={[
+          styles.sixthbox,
+          styles.mainbox,
+          {borderColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'},
+        ]}>
+        <Markdown
+          style={{
+            code_block: {
+              backgroundColor:
+                PC === '#000' || PC === '#1F1B24' ? '#3d3d3d' : '#c9c9c9',
+            },
+            table: {
+              borderColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+            },
+            blockquote: {
+              backgroundColor:
+                PC === '#000' || PC === '#1F1B24' ? '#3d3d3d' : '#c9c9c9',
+            },
+            tr: {
+              backgroundColor:
+                PC === '#000' || PC === '#1F1B24' ? '#3d3d3d' : '#c9c9c9',
+              borderColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+            },
+            th: {
+              backgroundColor:
+                PC === '#000' || PC === '#1F1B24' ? '#3d3d3d' : '#c9c9c9',
+              borderColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+            },
+            code_inline: {
+              backgroundColor:
+                PC === '#000' || PC === '#1F1B24' ? '#3d3d3d' : '#c9c9c9',
+            },
+            fence: {
+              backgroundColor:
+                PC === '#000' || PC === '#1F1B24' ? '#3d3d3d' : '#c9c9c9',
+            },
+            body: {color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'},
+          }}>
+          {readdata}
+        </Markdown>
+      </View>
+    </ScrollView>
   );
 };
 
@@ -255,26 +435,18 @@ export default connect(mapStateToProps)(NPMscreen);
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 10,
-    flex: 1,
     paddingVertical: 5,
   },
   titletext: {
-    color: '#000',
     fontWeight: 'bold',
-  },
-  text: {
-    // color: '#000',
   },
   separator: {
     marginVertical: 8,
-    borderBottomColor: '#737373',
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
   mainbox: {
     flex: 1,
-    backgroundColor: '#fff',
-    borderWidth: 0.5,
-    borderColor: '#000',
+    borderWidth: 1,
     borderRadius: 5,
     marginVertical: 5,
     padding: 10,
@@ -292,11 +464,8 @@ const styles = StyleSheet.create({
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 0.5,
-    borderColor: '#000',
     borderRadius: 3,
   },
-  thirdbox: {},
   forthbox: {
     display: 'flex',
     flex: 1,
@@ -309,8 +478,6 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     marginBottom: 8,
     padding: 10,
-    borderWidth: 0.5,
-    borderColor: '#000',
     borderRadius: 3,
   },
   fifthbox: {
@@ -323,9 +490,6 @@ const styles = StyleSheet.create({
     width: 'auto',
     margin: 5,
     padding: 5,
-    backgroundColor: '#fff',
-    borderWidth: 0.5,
-    borderColor: '#000',
     borderRadius: 3,
   },
   sixthbox: {

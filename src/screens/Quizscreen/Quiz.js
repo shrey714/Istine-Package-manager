@@ -24,7 +24,7 @@ import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 import QuizData from './QuizData';
 const {width, height} = Dimensions.get('window');
-const Quiz = ({route, colorlist}) => {
+const Quiz = ({route, colorlist, navigation}) => {
   const {name, bg} = route.params;
   let PC = colorlist.Primarycolor;
   let SC = colorlist.Secondarycolor;
@@ -305,6 +305,7 @@ const Quiz = ({route, colorlist}) => {
           paddingTop: getStatusBarHeight(),
           position: 'relative',
         }}>
+        {/*main screen*/}
         <Animatable.View
           animation="slideInDown"
           duration={800}
@@ -337,7 +338,7 @@ const Quiz = ({route, colorlist}) => {
             style={{
               flex: 1,
               backgroundColor: 'rgba(0,0,0,0.6)',
-              hardwareAccelerated: true,
+              // hardwareAccelerated: true,
               alignItems: 'center',
               justifyContent: 'center',
             }}>
