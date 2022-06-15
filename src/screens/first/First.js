@@ -6,7 +6,7 @@ const shortid = require('shortid');
 import FirstHeader from './FirstHeader';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
-// import Notify from './Notify';
+import Notify from './Notify';
 import PackagesApi from './PackagesApi';
 import {
   Center,
@@ -24,6 +24,7 @@ const First = ({navigation, colorlist, onPress, initialState}) => {
   let PC = colorlist.Primarycolor;
   let SC = colorlist.Secondarycolor;
   let TC = colorlist.Ternarycolor;
+
   useEffect(() => {
     // console.log(colorlist.colours);
     navigation.setOptions({
@@ -110,7 +111,7 @@ const First = ({navigation, colorlist, onPress, initialState}) => {
           {PackagesApi.map(item => Shrey(item))}
         </ScrollView>
       </NativeBaseProvider>
-      {/* <Notify /> */}
+      <Notify />
     </>
   );
 };

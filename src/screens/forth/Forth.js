@@ -23,9 +23,6 @@ const Forth = ({navigation, getpackages, packageState, colorlist}) => {
   if (packageState.loading) {
     return <OnlyLoading />;
   }
-  if (packageState.packages === []) {
-    console.log('empty');
-  }
 
   return (
     <>
@@ -39,10 +36,10 @@ const Forth = ({navigation, getpackages, packageState, colorlist}) => {
             {packageState.packages.map((item, index) => (
               <Animatable.View
                 animation="zoomIn"
-                duration={800}
+                duration={700}
                 key={item.id}
                 useNativeDriver={true}
-                delay={index * 200}>
+                delay={index * 175}>
                 <Favbox index={index} details={item} navigation={navigation} />
               </Animatable.View>
             ))}

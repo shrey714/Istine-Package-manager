@@ -11,16 +11,16 @@ export const signUp = data => async dispatch => {
       console.log('data set done');
       Snackbar.show({
         text: 'account created',
-        textColor: '#900',
-        backgroundColor: colorScheme === 'light' ? '#fff' : '#000',
+        textColor: '#fff',
+        backgroundColor: 'rgba(0,0,0,0.5)',
       });
     })
     .catch(error => {
       console.error(error);
       Snackbar.show({
         text: 'signup failed',
-        textColor: '#900',
-        backgroundColor: colorScheme === 'light' ? '#fff' : '#000',
+        textColor: '#fff',
+        backgroundColor: 'rgba(0,0,0,0.5)',
       });
     });
 };
@@ -33,16 +33,16 @@ export const signIn = data => async dispatch => {
       console.log('signin done');
       Snackbar.show({
         text: 'signin done',
-        textColor: '#900',
-        backgroundColor: colorScheme === 'light' ? '#fff' : '#000',
+        textColor: '#fff',
+        backgroundColor: 'rgba(0,0,0,0.5)',
       });
     })
     .catch(error => {
       console.error(error);
       Snackbar.show({
         text: 'signin failed',
-        textColor: '#900',
-        backgroundColor: colorScheme === 'light' ? '#fff' : '#000',
+        textColor: '#fff',
+        backgroundColor: 'rgba(0,0,0,0.5)',
       });
     });
 };
@@ -54,16 +54,16 @@ export const signOut = () => async dispatch => {
       console.log('signout done');
       Snackbar.show({
         text: 'signout done',
-        textColor: '#900',
-        backgroundColor: colorScheme === 'light' ? '#fff' : '#000',
+        textColor: '#fff',
+        backgroundColor: 'rgba(0,0,0,0.5)',
       });
     })
     .catch(error => {
       console.error(error);
       Snackbar.show({
         text: 'signout failed',
-        textColor: '#900',
-        backgroundColor: colorScheme === 'light' ? '#fff' : '#000',
+        textColor: '#fff',
+        backgroundColor: 'rgba(0,0,0,0.5)',
       });
     });
 };

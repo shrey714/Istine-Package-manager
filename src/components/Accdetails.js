@@ -7,8 +7,7 @@ import getpackages from '../action/package';
 import LOGO from '.././assets/images/LOGO.png';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 import {firebase} from '@react-native-firebase/auth';
-// import WideAd from './WideAd';
-// import database from '@react-native-firebase/database';
+import WideAd from './WideAd';
 
 const Accdetails = ({getpackages, packageState, colorlist}) => {
   let PC = colorlist.Primarycolor;
@@ -31,9 +30,9 @@ const Accdetails = ({getpackages, packageState, colorlist}) => {
   return (
     <>
       <View style={[styles.container, {backgroundColor: PC}]}>
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={[
+        <View
+          // showsVerticalScrollIndicator={false}
+          style={[
             styles.settingsbox,
             {
               backgroundColor: TC,
@@ -89,8 +88,8 @@ const Accdetails = ({getpackages, packageState, colorlist}) => {
               Favourite : {obj.added}
             </Text>
           </View>
-          {/* <WideAd /> */}
-        </ScrollView>
+          <WideAd />
+        </View>
         <View style={[styles.bottomsettings]}>
           <Text
             numberOfLines={1}
@@ -133,6 +132,7 @@ const styles = StyleSheet.create({
   },
   settingsbox: {
     flexGrow: 1,
+    flex: 1,
     width: '100%',
     borderWidth: 1,
     borderRadius: 8,

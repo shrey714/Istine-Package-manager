@@ -18,15 +18,15 @@ const Addtofavbtn = ({packagename, packageversion}) => {
       });
       Snackbar.show({
         text: 'add to fav succsed',
-        textColor: '#900',
-        backgroundColor: '#fff',
+        textColor: '#fff',
+        backgroundColor: 'rgba(0,0,0,0.5)',
       });
     } catch (error) {
       console.log(error);
       Snackbar.show({
         text: 'add to fav failed',
-        textColor: '#900',
-        backgroundColor: '#fff',
+        textColor: '#fff',
+        backgroundColor: 'rgba(0,0,0,0.5)',
       });
     }
   };

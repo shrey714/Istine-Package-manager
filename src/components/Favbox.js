@@ -12,12 +12,40 @@ import {
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import Snackbar from 'react-native-snackbar';
+import database from '@react-native-firebase/database';
+import {firebase} from '@react-native-firebase/auth';
 const windowWidth = Dimensions.get('screen').width;
 
 const Favbox = ({details, index, navigation, colorlist}) => {
   let PC = colorlist.Primarycolor;
   let SC = colorlist.Secondarycolor;
   let TC = colorlist.Ternarycolor;
+
+  const deleteBox = async () => {
+    try {
+      // let maile = await firebase.auth()._user.uid;
+      // await database()
+      //   .ref(`/packages/${maile}/`)
+      //   .child(`${details.id}`)
+      //   .remove(() => {
+      //     console.log('removed');
+      //   });
+      Snackbar.show({
+        rtn: true,
+        text: 'deletion completed',
+        textColor: '#fff',
+        backgroundColor: 'rgba(0,0,0,0.5)',
+      });
+    } catch (error) {
+      console.log(error);
+      Snackbar.show({
+        text: 'deletion failed',
+        textColor: '#fff',
+        backgroundColor: 'rgba(0,0,0,0.5)',
+      });
+    }
+  };
 
   let Anim = useRef(new Animated.Value(0)).current;
 
@@ -64,6 +92,7 @@ const Favbox = ({details, index, navigation, colorlist}) => {
           },
         ]}>
         <TouchableOpacity
+          onPress={deleteBox}
           disabled={olele ? false : true}
           style={[styles.trashbtn, {borderColor: SC}]}>
           <Icon name="trash" size={35} color={SC} />

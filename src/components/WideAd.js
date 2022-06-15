@@ -1,29 +1,29 @@
-import React, {useRef} from 'react';
-import {BannerAd, TestIds} from '@react-native-admob/admob';
-import {View, StyleSheet} from 'react-native';
+import React from 'react';
+import {View, ScrollView, StyleSheet} from 'react-native';
+import {BannerAd, BannerAdSize, TestIds} from 'react-native-google-mobile-ads';
+const adUnitId = __DEV__
+  ? TestIds.BANNER
+  : 'ca-app-pub-7393727234144842/8422249415';
 const WideAd = () => {
-  const bannerRef = useRef(null);
-
   return (
-    <View style={styles.container22}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={styles.adcontainer}>
       <BannerAd
-        unitId={TestIds.BANNER}
+        unitId={adUnitId}
         size={'WIDE_SKYSCRAPER'}
-        ref={bannerRef}
-        onAdFailedToLoad={error => console.error(error)}
+        onAdFailedToLoad={error => {
+          console.log(error);
+        }}
       />
-    </View>
+    </ScrollView>
   );
 };
 
 export default WideAd;
 const styles = StyleSheet.create({
-  container22: {
-    flex: 1,
+  adcontainer: {
     paddingBottom: 5,
-    overflow: 'hidden',
     alignSelf: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#fff',
   },
 });

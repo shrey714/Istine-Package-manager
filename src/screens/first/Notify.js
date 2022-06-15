@@ -1,22 +1,19 @@
-import React, {useRef} from 'react';
-import {BannerAd, TestIds} from '@react-native-admob/admob';
+import React from 'react';
 import {View, StyleSheet} from 'react-native';
+import {BannerAd, BannerAdSize, TestIds} from 'react-native-google-mobile-ads';
+const adUnitId = __DEV__
+  ? TestIds.BANNER
+  : 'ca-app-pub-7393727234144842/8422249415';
+
 const Notify = () => {
-  const bannerRef = useRef(null);
-  //ca-app-pub-9203877977299363/8135429090
   return (
-    <View style={styles.container22}>
+    <View style={styles.adcontainer}>
       <BannerAd
-        unitId={'ca-app-pub-9203877977299363/8135429090'}
-        size={'BANNER'}
-        ref={bannerRef}
-        onAdFailedToLoad={error => console.error(error)}
-      />
-      <BannerAd
-        unitId={TestIds.BANNER}
-        size={'BANNER'}
-        ref={bannerRef}
-        onAdFailedToLoad={error => console.error(error)}
+        unitId={adUnitId}
+        size={BannerAdSize.BANNER}
+        onAdFailedToLoad={error => {
+          console.log(error);
+        }}
       />
     </View>
   );
@@ -24,7 +21,7 @@ const Notify = () => {
 
 export default Notify;
 const styles = StyleSheet.create({
-  container22: {
+  adcontainer: {
     position: 'absolute',
     bottom: 5,
     borderRadius: 10,
