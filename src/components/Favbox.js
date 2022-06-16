@@ -24,15 +24,14 @@ const Favbox = ({details, index, navigation, colorlist}) => {
 
   const deleteBox = async () => {
     try {
-      // let maile = await firebase.auth()._user.uid;
-      // await database()
-      //   .ref(`/packages/${maile}/`)
-      //   .child(`${details.id}`)
-      //   .remove(() => {
-      //     console.log('removed');
-      //   });
+      let maile = await firebase.auth()._user.uid;
+      await database()
+        .ref(`/packages/${maile}/`)
+        .child(`${details.id}`)
+        .remove(() => {
+          //removed
+        });
       Snackbar.show({
-        rtn: true,
         text: 'deletion completed',
         textColor: '#fff',
         backgroundColor: 'rgba(0,0,0,0.5)',

@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {StyleSheet, SafeAreaView, ScrollView} from 'react-native';
+import React from 'react';
+import {StyleSheet, ScrollView} from 'react-native';
 import Packagebox from './Packagebox';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
@@ -18,22 +18,16 @@ const Second = ({navigation, colorlist}) => {
   return (
     <>
       <>
-        <SafeAreaView style={[styles.container, {backgroundColor: PC}]}>
-          <ScrollView
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={styles.contentcontainer}>
-            <Packagebox navigation={navigation} name={'NPM'} bg={NPM} />
-            <Packagebox navigation={navigation} name={'FLUTTER'} bg={FLUTTER} />
-            <Packagebox navigation={navigation} name={'PYPI'} bg={PYPI} />
-            <Packagebox
-              navigation={navigation}
-              name={'COMPOSER'}
-              bg={COMPOSER}
-            />
-            <Packagebox navigation={navigation} name={'DOCKER'} bg={DOCKER} />
-            <Packagebox navigation={navigation} name={'GO'} bg={GO} />
-          </ScrollView>
-        </SafeAreaView>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.contentcontainer}>
+          <Packagebox navigation={navigation} name={'NPM'} bg={NPM} />
+          <Packagebox navigation={navigation} name={'FLUTTER'} bg={FLUTTER} />
+          <Packagebox navigation={navigation} name={'PYPI'} bg={PYPI} />
+          <Packagebox navigation={navigation} name={'COMPOSER'} bg={COMPOSER} />
+          <Packagebox navigation={navigation} name={'DOCKER'} bg={DOCKER} />
+          <Packagebox navigation={navigation} name={'GO'} bg={GO} />
+        </ScrollView>
       </>
     </>
   );
@@ -50,9 +44,6 @@ Second.prototype = {
 export default connect(mapStateToProps)(Second);
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   contentcontainer: {
     display: 'flex',
     flexDirection: 'row',

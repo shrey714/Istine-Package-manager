@@ -30,7 +30,7 @@ const Second = ({navigation, colorlist}) => {
       <Stack.Screen
         name="Home"
         component={QuizCards}
-        options={{title: 'Quiz'}}
+        options={{title: 'Quiz', cardStyle: {backgroundColor: PC}}}
       />
       <Stack.Screen
         name="Quiz"

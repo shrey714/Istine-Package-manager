@@ -7,7 +7,6 @@ import Sett2 from './theme/Sett2';
 import Sett3 from './bug_report/Sett3';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
-
 const Fifth = ({navigation, colorlist}) => {
   let PC = colorlist.Primarycolor;
   let SC = colorlist.Secondarycolor;
@@ -21,14 +20,29 @@ const Fifth = ({navigation, colorlist}) => {
   return (
     <SettingsStack.Navigator
       screenOptions={{
-        headerShown: false,
+        headerTitleAlign: 'center',
         ...TransitionPresets.ModalSlideFromBottomIOS,
         presentation: 'transparentModal',
+        headerLeft: () => null,
+        cardStyle: {backgroundColor: PC},
+        headerStyle: {
+          backgroundColor: PC,
+          elevation: 0,
+        },
+        headerTintColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+        headerTitleStyle: {
+          fontWeight: '200',
+          fontSize: 20,
+        },
       }}>
-      <SettingsStack.Screen name="Settings" component={Settings} />
-      <SettingsStack.Screen name="Sett1" component={Sett1} />
-      <SettingsStack.Screen name="Sett2" component={Sett2} />
-      <SettingsStack.Screen name="Sett3" component={Sett3} />
+      <SettingsStack.Screen
+        name="Settings"
+        options={{headerShown: false}}
+        component={Settings}
+      />
+      <SettingsStack.Screen name="Notifications" component={Sett1} />
+      <SettingsStack.Screen name="Theme" component={Sett2} />
+      <SettingsStack.Screen name="Bug Report" component={Sett3} />
     </SettingsStack.Navigator>
   );
 };

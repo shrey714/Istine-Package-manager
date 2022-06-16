@@ -47,7 +47,7 @@ const SignIn = ({signIn}) => {
               <ChartScreen value={datarray} style={margin} />
             </Box>
             <ScrollView showsVerticalScrollIndicator={false}>
-              <FormControl style={styles.signinbox}>
+              <FormControl isRequired style={styles.signinbox}>
                 <Box style={styles.headingbox}>
                   <Text size="lg" style={styles.heading1}>
                     Welcome Back

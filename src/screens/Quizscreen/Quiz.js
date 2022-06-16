@@ -7,7 +7,6 @@ import {getStatusBarHeight} from 'react-native-status-bar-height';
 import {
   View,
   Text,
-  SafeAreaView,
   TouchableOpacity,
   Modal,
   StyleSheet,
@@ -279,10 +278,10 @@ const Quiz = ({route, colorlist, navigation}) => {
   };
 
   return (
-    <SafeAreaView
+    <View
       style={{
         flex: 1,
-        backgroundColor: '#000',
+        backgroundColor: 'transparent',
       }}>
       <StatusBar
         translucent={true}
@@ -405,7 +404,7 @@ const Quiz = ({route, colorlist, navigation}) => {
           </View>
         </Modal>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

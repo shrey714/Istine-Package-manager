@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import {InterstitialAd, TestIds} from 'react-native-google-mobile-ads';
 import {ScrollView, StyleSheet} from 'react-native';
 import Colorpick from './Colorpick';
 import propTypes from 'prop-types';
@@ -9,13 +10,36 @@ const Sett2 = ({colorlist}) => {
   let PC = colorlist.Primarycolor;
   let SC = colorlist.Secondarycolor;
   let TC = colorlist.Ternarycolor;
+  const adUnitId = __DEV__
+    ? TestIds.INTERSTITIAL
+    : 'ca-app-pub-7393727234144842/5645996548';
+
+  const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
+    requestNonPersonalizedAdsOnly: false,
+  });
+
+  useEffect(() => {
+    interstitial.load();
+    // console.log('loaded');
+  }, [interstitial]);
   return (
     <>
-      <ScrollView
-        contentContainerStyle={[styles.container, {backgroundColor: PC}]}>
-        <Colorpick ColorTheme={ColorTheme.colour1} type={'Primary'} />
-        <Colorpick ColorTheme={ColorTheme.colour2} type={'Secondary'} />
-        <Colorpick ColorTheme={ColorTheme.colour3} type={'Ternary'} />
+      <ScrollView contentContainerStyle={[styles.container]}>
+        <Colorpick
+          sendadata={interstitial}
+          ColorTheme={ColorTheme.colour1}
+          type={'Primary'}
+        />
+        <Colorpick
+          sendadata={interstitial}
+          ColorTheme={ColorTheme.colour2}
+          type={'Secondary'}
+        />
+        <Colorpick
+          sendadata={interstitial}
+          ColorTheme={ColorTheme.colour3}
+          type={'Ternary'}
+        />
       </ScrollView>
     </>
   );
