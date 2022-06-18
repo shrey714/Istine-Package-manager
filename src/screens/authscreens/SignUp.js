@@ -1,21 +1,20 @@
-/* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {connect} from 'react-redux';
 import propTypes from 'prop-types';
 import {
   StyleSheet,
-  Appearance,
+  Easing,
+  Animated,
   Text,
   ScrollView,
   Dimensions,
 } from 'react-native';
-// import LinearGradient from 'react-native-linear-gradient';
-import {NativeBaseProvider, Box, FormControl, Input, Button} from 'native-base';
-const screenwidth = Dimensions.get('screen').width;
-const screenheight = Dimensions.get('screen').height;
+import LOGO from '../../assets/images/LOGO.png';
+import {Box, Center, FormControl, Input, Button} from 'native-base';
+const screenwidth = Dimensions.get('window').width;
+const screenheight = Dimensions.get('window').height;
 import ChartScreen from '../../components/ChartScreen';
 import {signUp} from '../../action/auth';
-const colorScheme = Appearance.getColorScheme();
 
 const SignUp = ({signUp}) => {
   const doSignUp = async () => {
@@ -25,100 +24,125 @@ const SignUp = ({signUp}) => {
     marginLeft: -screenwidth / 5.9,
     marginBottom: -screenheight / 11.733,
   };
-  const datarray = [20, 28, 100, 60, 80, 50, 20, 60, 45, 100];
+  const datarray = [0, 40, 10, 60, 30, 60, 50, 80, 40, 100];
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const anima = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.loop(
+      Animated.timing(anima, {
+        toValue: 1,
+        duration: 1000,
+        easing: Easing.elastic(2.8),
+        useNativeDriver: true,
+      }),
+    ).start();
+  }, [anima]);
+  const spin = anima.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '180deg'],
+  });
   return (
     <ScrollView
-      contentContainerStyle={{flexGrow: 1}}
+      contentContainerStyle={[styles.container, {backgroundColor: '#fff'}]}
       showsVerticalScrollIndicator={false}>
-      <NativeBaseProvider>
-        <Box
-          style={[
-            styles.container,
-            {backgroundColor: colorScheme === 'light' ? '#fff' : '#000'},
-          ]}>
-          <Box
-            style={[
-              styles.signbox,
-              {backgroundColor: colorScheme === 'light' ? '#fff' : '#4d4d4d'},
-            ]}>
-            <Box style={styles.chartbox}>
-              <ChartScreen value={datarray} style={margin} />
-            </Box>
-            <ScrollView showsVerticalScrollIndicator={false}>
-              <FormControl isRequired style={styles.signupbox}>
-                <Box style={styles.headingbox}>
-                  <Text size="lg" style={styles.heading1}>
-                    Welcome
-                  </Text>
-                  <Text size="lg" style={styles.heading2}>
-                    SignUp to explore your packages
-                  </Text>
-                </Box>
-                <Input
-                  fontSize="19"
-                  type="email"
-                  variant="underlined"
-                  marginTop={screenheight / 20}
-                  marginVertical={5}
-                  width={screenwidth / 1.6}
-                  borderRadius={0}
-                  paddingLeft={1}
-                  paddingRight={2}
-                  borderWidth={1}
-                  isRequired={true}
-                  borderColor="#000"
-                  _focus={{borderColor: '#000'}}
-                  placeholder="Email"
-                  value={email}
-                  onChangeText={text => setEmail(text)}
-                />
-                <Input
-                  fontSize="19"
-                  type="password"
-                  variant="underlined"
-                  marginVertical={5}
-                  width={screenwidth / 1.6}
-                  paddingLeft={1}
-                  paddingRight={2}
-                  borderRadius={0}
-                  borderWidth={1}
-                  isRequired={true}
-                  borderColor="#000"
-                  placeholder="Password"
-                  _focus={{borderColor: '#000'}}
-                  value={password}
-                  secureTextEntry={true}
-                  onChangeText={text => setPassword(text)}
-                />
-                <Button
-                  regular
-                  block
-                  style={[
-                    styles.button,
-                    {
-                      backgroundColor:
-                        colorScheme === 'light' ? '#fff' : '#000',
-                      borderColor: colorScheme === 'dark' ? '#fff' : '#000',
-                    },
-                  ]}
-                  onPress={doSignUp}>
-                  <Text
-                    style={[
-                      styles.buttontxt,
-                      {
-                        color: colorScheme === 'dark' ? '#fff' : '#000',
-                      },
-                    ]}>
-                    SignUp
-                  </Text>
-                </Button>
-              </FormControl>
-            </ScrollView>
-          </Box>
+      <Box
+        shadow={2}
+        style={[
+          styles.signbox,
+          {
+            backgroundColor: '#fff',
+            width: screenwidth / 1.18,
+            height: screenheight / 1.3,
+          },
+        ]}>
+        <Box style={[styles.chartbox, {width: '100%'}]}>
+          <ChartScreen value={datarray} style={margin} />
         </Box>
-      </NativeBaseProvider>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <Center paddingY={5}>
+            <Animated.Image
+              style={{
+                borderRadius: 150,
+                width: 100,
+                height: 100,
+                transform: [{rotate: spin}],
+              }}
+              resizeMode={'contain'}
+              source={LOGO}
+              alt="Alternate Text"
+            />
+          </Center>
+          <FormControl isRequired style={styles.signinbox}>
+            <Box marginTop={screenheight / 10}>
+              <Text size="lg" style={styles.heading1}>
+                Welcome
+              </Text>
+              <Text size="lg" style={styles.heading2}>
+                SignUp to explore your packages
+              </Text>
+            </Box>
+            <Input
+              fontSize="19"
+              type="email"
+              variant="underlined"
+              marginVertical={5}
+              width={screenwidth / 1.6}
+              maxW={'320'}
+              borderRadius={0}
+              paddingLeft={1}
+              paddingRight={2}
+              borderWidth={1}
+              isRequired={true}
+              borderColor="#000"
+              placeholder="Email"
+              _focus={{borderColor: '#900'}}
+              value={email}
+              onChangeText={text => setEmail(text)}
+            />
+            <Input
+              fontSize="19"
+              type="password"
+              variant="underlined"
+              marginVertical={5}
+              width={screenwidth / 1.6}
+              maxW={'320'}
+              paddingLeft={1}
+              paddingRight={2}
+              borderRadius={0}
+              borderWidth={1}
+              isRequired={true}
+              borderColor="#000"
+              placeholder="Password"
+              _focus={{borderColor: '#900'}}
+              value={password}
+              secureTextEntry={true}
+              onChangeText={text => setPassword(text)}
+            />
+            <Button
+              regular
+              shadow={1}
+              _pressed={{
+                bg: '#ADADAD',
+              }}
+              block
+              onPress={doSignUp}
+              bg={'#fff'}
+              style={[styles.button]}>
+              <Text
+                style={[
+                  styles.buttontxt,
+                  {
+                    color: '#000',
+                  },
+                ]}>
+                SignUp
+              </Text>
+            </Button>
+          </FormControl>
+        </ScrollView>
+      </Box>
     </ScrollView>
   );
 };
@@ -134,38 +158,25 @@ SignUp.propTypes = {
 export default connect(null, mapDispatchToProps)(SignUp);
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     alignItems: 'flex-start',
     justifyContent: 'center',
   },
   signbox: {
-    width: screenwidth / 1.18,
-    height: screenheight / 1.5,
     borderTopRightRadius: 30,
     borderBottomRightRadius: 30,
     overflow: 'hidden',
-    zIndex: 10,
-    elevation: 3,
   },
   chartbox: {
     overflow: 'hidden',
     position: 'absolute',
-    width: '100%',
-    height: '100%',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-end',
+    bottom: 0,
   },
-  signupbox: {
+  signinbox: {
     flex: 1,
-    paddingRight: screenwidth / 18,
+    width: '100%',
+    paddingRight: screenwidth / (16 * 1.18),
     alignItems: 'flex-end',
-  },
-  headingbox: {
-    height: screenheight / 4.5,
-    width: screenwidth / 1.18 - screenwidth / 18,
-    paddingTop: screenheight / 8,
-    justifyContent: 'flex-start',
-    paddingLeft: screenwidth / 18,
   },
   heading1: {
     color: '#000',
@@ -173,25 +184,19 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   heading2: {
-    color: 'gray',
+    color: '#ADADAD',
+    fontWeight: '500',
     fontSize: 18,
   },
   button: {
-    width: screenwidth / 2.7,
-    marginTop: screenheight / 10,
-    alignSelf: 'flex-start',
-    borderBottomRightRadius: 30,
-    borderTopRightRadius: 30,
-    borderRightWidth: 1,
-    borderTopWidth: 1,
-    borderLeftWidth: 0.5,
-    borderBottomWidth: 1,
-    borderTopLeftRadius: 0,
-    borderBottomLeftRadius: 0,
+    width: 100,
+    marginTop: screenheight / 25,
+    borderWidth: 1,
+    marginBottom: screenheight / 25,
   },
   buttontxt: {
     fontSize: 24,
-    alignSelf: 'center',
     fontWeight: 'bold',
+    alignSelf: 'center',
   },
 });

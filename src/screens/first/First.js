@@ -8,16 +8,7 @@ import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Notify from './Notify';
 import PackagesApi from './PackagesApi';
-import {
-  Center,
-  NativeBaseProvider,
-  Image,
-  Button,
-  Text,
-  Box,
-  VStack,
-  Skeleton,
-} from 'native-base';
+import {Center, Image, Button, Text, Box, VStack, Skeleton} from 'native-base';
 
 const First = ({navigation, colorlist, onPress, initialState}) => {
   const greettext = GreetingText();
@@ -104,13 +95,11 @@ const First = ({navigation, colorlist, onPress, initialState}) => {
 
   return (
     <>
-      <NativeBaseProvider>
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.container}>
-          {PackagesApi.map(item => Shrey(item))}
-        </ScrollView>
-      </NativeBaseProvider>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.container}>
+        {PackagesApi.map(item => Shrey(item))}
+      </ScrollView>
       <Notify />
     </>
   );

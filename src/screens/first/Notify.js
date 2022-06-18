@@ -28,6 +28,5 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     alignSelf: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fff',
   },
 });

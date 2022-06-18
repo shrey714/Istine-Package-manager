@@ -12,7 +12,6 @@ import {
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 import OnlyLoading from '../../components/OnlyLoading';
 import axios from 'axios';
-import {NativeBaseProvider} from 'native-base';
 import Accordion from './Accordion';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
@@ -99,51 +98,49 @@ const Third = ({navigation, colorlist}) => {
           <OnlyLoading />
         </View>
       ) : (
-        <NativeBaseProvider>
-          <Animated.FlatList
-            {...{onScroll}}
-            initialScrollIndex={0}
-            contentContainerStyle={{
-              paddingBottom: getStatusBarHeight() + 5,
-              marginTop: getStatusBarHeight(),
-            }}
-            ListHeaderComponent={
-              <View
+        <Animated.FlatList
+          {...{onScroll}}
+          initialScrollIndex={0}
+          contentContainerStyle={{
+            paddingBottom: getStatusBarHeight() + 5,
+            marginTop: getStatusBarHeight(),
+          }}
+          ListHeaderComponent={
+            <View
+              style={[
+                styles.heading,
+                {
+                  backgroundColor: PC,
+                  borderColor:
+                    PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+                },
+              ]}>
+              <TextInput
+                placeholderTextColor={TC === '#000' ? '#ADADAD' : 'gray'}
                 style={[
-                  styles.heading,
+                  styles.searchbox,
                   {
-                    backgroundColor: PC,
-                    borderColor:
-                      PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+                    backgroundColor: TC,
+                    color: TC === '#000' ? '#fff' : '#000',
                   },
-                ]}>
-                <TextInput
-                  placeholderTextColor={TC === '#000' ? '#ADADAD' : 'gray'}
-                  style={[
-                    styles.searchbox,
-                    {
-                      backgroundColor: TC,
-                      color: TC === '#000' ? '#fff' : '#000',
-                    },
-                  ]}
-                  value={inputSearch}
-                  onChangeText={setInputSearch}
-                  onSubmitEditing={() => {
-                    fetchdetails();
-                  }}
-                  placeholder="Search"
-                />
-              </View>
-            }
-            data={details}
-            renderItem={({item, index}) => renderaccordian(item, index)}
-            stickyHeaderIndices={[0]}
-            keyExtractor={() => shortid.generate()}
-            showsVerticalScrollIndicator={false}
-            stickyHeaderHiddenOnScroll={true}
-            // onEndReached={() => Vibration.vibrate(5)}
-          />
-        </NativeBaseProvider>
+                ]}
+                value={inputSearch}
+                onChangeText={setInputSearch}
+                onSubmitEditing={() => {
+                  fetchdetails();
+                }}
+                placeholder="Search"
+              />
+            </View>
+          }
+          data={details}
+          renderItem={({item, index}) => renderaccordian(item, index)}
+          stickyHeaderIndices={[0]}
+          keyExtractor={() => shortid.generate()}
+          showsVerticalScrollIndicator={false}
+          stickyHeaderHiddenOnScroll={true}
+          // onEndReached={() => Vibration.vibrate(5)}
+        />
       )}
     </>
   );

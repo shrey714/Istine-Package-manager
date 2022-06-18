@@ -121,7 +121,13 @@ const Accordion = props => {
           <Icon
             name={expanded ? 'arrow-circle-up' : 'arrow-circle-down'}
             size={30}
-            color={SC}
+            color={
+              PC === '#ffffff' || PC === '#F9F9F9'
+                ? SC === '#ffffff'
+                  ? '#000'
+                  : SC
+                : SC
+            }
           />
         </Pressable>
       </Flex>

@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 import {
   View,
@@ -17,18 +17,40 @@ import {
   StatusBar,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {useInterstitialAd, TestIds} from 'react-native-google-mobile-ads';
 import * as Animatable from 'react-native-animatable';
 import {SharedElement} from 'react-navigation-shared-element';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 import QuizData from './QuizData';
 const {width, height} = Dimensions.get('window');
+//===============
+
+//===============
 const Quiz = ({route, colorlist, navigation}) => {
   const {name, bg} = route.params;
   let PC = colorlist.Primarycolor;
   let SC = colorlist.Secondarycolor;
   let TC = colorlist.Ternarycolor;
+  //=================
+  const adUnitId = __DEV__
+    ? TestIds.INTERSTITIAL
+    : 'ca-app-pub-7393727234144842/5645996548';
 
+  const {isLoaded, isClosed, load, show} = useInterstitialAd(adUnitId, {
+    requestNonPersonalizedAdsOnly: false,
+  });
+  useEffect(() => {
+    load();
+  }, [load]);
+  useEffect(() => {
+    if (isClosed) {
+      restartQuiz();
+      load();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isClosed]);
+  //=================
   const allQuestions = QuizData;
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [currentOptionSelected, setCurrentOptionSelected] = useState(null);
@@ -384,7 +406,13 @@ const Quiz = ({route, colorlist, navigation}) => {
               </View>
               {/* Retry Quiz button */}
               <TouchableOpacity
-                onPress={restartQuiz}
+                onPress={() => {
+                  if (isLoaded) {
+                    show();
+                  } else {
+                    restartQuiz();
+                  }
+                }}
                 style={{
                   backgroundColor: SC,
                   padding: 20,

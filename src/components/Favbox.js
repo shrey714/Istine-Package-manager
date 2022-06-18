@@ -114,7 +114,18 @@ const Favbox = ({details, index, navigation, colorlist}) => {
       </View>
 
       <View style={[styles.versionbox, {backgroundColor: PC}]}>
-        <Text style={[styles.versiontext, {color: SC}]}>
+        <Text
+          style={[
+            styles.versiontext,
+            {
+              color:
+                PC === '#ffffff' || PC === '#F9F9F9'
+                  ? SC === '#ffffff'
+                    ? '#000'
+                    : SC
+                  : SC,
+            },
+          ]}>
           {details?.packageversion}
         </Text>
       </View>

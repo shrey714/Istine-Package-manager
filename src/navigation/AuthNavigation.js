@@ -1,11 +1,10 @@
 import React, {useEffect} from 'react';
-import {Vibration, Dimensions, Appearance} from 'react-native';
+import {Vibration, Dimensions} from 'react-native';
 import SignIn from '../screens/authscreens/SignIn';
 import SignUp from '../screens/authscreens/SignUp';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import PushNotification from 'react-native-push-notification';
-const colorScheme = Appearance.getColorScheme();
 
 const TopTab = createMaterialTopTabNavigator();
 
@@ -15,7 +14,6 @@ const AuthNavigation = () => {
       channelId: 'test-channel',
       channelName: 'Test Channel',
     });
-    console.log('channel created');
   };
 
   const btnvibration = {
@@ -33,28 +31,21 @@ const AuthNavigation = () => {
         tabBarPosition="top"
         screenOptions={{
           tabBarAllowFontScaling: true,
-          activeTintColor: '#000',
           tabBarBounces: true,
-          inactiveTintColor: '#636363',
           tabBarLabelStyle: {
             fontWeight: 'bold',
-            fontSize: 25,
-            color: colorScheme === 'dark' ? 'gray' : '#000',
+            fontSize: 23,
+            color: '#000',
           },
           tabBarItemStyle: {
             width: Dimensions.get('window').width / 2,
           },
           tabBarStyle: {
-            backgroundColor: colorScheme === 'light' ? '#fff' : '#000',
+            backgroundColor: '#fff',
             marginTop: getStatusBarHeight(),
             width: Dimensions.get('window').width,
           },
-          tabBarPressColor: colorScheme === 'light' ? '#000' : '#fff',
-          indicatorStyle: {
-            // borderBottomColor: 'red',
-            borderBottomWidth: 2,
-            // borderColor: 'red',
-          },
+          tabBarPressColor: '#000',
         }}>
         <TopTab.Screen
           name="SignIn"

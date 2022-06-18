@@ -54,12 +54,36 @@ const NPMscreen = ({detailsdata, readme, colorlist}) => {
           {borderColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'},
         ]}>
         <Text
-          style={[styles.text, {fontSize: 18, fontWeight: 'bold', color: SC}]}>
+          style={[
+            styles.text,
+            {
+              fontSize: 18,
+              fontWeight: 'bold',
+              color:
+                PC === '#ffffff' || PC === '#F9F9F9'
+                  ? SC === '#ffffff'
+                    ? '#000'
+                    : SC
+                  : SC,
+            },
+          ]}>
           {data.name}
         </Text>
         <Separator />
         <Text
-          style={[styles.text, {fontSize: 18, fontWeight: 'bold', color: SC}]}>
+          style={[
+            styles.text,
+            {
+              fontSize: 18,
+              fontWeight: 'bold',
+              color:
+                PC === '#ffffff' || PC === '#F9F9F9'
+                  ? SC === '#ffffff'
+                    ? '#000'
+                    : SC
+                  : SC,
+            },
+          ]}>
           v{data.version}
         </Text>
         <Separator />
@@ -168,7 +192,19 @@ const NPMscreen = ({detailsdata, readme, colorlist}) => {
           {borderColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'},
         ]}>
         <Text
-          style={[styles.text, {fontSize: 19, fontWeight: 'bold', color: SC}]}>
+          style={[
+            styles.text,
+            {
+              fontSize: 19,
+              fontWeight: 'bold',
+              color:
+                PC === '#ffffff' || PC === '#F9F9F9'
+                  ? SC === '#ffffff'
+                    ? '#000'
+                    : SC
+                  : SC,
+            },
+          ]}>
           npm install {data.name}
         </Text>
       </View>

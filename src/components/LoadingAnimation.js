@@ -34,9 +34,29 @@ const LoadingAnimation = props => {
         <Animated.View // Special animatable View
           style={[
             styles.box,
-            {transform: [{rotate: spin}, {scale: sizespin}], borderColor: SC},
+            {
+              transform: [{rotate: spin}, {scale: sizespin}],
+              borderColor:
+                PC === '#ffffff' || PC === '#F9F9F9'
+                  ? SC === '#ffffff'
+                    ? '#000'
+                    : SC
+                  : SC,
+            },
           ]}>
-          <View style={[styles.innerbox, {borderColor: SC}]} />
+          <View
+            style={[
+              styles.innerbox,
+              {
+                borderColor:
+                  PC === '#ffffff' || PC === '#F9F9F9'
+                    ? SC === '#ffffff'
+                      ? '#000'
+                      : SC
+                    : SC,
+              },
+            ]}
+          />
         </Animated.View>
       </View>
     </>

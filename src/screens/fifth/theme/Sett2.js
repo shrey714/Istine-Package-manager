@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {InterstitialAd, TestIds} from 'react-native-google-mobile-ads';
 import {ScrollView, StyleSheet} from 'react-native';
 import Colorpick from './Colorpick';
@@ -20,7 +20,7 @@ const Sett2 = ({colorlist}) => {
 
   useEffect(() => {
     interstitial.load();
-    // console.log('loaded');
+    // console.log('loaded2');
   }, [interstitial]);
   return (
     <>

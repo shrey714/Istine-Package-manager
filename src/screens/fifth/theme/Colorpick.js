@@ -26,6 +26,7 @@ function ColorPickerDemo({type, sendadata, setPST, colorlist, ColorTheme}) {
       }
     };
     setbtnbackground();
+    // console.log('effect1');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
@@ -38,6 +39,7 @@ function ColorPickerDemo({type, sendadata, setPST, colorlist, ColorTheme}) {
         setbtnback(TC);
       }
     };
+    // console.log('effect2');
     setbtnbackground();
   }, [PC, SC, TC, type]);
 
@@ -91,9 +93,9 @@ function ColorPickerDemo({type, sendadata, setPST, colorlist, ColorTheme}) {
             borderColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
           },
         ]}
-        onPress={() => {
+        onPress={async () => {
+          await sendadata?.show();
           letsadd();
-          sendadata.show();
         }}>
         <Icon
           name="circle-o"
@@ -130,7 +132,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     overflow: 'hidden',
     width: '80%',
-    marginTop: 10,
+    // marginTop: 10,
   },
   text: {
     fontSize: 25,

@@ -5,6 +5,7 @@ import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import {LogBox} from 'react-native';
 import {SSRProvider} from '@react-aria/ssr';
+import {NativeBaseProvider} from 'native-base';
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
 ]);
@@ -14,7 +15,9 @@ const App = () => {
       <SSRProvider>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
-            <RootApp />
+            <NativeBaseProvider>
+              <RootApp />
+            </NativeBaseProvider>
           </PersistGate>
         </Provider>
       </SSRProvider>
