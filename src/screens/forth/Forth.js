@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {StyleSheet, View, ScrollView, SafeAreaView} from 'react-native';
 import Favbox from '../../components/Favbox';
 import getpackages from '../../action/package';
-import OnlyLoading from '../../components/OnlyLoading';
+import LoadingAnimation from '../../components/LoadingAnimation';
 import {connect} from 'react-redux';
 import propTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -21,7 +21,7 @@ const Forth = ({navigation, getpackages, packageState, colorlist}) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   if (packageState.loading) {
-    return <OnlyLoading />;
+    return <LoadingAnimation />;
   }
 
   return (

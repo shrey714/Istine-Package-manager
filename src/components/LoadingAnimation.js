@@ -1,11 +1,13 @@
 import React, {useRef, useEffect} from 'react';
-import {Animated, Easing, StyleSheet, View} from 'react-native';
+import {Animated, Easing, Dimensions, StyleSheet, View} from 'react-native';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 const LoadingAnimation = props => {
   let PC = props.colorlist.Primarycolor;
   let SC = props.colorlist.Secondarycolor;
   let TC = props.colorlist.Ternarycolor;
+  const windowHeight = Dimensions.get('window').height;
+  const windowWidth = Dimensions.get('window').width;
 
   const anima = useRef(new Animated.Value(0)).current;
 
@@ -14,7 +16,7 @@ const LoadingAnimation = props => {
       Animated.timing(anima, {
         toValue: 2,
         duration: 2000,
-        easing: Easing.elastic(2.8),
+        easing: Easing.elastic(2.5),
         useNativeDriver: true,
       }),
     ).start();
@@ -30,7 +32,15 @@ const LoadingAnimation = props => {
 
   return (
     <>
-      <View style={[styles.container, {backgroundColor: PC}]}>
+      <View
+        style={[
+          styles.container,
+          {
+            backgroundColor: PC,
+            width: windowWidth,
+            height: windowHeight,
+          },
+        ]}>
         <Animated.View // Special animatable View
           style={[
             styles.box,
@@ -75,24 +85,23 @@ export default connect(mapStateToProps)(LoadingAnimation);
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
   box: {
-    width: 50,
+    width: 56,
     justifyContent: 'center',
     alignItems: 'center',
-    height: 50,
-    borderWidth: 2.3,
+    height: 56,
+    borderWidth: 3,
     borderRadius: 150,
     borderTopColor: 'rgba(0,0,0,0)',
     borderBottomColor: 'rgba(0,0,0,0)',
   },
   innerbox: {
-    width: 30,
-    height: 30,
-    borderWidth: 2,
+    width: 32,
+    height: 32,
+    borderWidth: 3.4,
     borderRadius: 150,
   },
 });

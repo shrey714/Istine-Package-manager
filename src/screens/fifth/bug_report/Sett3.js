@@ -251,10 +251,10 @@ const Sett3 = ({colorlist}) => {
           marginTop: 12,
           borderBottomWidth: 0.2,
           borderBottomColor:
-            PC === '#000' || PC === '#1F1B24' ? '#707070' : '#ababab',
+            PC === '#000' || PC === '#1F1B24' ? '#c9c9c9' : '#ababab',
           borderTopWidth: 0.2,
           borderTopColor:
-            PC === '#000' || PC === '#1F1B24' ? '#707070' : '#ababab',
+            PC === '#000' || PC === '#1F1B24' ? '#c9c9c9' : '#ababab',
         }}>
         <ScrollView
           horizontal={true}
@@ -388,17 +388,17 @@ const Sett3 = ({colorlist}) => {
           marginTop: 12,
           borderBottomWidth: 0.2,
           borderBottomColor:
-            PC === '#000' || PC === '#1F1B24' ? '#707070' : '#ababab',
+            PC === '#000' || PC === '#1F1B24' ? '#c9c9c9' : '#ababab',
           borderTopWidth: 0.2,
           borderTopColor:
-            PC === '#000' || PC === '#1F1B24' ? '#707070' : '#ababab',
+            PC === '#000' || PC === '#1F1B24' ? '#c9c9c9' : '#ababab',
         }}>
         <TextInput
           multiline
           value={textAreaValue}
           onChangeText={setTextAreaValue}
           placeholderTextColor={
-            PC === '#000' || PC === '#1F1B24' ? '#707070' : '#ababab'
+            PC === '#000' || PC === '#1F1B24' ? '#c9c9c9' : '#ababab'
           }
           placeholder="What would you like us to improve?"
           style={{

@@ -38,7 +38,7 @@ const RootApp = ({authState, colorlist}) => {
   //   true,
   // );
   changeNavigationBarColor(
-    PC === '#000' || PC === '#1F1B24' ? 'black' : 'white',
+    PC === '#000' || PC === '#1F1B24' || PC === '#949398FF' ? 'black' : 'white',
     true,
     true,
   );

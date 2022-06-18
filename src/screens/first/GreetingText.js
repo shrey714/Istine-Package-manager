@@ -1,15 +1,13 @@
-import React from 'react';
-
 const GreetingText = () => {
   var today = new Date();
   var curHr = today.getHours();
 
   if (curHr < 12) {
-    return 'GOOD MORNING';
+    return 'Good morning';
   } else if (curHr < 18) {
-    return 'GOOD AFTERNOON';
+    return 'Good afternoon';
   } else {
-    return 'GOOD EVENING';
+    return 'Good evening';
   }
 };
 

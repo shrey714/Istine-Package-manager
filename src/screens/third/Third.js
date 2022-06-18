@@ -10,7 +10,7 @@ import {
   Vibration,
 } from 'react-native';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
-import OnlyLoading from '../../components/OnlyLoading';
+import LoadingAnimation from '../../components/LoadingAnimation';
 import axios from 'axios';
 import Accordion from './Accordion';
 import propTypes from 'prop-types';
@@ -95,7 +95,7 @@ const Third = ({navigation, colorlist}) => {
     <>
       {loading ? (
         <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
-          <OnlyLoading />
+          <LoadingAnimation />
         </View>
       ) : (
         <Animated.FlatList

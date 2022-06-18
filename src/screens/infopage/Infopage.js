@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import BottomSheet from '../../components/BottomSheet';
 import axios from 'axios';
-import OnlyLoading from '../../components/OnlyLoading';
+import LoadingAnimation from '../../components/LoadingAnimation';
 import NPMscreen from '../detailscreen/NPMscreen';
 import Addtofavbtn from '../../components/Addtofavbtn';
 import propTypes from 'prop-types';
@@ -63,15 +63,15 @@ const Infopage = ({route, navigation, colorlist}) => {
   return details ? (
     <>
       <NPMscreen detailsdata={maindata} readme={readme} />
-      {/* <BottomSheet
+      <BottomSheet
         packagename={packagename}
         navigation={navigation}
         package={details}
-      /> */}
+      />
     </>
   ) : (
     <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
-      <OnlyLoading />
+      <LoadingAnimation />
     </View>
   );
 };

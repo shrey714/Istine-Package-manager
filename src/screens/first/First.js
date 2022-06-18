@@ -1,15 +1,20 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
-import {ScrollView, StyleSheet, Linking} from 'react-native';
+import {
+  ScrollView,
+  TouchableOpacity,
+  Vibration,
+  StyleSheet,
+  Linking,
+} from 'react-native';
 import GreetingText from './GreetingText';
-const shortid = require('shortid');
-import FirstHeader from './FirstHeader';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
+import Snackbar from 'react-native-snackbar';
 import Notify from './Notify';
 import PackagesApi from './PackagesApi';
 import {Center, Image, Button, Text, Box, VStack, Skeleton} from 'native-base';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 const First = ({navigation, colorlist, onPress, initialState}) => {
   const greettext = GreetingText();
   let PC = colorlist.Primarycolor;
@@ -17,32 +22,47 @@ const First = ({navigation, colorlist, onPress, initialState}) => {
   let TC = colorlist.Ternarycolor;
 
   useEffect(() => {
-    // console.log(colorlist.colours);
     navigation.setOptions({
       title: greettext,
-      headerRight: () => <FirstHeader />,
+      headerRight: () => (
+        <>
+          <TouchableOpacity
+            style={styles.buttonarea}
+            onPress={() => {
+              Vibration.vibrate(5);
+              Snackbar.show({
+                text: 'Empty',
+                textColor:
+                  PC === '#000' || PC === '#1F1B24' || PC === '#949398FF'
+                    ? '#fff'
+                    : '#000',
+                backgroundColor:
+                  PC === '#000' || PC === '#1F1B24' || PC === '#949398FF'
+                    ? '#000'
+                    : '#fff',
+              });
+            }}>
+            <Icon name="bell-o" size={23} color={SC} />
+          </TouchableOpacity>
+        </>
+      ),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [isLoaded, setIsLoaded] = useState(false);
-  const [text, setText] = useState('');
   setTimeout(() => {
     setIsLoaded(true);
-    setText(
-      'Lose yourself in the greens of nature, the ones that make you strong. Come visit us at the Greenway Park, and we will be happy to show you around.',
-    );
   }, 5000);
 
-  const Shrey = item => {
+  const Shrey = (item, index) => {
     return (
-      <Center
-        key={shortid.generate()}
-        w="100%"
-        style={{marginTop: 10, elevation: 2}}>
+      <Center key={index} w="100%" style={{marginTop: 10}}>
         <Box w="90%" maxWidth="400">
           <VStack
             maxWidth="400"
+            shadow={3}
+            background={PC}
             borderWidth="1"
             space={8}
             overflow="hidden"
@@ -98,7 +118,7 @@ const First = ({navigation, colorlist, onPress, initialState}) => {
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.container}>
-        {PackagesApi.map(item => Shrey(item))}
+        {PackagesApi.map((item, index) => Shrey(item, index))}
       </ScrollView>
       <Notify />
     </>
@@ -122,5 +142,14 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 40,
+  },
+  buttonarea: {
+    marginRight: 8,
+    backgroundColor: '#000',
+    width: 40,
+    height: 40,
+    borderRadius: 150,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

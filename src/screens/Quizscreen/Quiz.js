@@ -283,6 +283,7 @@ const Quiz = ({route, colorlist, navigation}) => {
           borderColor: TC + 40,
           marginBottom: 20,
           backgroundColor: 'rgba(0,0,0,0.5)',
+          zIndex: 1,
         }}>
         <Animated.View
           style={[

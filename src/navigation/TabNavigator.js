@@ -42,7 +42,7 @@ const TabNavigator = ({colorlist}) => {
               PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
             headerTitleStyle: {
               fontWeight: '200',
-              fontSize: 25,
+              fontSize: 24,
             },
             tabBarShowLabel: false,
             tabBarStyle: [

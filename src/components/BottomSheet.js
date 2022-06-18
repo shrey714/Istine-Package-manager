@@ -1,11 +1,5 @@
 import React, {useCallback, useState, useEffect, useRef, useMemo} from 'react';
-import {
-  StyleSheet,
-  View,
-  Dimensions,
-  TouchableOpacity,
-  Text,
-} from 'react-native';
+import {StyleSheet, Dimensions, TouchableOpacity, Text} from 'react-native';
 import BottomSheet, {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import shortid from 'shortid';
 import propTypes from 'prop-types';
@@ -15,7 +9,7 @@ const screenwidth = Dimensions.get('screen').width;
 const BottomSheett = props => {
   let PC = props.colorlist.Primarycolor;
   let SC = props.colorlist.Secondarycolor;
-  let TC = props.colorlist.Ternarycolor;
+  // let TC = props.colorlist.Ternarycolor;
 
   const sheetRef = useRef();
   const [packagedata, setpackagedata] = useState('');
@@ -45,9 +39,16 @@ const BottomSheett = props => {
           });
           sheetRef.current?.snapToIndex(0);
         }}
-        key={shortid.generate()}
-        style={[styles.box, {backgroundColor: PC}]}>
+        // key={shortid.generate()}
+        style={[
+          styles.box,
+          {
+            borderBottomColor:
+              PC === '#000' || PC === '#1f1b24' ? '#a3a3a3' : '#000',
+          },
+        ]}>
         <Text
+          numberOfLines={1}
           style={[
             styles.text,
             {color: PC === '#000' || PC === '#1f1b24' ? '#fff' : '#000'},
@@ -64,14 +65,20 @@ const BottomSheett = props => {
     <BottomSheet
       BottomSheetBackdrop={true}
       ref={sheetRef}
-      backgroundStyle={{backgroundColor: PC, borderWidth: 1}}
+      backgroundStyle={{
+        backgroundColor: PC,
+        borderTopWidth: 1,
+        borderEndWidth: 1,
+        borderStartWidth: 1,
+        borderColor: PC === '#000' || PC === '#1f1b24' ? '#a3a3a3' : '#000',
+      }}
       handleIndicatorStyle={{backgroundColor: SC, width: 40}}
       snapPoints={snapPoints}>
       <BottomSheetFlatList
         data={data}
         keyExtractor={i => i}
         renderItem={renderItem}
-        contentContainerStyle={[styles.contentContainer, {backgroundColor: PC}]}
+        contentContainerStyle={[styles.contentContainer]}
       />
     </BottomSheet>
   );
@@ -94,16 +101,13 @@ const styles = StyleSheet.create({
   box: {
     width: screenwidth / 1.05,
     minHeight: 30,
-    borderRadius: 6,
-    borderWidth: 0.5,
-    borderEndColor: '#000',
-    elevation: 0,
+    borderBottomWidth: 0.5,
     alignSelf: 'center',
     marginTop: 5,
     padding: 8,
   },
   text: {
-    fontSize: 26,
+    fontSize: 24,
     fontWeight: 'bold',
   },
 });

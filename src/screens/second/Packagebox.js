@@ -19,7 +19,7 @@ const Packagebox = props => {
   let SC = props.colorlist.Secondarycolor;
   let TC = props.colorlist.Ternarycolor;
   return (
-    <Animatable.View animation="zoomIn" duration={500} useNativeDriver={true}>
+    <Animatable.View animation="fadeIn" duration={500} useNativeDriver={true}>
       <TouchableOpacity
         style={styles.packagebox}
         onPress={() =>
@@ -55,6 +55,7 @@ export default connect(mapStateToProps)(Packagebox);
 const styles = StyleSheet.create({
   packagebox: {
     width: screenWidth / 2 - 4,
+    margin: 1,
     marginVertical: 2,
     height: 350,
     borderRadius: 8,
@@ -62,13 +63,13 @@ const styles = StyleSheet.create({
   },
   back: {
     height: 280,
-    // flex: 1,
-    // position: 'absolute',
+    flex: 1,
+    position: 'absolute',
     width: screenWidth / 2,
     resizeMode: 'cover',
   },
   namebox: {
-    width: screenWidth / 2,
+    width: screenWidth / 2 - 2,
     height: 70,
     justifyContent: 'center',
     alignItems: 'center',
