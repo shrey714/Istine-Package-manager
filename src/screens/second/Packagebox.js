@@ -19,7 +19,7 @@ const Packagebox = props => {
   let SC = props.colorlist.Secondarycolor;
   let TC = props.colorlist.Ternarycolor;
   return (
-    <Animatable.View animation="fadeIn" duration={500} useNativeDriver={true}>
+    <Animatable.View animation="fadeInUp" duration={400} useNativeDriver={true}>
       <TouchableOpacity
         style={styles.packagebox}
         onPress={() =>

@@ -1,5 +1,9 @@
-import React, {useEffect} from 'react';
-import {InterstitialAd, TestIds} from 'react-native-google-mobile-ads';
+import React, {useEffect, useState} from 'react';
+import {
+  InterstitialAd,
+  AdEventType,
+  TestIds,
+} from 'react-native-google-mobile-ads';
 import {ScrollView, StyleSheet} from 'react-native';
 import Colorpick from './Colorpick';
 import propTypes from 'prop-types';
@@ -18,25 +22,37 @@ const Sett2 = ({colorlist}) => {
     requestNonPersonalizedAdsOnly: false,
   });
 
+  const [loaded, setLoaded] = useState(false);
+
   useEffect(() => {
+    const unsubscribe = interstitial.addAdEventListener(
+      AdEventType.LOADED,
+      () => {
+        setLoaded(true);
+        console.log('loaded');
+      },
+    );
     interstitial.load();
-    // console.log('loaded2');
+    return unsubscribe;
   }, [interstitial]);
   return (
     <>
       <ScrollView contentContainerStyle={[styles.container]}>
         <Colorpick
           sendadata={interstitial}
+          loaded={loaded}
           ColorTheme={ColorTheme.colour1}
           type={'Primary'}
         />
         <Colorpick
           sendadata={interstitial}
+          loaded={loaded}
           ColorTheme={ColorTheme.colour2}
           type={'Secondary'}
         />
         <Colorpick
           sendadata={interstitial}
+          loaded={loaded}
           ColorTheme={ColorTheme.colour3}
           type={'Ternary'}
         />

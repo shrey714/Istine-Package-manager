@@ -5,6 +5,7 @@ buildscript {
         minSdkVersion = 23
         compileSdkVersion = 31
         targetSdkVersion = 31
+        androidXCore = "1.7.0"
         googlePlayServicesVersion = "+" // default: "+"
         firebaseMessagingVersion = "21.1.0" // default: "21.1.0"
         buildToolsVersion = "31.0.0"

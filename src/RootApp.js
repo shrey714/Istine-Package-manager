@@ -1,8 +1,10 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StatusBar} from 'react-native';
+// import {getStatusBarHeight} from 'react-native-status-bar-height';
 import changeNavigationBarColor from 'react-native-navigation-bar-color';
 import DrawerNavigator from './navigation/DrawerNavigator';
 import AuthNavigation from './navigation/AuthNavigation';
+import Neterror from './components/Neterror';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
 import LoadingAnimation from './components/LoadingAnimation';
 const Stack = createStackNavigator();
@@ -12,10 +14,10 @@ import propTypes from 'prop-types';
 import SplashScreen from 'react-native-splash-screen';
 import auth from '@react-native-firebase/auth';
 import {NavigationContainer} from '@react-navigation/native';
-// const colorScheme = Appearance.getColorScheme();
-
+import {useNetInfo} from '@react-native-community/netinfo';
 const RootApp = ({authState, colorlist}) => {
   const dispatch = useDispatch();
+  const netinfo = useNetInfo();
   let PC = colorlist.Primarycolor;
   let SC = colorlist.Secondarycolor;
   let TC = colorlist.Ternarycolor;
@@ -32,11 +34,6 @@ const RootApp = ({authState, colorlist}) => {
       });
     }
   };
-  // changeNavigationBarColor(
-  //   colorScheme === 'light' ? 'white' : 'black',
-  //   true,
-  //   true,
-  // );
   changeNavigationBarColor(
     PC === '#000' || PC === '#1F1B24' || PC === '#949398FF' ? 'black' : 'white',
     true,
@@ -51,6 +48,7 @@ const RootApp = ({authState, colorlist}) => {
     return susbcriber;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const [connection, setconnection] = useState(false);
 
   if (authState.loading) {
     return <LoadingAnimation />;
@@ -60,12 +58,13 @@ const RootApp = ({authState, colorlist}) => {
     <>
       <NavigationContainer
         onReady={async () => {
-          SplashScreen.hide();
           StatusBar.setBarStyle(
             PC === '#000' || PC === '#1F1B24'
               ? 'light-content'
               : 'dark-content',
           );
+          SplashScreen.hide();
+          setconnection(true);
         }}>
         <StatusBar
           translucent={true}
@@ -75,6 +74,7 @@ const RootApp = ({authState, colorlist}) => {
           }
           // animated={true}
         />
+        {connection && !netinfo.isConnected ? <Neterror /> : <></>}
         <Stack.Navigator screenOptions={{headerShown: false}}>
           {/* !authState.isauthenticated */}
           {!authState.isauthenticated ? (

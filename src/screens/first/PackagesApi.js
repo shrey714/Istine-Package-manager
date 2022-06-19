@@ -1,13 +1,13 @@
 const PackagesApi = [
   {
     name: 'react',
-    image: 'https://wallpaperaccess.com/full/3949081.png',
+    image: 'https://images.hdqwalls.com/wallpapers/bthumb/react-js-logo-no.jpg',
     url: 'https://reactjs.org/',
     data: 'React is a JavaScript library for building user interfaces.',
   },
   {
     name: 'react-native',
-    image: 'https://images.hdqwalls.com/wallpapers/bthumb/react-js-logo-no.jpg',
+    image: 'https://wallpaperaccess.com/full/3949081.png',
     url: 'https://reactnative.dev/',
     data: 'React Native combines the best parts of native development with React, a best-in-class JavaScript library for building user interfaces',
   },

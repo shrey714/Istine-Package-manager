@@ -6,7 +6,14 @@ import setPST from '../../../action/color';
 import propTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-function ColorPickerDemo({type, sendadata, setPST, colorlist, ColorTheme}) {
+function ColorPickerDemo({
+  type,
+  sendadata,
+  loaded,
+  setPST,
+  colorlist,
+  ColorTheme,
+}) {
   let PC = colorlist.colours.Primarycolor;
   let SC = colorlist.colours.Secondarycolor;
   let TC = colorlist.colours.Ternarycolor;
@@ -93,9 +100,13 @@ function ColorPickerDemo({type, sendadata, setPST, colorlist, ColorTheme}) {
             borderColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
           },
         ]}
-        onPress={async () => {
-          await sendadata?.show();
-          letsadd();
+        onPress={() => {
+          if (loaded) {
+            letsadd();
+            sendadata?.show();
+          } else {
+            letsadd();
+          }
         }}>
         <Icon
           name="circle-o"

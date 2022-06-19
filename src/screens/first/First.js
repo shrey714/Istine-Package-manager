@@ -48,7 +48,7 @@ const First = ({navigation, colorlist, onPress, initialState}) => {
       ),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [PC]);
 
   const [isLoaded, setIsLoaded] = useState(false);
   setTimeout(() => {
@@ -72,7 +72,7 @@ const First = ({navigation, colorlist, onPress, initialState}) => {
             }>
             <Skeleton h="40" isLoaded={isLoaded}>
               <Image
-                alt="image here"
+                alt="_"
                 h="40"
                 source={{
                   uri: item.image,

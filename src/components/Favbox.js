@@ -34,14 +34,14 @@ const Favbox = ({details, index, navigation, colorlist}) => {
       Snackbar.show({
         text: 'deletion completed',
         textColor: '#fff',
-        backgroundColor: 'rgba(0,0,0,0.5)',
+        backgroundColor: 'rgba(0,0,0,0.8)',
       });
     } catch (error) {
       console.log(error);
       Snackbar.show({
         text: 'deletion failed',
         textColor: '#fff',
-        backgroundColor: 'rgba(0,0,0,0.5)',
+        backgroundColor: 'rgba(0,0,0,0.8)',
       });
     }
   };
@@ -67,7 +67,6 @@ const Favbox = ({details, index, navigation, colorlist}) => {
       style={[
         styles.box,
         {
-          backgroundColor: TC,
           borderColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
         },
       ]}
@@ -107,7 +106,7 @@ const Favbox = ({details, index, navigation, colorlist}) => {
         <Icon name="ellipsis-v" size={22} color={SC} />
       </TouchableOpacity>
 
-      <View style={styles.packagebox}>
+      <View style={[styles.packagebox, {backgroundColor: TC}]}>
         <Text style={[styles.packagetext, {color: SC}]}>
           {details?.packagename}
         </Text>
@@ -115,6 +114,7 @@ const Favbox = ({details, index, navigation, colorlist}) => {
 
       <View style={[styles.versionbox, {backgroundColor: PC}]}>
         <Text
+          numberOfLines={1}
           style={[
             styles.versiontext,
             {
