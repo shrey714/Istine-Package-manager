@@ -29,7 +29,7 @@ const Sett2 = ({colorlist}) => {
       AdEventType.LOADED,
       () => {
         setLoaded(true);
-        console.log('loaded');
+        // console.log('loaded');
       },
     );
     interstitial.load();

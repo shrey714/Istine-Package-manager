@@ -339,7 +339,9 @@ const Quiz = ({route, colorlist, navigation}) => {
           animation="zoomIn"
           duration={800}
           useNativeDriver={true}>
-          <ScrollView showsVerticalScrollIndicator={false}>
+          <ScrollView
+            contentContainerStyle={{paddingBottom: 63}}
+            showsVerticalScrollIndicator={false}>
             {/* Question */}
             {renderQuestion()}
 

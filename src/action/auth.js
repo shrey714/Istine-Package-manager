@@ -1,14 +1,11 @@
 import auth from '@react-native-firebase/auth';
 import Snackbar from 'react-native-snackbar';
-import {Appearance} from 'react-native';
-const colorScheme = Appearance.getColorScheme();
 
 export const signUp = data => async dispatch => {
   const {email, password} = data;
   auth()
     .createUserWithEmailAndPassword(email, password)
-    .then(() => {
-      console.log('data set done');
+    .then(userCredential => {
       Snackbar.show({
         text: 'account created',
         textColor: '#fff',
@@ -62,6 +59,27 @@ export const signOut = () => async dispatch => {
       console.error(error);
       Snackbar.show({
         text: 'signout failed',
+        textColor: '#fff',
+        backgroundColor: 'rgba(0,0,0,0.5)',
+      });
+    });
+};
+
+export const forgotpass = data => async dispatch => {
+  const {email} = data;
+  auth()
+    .sendPasswordResetEmail(email)
+    .then(() => {
+      Snackbar.show({
+        text: 'Link sent',
+        textColor: '#fff',
+        backgroundColor: 'rgba(0,0,0,0.5)',
+      });
+    })
+    .catch(error => {
+      console.error(error);
+      Snackbar.show({
+        text: 'Link sent failed',
         textColor: '#fff',
         backgroundColor: 'rgba(0,0,0,0.5)',
       });

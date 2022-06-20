@@ -10,6 +10,7 @@ import {
   Dimensions,
 } from 'react-native';
 import LOGO from '../../assets/images/LOGO.png';
+import Snackbar from 'react-native-snackbar';
 import {Box, Center, FormControl, Input, Button} from 'native-base';
 const screenwidth = Dimensions.get('window').width;
 const screenheight = Dimensions.get('window').height;
@@ -18,7 +19,15 @@ import {signUp} from '../../action/auth';
 
 const SignUp = ({signUp}) => {
   const doSignUp = async () => {
-    signUp({email, password});
+    if (email === '' || password === '') {
+      Snackbar.show({
+        text: 'Please enter your email and password',
+        textColor: '#fff',
+        backgroundColor: 'rgba(0,0,0,0.5)',
+      });
+    } else {
+      signUp({email, password});
+    }
   };
   const margin = {
     marginLeft: -screenwidth / 5.9,
@@ -60,7 +69,9 @@ const SignUp = ({signUp}) => {
         <Box style={[styles.chartbox, {width: '100%'}]}>
           <ChartScreen value={datarray} style={margin} />
         </Box>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView
+          contentContainerStyle={{flexGrow: 1}}
+          showsVerticalScrollIndicator={false}>
           <Center paddingY={5}>
             <Animated.Image
               style={{
@@ -75,7 +86,7 @@ const SignUp = ({signUp}) => {
             />
           </Center>
           <FormControl isRequired style={styles.signinbox}>
-            <Box marginTop={screenheight / 10}>
+            <Box marginBottom={2}>
               <Text size="lg" style={styles.heading1}>
                 Welcome
               </Text>
@@ -177,6 +188,7 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingRight: screenwidth / (16 * 1.18),
     alignItems: 'flex-end',
+    justifyContent: 'center',
   },
   heading1: {
     color: '#000',
@@ -189,7 +201,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   button: {
-    width: 100,
     marginTop: screenheight / 25,
     borderWidth: 1,
     marginBottom: screenheight / 25,
