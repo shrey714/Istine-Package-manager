@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
 const SettingsStack = createStackNavigator();
 import Settings from './Settings';
@@ -7,16 +7,10 @@ import Sett2 from './theme/Sett2';
 import Sett3 from './bug_report/Sett3';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
-const Fifth = ({navigation, colorlist}) => {
+const Fifth = ({colorlist}) => {
   let PC = colorlist.Primarycolor;
   let SC = colorlist.Secondarycolor;
   let TC = colorlist.Ternarycolor;
-  useEffect(() => {
-    navigation.setOptions({
-      title: 'Settings',
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
   return (
     <SettingsStack.Navigator
       screenOptions={{

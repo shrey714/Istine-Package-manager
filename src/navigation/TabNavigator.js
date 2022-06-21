@@ -72,7 +72,12 @@ const TabNavigator = ({colorlist}) => {
           options={{headerShown: false}}
         />
         <Tab.Screen name="Forth" listeners={btnvibration} component={Forth} />
-        <Tab.Screen name="Fifth" listeners={btnvibration} component={Fifth} />
+        <Tab.Screen
+          name="Fifth"
+          options={{title: 'Settings'}}
+          listeners={btnvibration}
+          component={Fifth}
+        />
       </Tab.Navigator>
     </>
   );

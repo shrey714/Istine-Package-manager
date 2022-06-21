@@ -8,10 +8,10 @@ import Quiz from '../Quizscreen/Quiz';
 
 const Stack = createSharedElementStackNavigator();
 
-const Second = ({navigation, colorlist}) => {
+const Second = ({colorlist}) => {
   let PC = colorlist.Primarycolor;
-  let SC = colorlist.Secondarycolor;
-  let TC = colorlist.Ternarycolor;
+  // let SC = colorlist.Secondarycolor;
+  // let TC = colorlist.Ternarycolor;
   return (
     <Stack.Navigator
       screenOptions={{
@@ -34,7 +34,7 @@ const Second = ({navigation, colorlist}) => {
       />
       <Stack.Screen
         name="Quiz"
-        options={{headerShown: false}}
+        options={{headerShown: false, cardStyle: {backgroundColor: PC}}}
         component={Quiz}
       />
     </Stack.Navigator>

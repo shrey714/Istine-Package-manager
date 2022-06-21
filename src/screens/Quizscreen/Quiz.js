@@ -9,8 +9,7 @@ import {
   Text,
   TouchableOpacity,
   Modal,
-  StyleSheet,
-  ImageBackground,
+  Image,
   Dimensions,
   ScrollView,
   Animated,
@@ -23,12 +22,13 @@ import {SharedElement} from 'react-navigation-shared-element';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 import QuizData from './QuizData';
-const {width, height} = Dimensions.get('window');
+const {height} = Dimensions.get('window');
 //===============
 
 //===============
 const Quiz = ({route, colorlist, navigation}) => {
-  const {name, bg} = route.params;
+  // const {name, bg} = route.params;
+  const {item, index} = route.params;
   let PC = colorlist.Primarycolor;
   let SC = colorlist.Secondarycolor;
   let TC = colorlist.Ternarycolor;
@@ -36,7 +36,6 @@ const Quiz = ({route, colorlist, navigation}) => {
   const adUnitId = __DEV__
     ? TestIds.INTERSTITIAL
     : 'ca-app-pub-7393727234144842/5645996548';
-
   const {isLoaded, isClosed, load, show} = useInterstitialAd(adUnitId, {
     requestNonPersonalizedAdsOnly: false,
   });
@@ -59,7 +58,6 @@ const Quiz = ({route, colorlist, navigation}) => {
   const [score, setScore] = useState(0);
   const [showNextButton, setShowNextButton] = useState(false);
   const [showScoreModal, setShowScoreModal] = useState(false);
-
   const validateAnswer = selectedOption => {
     let correct_option = allQuestions[currentQuestionIndex]['correct_option'];
     setCurrentOptionSelected(selectedOption);
@@ -92,10 +90,8 @@ const Quiz = ({route, colorlist, navigation}) => {
   };
   const restartQuiz = () => {
     setShowScoreModal(false);
-
     setCurrentQuestionIndex(0);
     setScore(0);
-
     setCurrentOptionSelected(null);
     setCorrectOption(null);
     setIsOptionsDisabled(false);
@@ -106,7 +102,6 @@ const Quiz = ({route, colorlist, navigation}) => {
       useNativeDriver: false,
     }).start();
   };
-
   const renderQuestion = () => {
     return (
       <View
@@ -143,7 +138,6 @@ const Quiz = ({route, colorlist, navigation}) => {
             / {allQuestions.length}
           </Text>
         </View>
-
         {/* Question */}
         <Text
           style={{
@@ -191,7 +185,6 @@ const Quiz = ({route, colorlist, navigation}) => {
               marginVertical: 5,
             }}>
             <Text style={{fontSize: 20, color: '#000'}}>{option}</Text>
-
             {/* Show Check Or Cross Icon based on correct answer*/}
             {option === correctOption ? (
               <View
@@ -266,7 +259,6 @@ const Quiz = ({route, colorlist, navigation}) => {
       return null;
     }
   };
-
   const [progress, setProgress] = useState(new Animated.Value(0));
   const progressAnim = progress.interpolate({
     inputRange: [0, allQuestions.length],
@@ -299,27 +291,30 @@ const Quiz = ({route, colorlist, navigation}) => {
       </View>
     );
   };
-
   return (
     <View
       style={{
         flex: 1,
-        backgroundColor: 'transparent',
+        // backgroundColor: 'transparent',
       }}>
       <StatusBar
         translucent={true}
         backgroundColor="transparent"
-        animated={true}
+        // animated={true}
       />
-      <SharedElement id={`item.${name}.image_url`}>
-        <ImageBackground
-          imageStyle={{width, height}}
-          source={bg}
-          resizeMode={'cover'}
-          style={StyleSheet.absoluteFillObject}
-          blurRadius={2}
+      {/* ================ */}
+      <SharedElement id={`item.${index}.image_url`}>
+        <Image
+          source={item}
+          style={{
+            width: '100%',
+            height: height,
+            position: 'absolute',
+          }}
+          resizeMode="cover"
         />
       </SharedElement>
+      {/* ================ */}
       <View
         style={{
           flex: 1,
@@ -344,10 +339,8 @@ const Quiz = ({route, colorlist, navigation}) => {
             showsVerticalScrollIndicator={false}>
             {/* Question */}
             {renderQuestion()}
-
             {/* Options */}
             {renderOptions()}
-
             {/* Next Button */}
             {renderNextButton()}
           </ScrollView>
@@ -383,7 +376,6 @@ const Quiz = ({route, colorlist, navigation}) => {
                 }}>
                 {score > allQuestions.length / 2 ? 'Congratulations!' : 'Oops!'}
               </Text>
-
               <View
                 style={{
                   flexDirection: 'row',
@@ -448,12 +440,12 @@ Quiz.prototype = {
 };
 
 Quiz.sharedElements = route => {
-  const {name, bg} = route.params;
+  const {item, index} = route.params;
   return [
     {
-      id: `item.${name}.image_url`,
+      id: `item.${index}.image_url`,
       animation: 'move',
-      resize: 'auto',
+      resize: 'clip',
     },
   ];
 };

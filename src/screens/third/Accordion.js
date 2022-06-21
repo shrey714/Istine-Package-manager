@@ -1,15 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {
   Text,
   View,
   StyleSheet,
   Pressable,
   LayoutAnimation,
-  Platform,
-  UIManager,
   TouchableOpacity,
 } from 'react-native';
-// import * as Animatable from 'react-native-animatable';
 import {Divider, Heading, Flex} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import propTypes from 'prop-types';
@@ -21,11 +18,6 @@ const Accordion = props => {
   let TC = props.colorlist.Ternarycolor;
 
   const [expanded, setexpanded] = useState(false);
-  useEffect(() => {
-    if (Platform.OS === 'android') {
-      UIManager.setLayoutAnimationEnabledExperimental(true);
-    }
-  }, []);
 
   const toggleExpand = () => {
     // Vibration.vibrate(5);
@@ -51,19 +43,10 @@ const Accordion = props => {
   };
 
   return (
-    // <Animatable.View
-    //   animation="zoomIn"
-    //   duration={500}
-    //   key={props.index.id}
-    //   useNativeDriver={true}
-    //   // delay={index * 100}
-    // >
     <View
       style={[
         styles.box,
         {
-          backgroundColor: PC,
-          elevation: 2,
           borderColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
         },
       ]}>
@@ -150,7 +133,6 @@ const Accordion = props => {
         </View>
       )}
     </View>
-    //</Animatable.View>
   );
 };
 
