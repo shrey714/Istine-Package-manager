@@ -1,41 +1,29 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Modal,
+  Text,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
 import {ColorPicker} from 'react-native-btr';
 import {connect} from 'react-redux';
 import setPST from '../../../action/color';
 import propTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
-function ColorPickerDemo({
-  type,
-  sendadata,
-  loaded,
-  setPST,
-  colorlist,
-  ColorTheme,
-}) {
+const {width, height} = Dimensions.get('screen');
+function ColorPickerDemo({type, setPST, colorlist, ColorTheme}) {
   let PC = colorlist.colours.Primarycolor;
   let SC = colorlist.colours.Secondarycolor;
   let TC = colorlist.colours.Ternarycolor;
   const [btnback, setbtnback] = useState();
   const [selectedColor, setSelectedColor] = useState('');
+  const [loading, setloading] = useState(false);
   function setColor(color) {
     setSelectedColor(color);
   }
-  useEffect(() => {
-    const setbtnbackground = () => {
-      if (type === 'Primary') {
-        setSelectedColor(PC);
-      } else if (type === 'Secondary') {
-        setSelectedColor(SC);
-      } else if (type === 'Ternary') {
-        setSelectedColor(TC);
-      }
-    };
-    setbtnbackground();
-    // console.log('effect1');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
   useEffect(() => {
     const setbtnbackground = () => {
       if (type === 'Primary') {
@@ -46,44 +34,75 @@ function ColorPickerDemo({
         setbtnback(TC);
       }
     };
-    // console.log('effect2');
     setbtnbackground();
   }, [PC, SC, TC, type]);
 
   const letsadd = async () => {
-    if (type === 'Primary') {
-      await setPST({
-        Primarycolor: selectedColor,
-        Secondarycolor: SC,
-        Ternarycolor: TC,
-      });
-      // await setbtnbackground();
-    } else if (type === 'Secondary') {
-      await setPST({
-        Primarycolor: PC,
-        Secondarycolor: selectedColor,
-        Ternarycolor: TC,
-      });
-    } else if (type === 'Ternary') {
-      await setPST({
-        Primarycolor: PC,
-        Secondarycolor: SC,
-        Ternarycolor: selectedColor,
-      });
-    }
+    setloading(true);
+    setTimeout(async () => {
+      if (type === 'Primary') {
+        await setPST({
+          Primarycolor: selectedColor,
+          Secondarycolor: SC,
+          Ternarycolor: TC,
+        });
+        // await setbtnbackground();
+      } else if (type === 'Secondary') {
+        await setPST({
+          Primarycolor: PC,
+          Secondarycolor: selectedColor,
+          Ternarycolor: TC,
+        });
+      } else if (type === 'Ternary') {
+        await setPST({
+          Primarycolor: PC,
+          Secondarycolor: SC,
+          Ternarycolor: selectedColor,
+        });
+      }
+      setTimeout(() => {
+        setloading(false);
+      }, 400);
+    }, 400);
   };
-
+  // ============
+  const Waitmodal = () => {
+    return (
+      <>
+        <Modal
+          animationType="fade"
+          transparent={true}
+          statusBarTranslucent={true}
+          hardwareAccelerated={true}
+          visible={loading}>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: 'rgba(0,0,0,0.4)',
+            }}>
+            <Text style={{fontSize: 25, fontWeight: 'bold', color: '#ADADAD'}}>
+              Wait....
+            </Text>
+          </View>
+        </Modal>
+      </>
+    );
+  };
+  // ============
   return (
     <View style={[styles.container]}>
-      {/* <Text style={[styles.text, {alignSelf: 'flex-start', color: SC}]}>
-        {type}
-      </Text> */}
+      <Waitmodal />
       <View
         style={[
           styles.wrapper,
           {
-            backgroundColor: `${selectedColor}`,
-            borderColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+            backgroundColor:
+              PC === '#000' || PC === '#1F1B24'
+                ? 'rgba(255,255,255,0.4)'
+                : 'rgba(0,0,0,0.4)',
           },
         ]}>
         <ColorPicker
@@ -97,16 +116,14 @@ function ColorPickerDemo({
           styles.setbox,
           {
             backgroundColor: btnback,
-            borderColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+            borderColor:
+              PC === '#000' || PC === '#1F1B24'
+                ? 'rgba(255,255,255,0.4)'
+                : 'rgba(0,0,0,0.4)',
           },
         ]}
         onPress={() => {
-          if (loaded) {
-            letsadd();
-            sendadata?.show();
-          } else {
-            letsadd();
-          }
+          letsadd();
         }}>
         <Icon
           name="circle-o"
@@ -132,18 +149,18 @@ export default connect(mapStateToProps, mapDispatchToProps)(ColorPickerDemo);
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    width: '100%',
-    justifyContent: 'center',
+    width: width,
+    flexDirection: 'row',
     alignItems: 'center',
+    paddingHorizontal: 10,
+    marginVertical: 5,
+    justifyContent: 'space-between',
   },
   wrapper: {
-    paddingHorizontal: 10,
-    borderRadius: 10,
-    borderWidth: 1,
+    paddingHorizontal: 5,
+    borderRadius: 8,
     overflow: 'hidden',
-    width: '80%',
-    // marginTop: 10,
+    width: width - 80,
   },
   text: {
     fontSize: 25,
@@ -151,11 +168,10 @@ const styles = StyleSheet.create({
   },
   setbox: {
     elevation: 5,
-    width: 60,
-    marginTop: 10,
-    height: 60,
-    borderRadius: 150,
-    borderWidth: 1,
+    width: 55,
+    height: 55,
+    borderRadius: 8,
+    borderWidth: 3,
     alignItems: 'center',
     justifyContent: 'center',
   },

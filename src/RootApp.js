@@ -34,11 +34,16 @@ const RootApp = ({authState, colorlist}) => {
       });
     }
   };
-  changeNavigationBarColor(
-    PC === '#000' || PC === '#1F1B24' || PC === '#949398FF' ? 'black' : 'white',
-    true,
-    true,
-  );
+  useEffect(() => {
+    changeNavigationBarColor(
+      PC === '#000' || PC === '#1F1B24' || PC === '#949398FF'
+        ? 'black'
+        : 'white',
+      true,
+      true,
+    );
+  }, [PC]);
+
   useEffect(() => {
     StatusBar.setBarStyle(
       PC === '#000' || PC === '#1F1B24' ? 'light-content' : 'dark-content',

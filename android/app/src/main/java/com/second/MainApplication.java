@@ -14,6 +14,7 @@ import com.facebook.soloader.SoLoader;
 import com.second.newarchitecture.MainApplicationReactNativeHost;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import com.BV.LinearGradient.LinearGradientPackage;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 public class MainApplication extends Application implements ReactApplication {
 
@@ -31,7 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
           // packages.add(new SplashScreenReactPackage());
-          // packages.add(new ReactNativePushNotificationPackage());
+          packages.add(new LinearGradientPackage());
           return packages;
         }
 

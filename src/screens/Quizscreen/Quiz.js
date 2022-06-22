@@ -403,6 +403,7 @@ const Quiz = ({route, colorlist, navigation}) => {
               <TouchableOpacity
                 onPress={() => {
                   if (isLoaded) {
+                    console.log(isLoaded);
                     show();
                   } else {
                     restartQuiz();
