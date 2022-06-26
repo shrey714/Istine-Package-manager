@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Third from '../screens/third/Third';
 import Infopage from '../screens/infopage/Infopage';
 import propTypes from 'prop-types';
@@ -9,8 +8,8 @@ const Stack = createStackNavigator();
 
 const Infoandsearch = ({navigation, colorlist}) => {
   let PC = colorlist.Primarycolor;
-  let SC = colorlist.Secondarycolor;
-  let TC = colorlist.Ternarycolor;
+  // let SC = colorlist.Secondarycolor;
+  // let TC = colorlist.Ternarycolor;
 
   return (
     <Stack.Navigator

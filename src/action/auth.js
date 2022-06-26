@@ -8,16 +8,16 @@ export const signUp = data => async dispatch => {
     .then(userCredential => {
       Snackbar.show({
         text: 'account created',
-        textColor: '#fff',
-        backgroundColor: 'rgba(0,0,0,0.5)',
+        textColor: '#000',
+        backgroundColor: 'rgba(255,255,255,1)',
       });
     })
     .catch(error => {
       console.error(error);
       Snackbar.show({
         text: 'signup failed',
-        textColor: '#fff',
-        backgroundColor: 'rgba(0,0,0,0.5)',
+        textColor: '#000',
+        backgroundColor: 'rgba(255,255,255,1)',
       });
     });
 };
@@ -30,16 +30,16 @@ export const signIn = data => async dispatch => {
       console.log('signin done');
       Snackbar.show({
         text: 'signin done',
-        textColor: '#fff',
-        backgroundColor: 'rgba(0,0,0,0.5)',
+        textColor: '#000',
+        backgroundColor: 'rgba(255,255,255,1)',
       });
     })
     .catch(error => {
       console.error(error);
       Snackbar.show({
         text: 'signin failed',
-        textColor: '#fff',
-        backgroundColor: 'rgba(0,0,0,0.5)',
+        textColor: '#000',
+        backgroundColor: 'rgba(255,255,255,1)',
       });
     });
 };
@@ -51,16 +51,16 @@ export const signOut = () => async dispatch => {
       console.log('signout done');
       Snackbar.show({
         text: 'signout done',
-        textColor: '#fff',
-        backgroundColor: 'rgba(0,0,0,0.5)',
+        textColor: '#000',
+        backgroundColor: 'rgba(255,255,255,1)',
       });
     })
     .catch(error => {
       console.error(error);
       Snackbar.show({
         text: 'signout failed',
-        textColor: '#fff',
-        backgroundColor: 'rgba(0,0,0,0.5)',
+        textColor: '#000',
+        backgroundColor: 'rgba(255,255,255,1)',
       });
     });
 };
@@ -72,16 +72,16 @@ export const forgotpass = data => async dispatch => {
     .then(() => {
       Snackbar.show({
         text: 'Link sent',
-        textColor: '#fff',
-        backgroundColor: 'rgba(0,0,0,0.5)',
+        textColor: '#000',
+        backgroundColor: 'rgba(255,255,255,1)',
       });
     })
     .catch(error => {
       console.error(error);
       Snackbar.show({
         text: 'Link sent failed',
-        textColor: '#fff',
-        backgroundColor: 'rgba(0,0,0,0.5)',
+        textColor: '#000',
+        backgroundColor: 'rgba(255,255,255,1)',
       });
     });
 };

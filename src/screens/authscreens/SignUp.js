@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useState, useRef, useEffect} from 'react';
 import {connect} from 'react-redux';
 import propTypes from 'prop-types';
@@ -22,8 +23,8 @@ const SignUp = ({signUp}) => {
     if (email === '' || password === '') {
       Snackbar.show({
         text: 'Please enter your email and password',
-        textColor: '#fff',
-        backgroundColor: 'rgba(0,0,0,0.5)',
+        textColor: '#000',
+        backgroundColor: 'rgba(255,255,255,1)',
       });
     } else {
       signUp({email, password});
@@ -188,7 +189,7 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingRight: screenwidth / (16 * 1.18),
     alignItems: 'flex-end',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   heading1: {
     color: '#000',

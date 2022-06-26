@@ -9,7 +9,7 @@ const Notify = () => {
   return (
     <View style={styles.adcontainer}>
       <BannerAd
-        unitId={adUnitId}
+        unitId={TestIds.BANNER}
         size={BannerAdSize.BANNER}
         onAdFailedToLoad={error => {
           console.log(error);

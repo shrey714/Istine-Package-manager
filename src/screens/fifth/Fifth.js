@@ -9,8 +9,8 @@ import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 const Fifth = ({colorlist}) => {
   let PC = colorlist.Primarycolor;
-  let SC = colorlist.Secondarycolor;
-  let TC = colorlist.Ternarycolor;
+  // let SC = colorlist.Secondarycolor;
+  // let TC = colorlist.Ternarycolor;
   return (
     <SettingsStack.Navigator
       screenOptions={{

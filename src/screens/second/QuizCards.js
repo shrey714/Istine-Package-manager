@@ -3,16 +3,19 @@ import {ScrollView} from 'react-native';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 import * as Animatable from 'react-native-animatable';
-import COMPOSER from '../../assets/images/COMPOSER.png';
-import DOCKER from '../../assets/images/DOCKER.png';
-import FLUTTER from '../../assets/images/FLUTTER.png';
-import GO from '../../assets/images/GO.png';
-import NPM from '../../assets/images/NPM.png';
-import PYPI from '../../assets/images/PYPI.png';
+import ANGULAR from '../../assets/images/webpimg/ANGULAR.webp';
+import NODEJS from '../../assets/images/webpimg/NODEJS.webp';
+import REACT from '../../assets/images/webpimg/REACT.webp';
 import {View, Dimensions, Pressable, Image} from 'react-native';
 import {SharedElement} from 'react-navigation-shared-element';
 const {width} = Dimensions.get('screen');
-const imgarray = [NPM, COMPOSER, DOCKER, PYPI, FLUTTER, GO];
+import QuizData from '../Quizscreen/QuizData';
+// const imgarray = [ANGULAR, NODEJS, REACT];
+const imgarray = [
+  {img: ANGULAR, data: QuizData.ANGULAR},
+  {img: NODEJS, data: QuizData.NODEJS},
+  {img: REACT, data: QuizData.REACT},
+];
 const ITEM_WIDTH = width * 0.9;
 const ITEM_HEIGHT = ITEM_WIDTH * 0.8;
 const Second = ({navigation, colorlist}) => {
@@ -30,26 +33,35 @@ const Second = ({navigation, colorlist}) => {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{
             alignItems: 'center',
-            paddingTop: 14,
+            paddingBottom: 10,
           }}>
           {imgarray.map((item, index) => (
-            <View key={index}>
-              <Pressable
-                style={{marginBottom: 14}}
-                onPress={() => navigation.navigate('Quiz', {item, index})}>
-                <SharedElement id={`item.${index}.image_url`}>
-                  <Image
-                    style={{
-                      borderRadius: 10,
-                      width: ITEM_WIDTH,
-                      height: ITEM_HEIGHT,
-                    }}
-                    source={item}
-                    resizeMode="cover"
-                  />
-                </SharedElement>
-              </Pressable>
-            </View>
+            <Pressable
+              key={index}
+              style={{
+                marginTop: 10,
+                elevation: 4,
+                borderRadius: 5,
+              }}
+              onPress={() =>
+                navigation.navigate('Quiz', {
+                  item,
+                  index,
+                })
+              }>
+              <SharedElement id={`item.${index}.image_url`}>
+                <Image
+                  style={{
+                    borderRadius: 5,
+                    width: ITEM_WIDTH,
+                    maxWidth: 400,
+                    height: ITEM_HEIGHT,
+                  }}
+                  source={item.img}
+                  resizeMode="cover"
+                />
+              </SharedElement>
+            </Pressable>
           ))}
         </ScrollView>
       </View>

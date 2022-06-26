@@ -4,9 +4,12 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Snackbar from 'react-native-snackbar';
 import database from '@react-native-firebase/database';
 import shortid from 'shortid';
+import propTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {firebase} from '@react-native-firebase/auth';
 
-const Addtofavbtn = ({packagename, packageversion}) => {
+const Addtofavbtn = ({packagename, colorlist, packageversion}) => {
+  let PC = colorlist.Primarycolor;
   const addpackage = async () => {
     try {
       const uidp = shortid.generate();
@@ -17,16 +20,28 @@ const Addtofavbtn = ({packagename, packageversion}) => {
         id: uidp,
       });
       Snackbar.show({
-        text: 'add to fav succsed',
-        textColor: '#fff',
-        backgroundColor: 'rgba(0,0,0,0.5)',
+        text: 'Package added to favourite',
+        textColor:
+          PC === '#000' || PC === '#1F1B24' || PC === '#949398FF'
+            ? '#fff'
+            : '#000',
+        backgroundColor:
+          PC === '#000' || PC === '#1F1B24' || PC === '#949398FF'
+            ? '#000'
+            : '#fff',
       });
     } catch (error) {
       console.log(error);
       Snackbar.show({
-        text: 'add to fav failed',
-        textColor: '#fff',
-        backgroundColor: 'rgba(0,0,0,0.5)',
+        text: 'Package added to favourite failed',
+        textColor:
+          PC === '#000' || PC === '#1F1B24' || PC === '#949398FF'
+            ? '#fff'
+            : '#000',
+        backgroundColor:
+          PC === '#000' || PC === '#1F1B24' || PC === '#949398FF'
+            ? '#000'
+            : '#fff',
       });
     }
   };
@@ -38,7 +53,16 @@ const Addtofavbtn = ({packagename, packageversion}) => {
   );
 };
 
-export default Addtofavbtn;
+const mapStateToProps = state => ({
+  colorlist: state.colorreducer.colours,
+});
+
+Addtofavbtn.prototype = {
+  colorlist: propTypes.object.isRequired,
+};
+
+export default connect(mapStateToProps)(Addtofavbtn);
+
 const styles = StyleSheet.create({
   buttonarea: {
     marginRight: 8,

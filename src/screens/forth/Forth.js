@@ -11,7 +11,7 @@ import * as Animatable from 'react-native-animatable';
 const Forth = ({navigation, getpackages, packageState, colorlist}) => {
   let PC = colorlist.Primarycolor;
   let SC = colorlist.Secondarycolor;
-  let TC = colorlist.Ternarycolor;
+  // let TC = colorlist.Ternarycolor;
 
   useEffect(() => {
     getpackages();
@@ -26,20 +26,31 @@ const Forth = ({navigation, getpackages, packageState, colorlist}) => {
 
   return (
     <>
-      <SafeAreaView style={[styles.container, {backgroundColor: PC}]}>
+      <SafeAreaView style={[styles.container]}>
         {packageState.packages.length === 0 ? (
           <View style={(styles.container, styles.flexbox)}>
-            <Icon name="dropbox" size={100} color={SC} />
+            <Icon
+              name="dropbox"
+              size={100}
+              color={
+                PC === '#ffffff' || PC === '#F9F9F9'
+                  ? SC === '#ffffff'
+                    ? '#000'
+                    : SC
+                  : SC
+              }
+            />
           </View>
         ) : (
-          <ScrollView contentContainerStyle={styles.contentcontainer}>
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.contentcontainer}>
             {packageState.packages.map((item, index) => (
               <Animatable.View
-                animation="zoomIn"
-                duration={700}
+                animation="fadeIn"
+                duration={400}
                 key={item.id}
-                useNativeDriver={true}
-                delay={index * 175}>
+                useNativeDriver={true}>
                 <Favbox index={index} details={item} navigation={navigation} />
               </Animatable.View>
             ))}
@@ -75,6 +86,7 @@ const styles = StyleSheet.create({
   },
   contentcontainer: {
     display: 'flex',
+    paddingBottom: 10,
     flexDirection: 'row',
     flexWrap: 'wrap',
   },

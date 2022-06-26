@@ -1,14 +1,14 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {StyleSheet, Pressable, Text, View, Modal} from 'react-native';
+import {Text, View, Modal} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {connect} from 'react-redux';
 import propTypes from 'prop-types';
 
 const Neterror = ({colorlist}) => {
   let PC = colorlist.Primarycolor;
-  let SC = colorlist.Secondarycolor;
-  let TC = colorlist.Ternarycolor;
+  // let SC = colorlist.Secondarycolor;
+  // let TC = colorlist.Ternarycolor;
 
   return (
     <Modal

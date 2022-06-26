@@ -32,16 +32,28 @@ const Favbox = ({details, index, navigation, colorlist}) => {
           //removed
         });
       Snackbar.show({
-        text: 'deletion completed',
-        textColor: '#fff',
-        backgroundColor: 'rgba(0,0,0,0.8)',
+        text: 'Package deleted',
+        textColor:
+          PC === '#000' || PC === '#1F1B24' || PC === '#949398FF'
+            ? '#fff'
+            : '#000',
+        backgroundColor:
+          PC === '#000' || PC === '#1F1B24' || PC === '#949398FF'
+            ? '#000'
+            : '#fff',
       });
     } catch (error) {
       console.log(error);
       Snackbar.show({
-        text: 'deletion failed',
-        textColor: '#fff',
-        backgroundColor: 'rgba(0,0,0,0.8)',
+        text: 'Failed to delete the package',
+        textColor:
+          PC === '#000' || PC === '#1F1B24' || PC === '#949398FF'
+            ? '#fff'
+            : '#000',
+        backgroundColor:
+          PC === '#000' || PC === '#1F1B24' || PC === '#949398FF'
+            ? '#000'
+            : '#fff',
       });
     }
   };
@@ -67,7 +79,8 @@ const Favbox = ({details, index, navigation, colorlist}) => {
       style={[
         styles.box,
         {
-          borderColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+          borderWidth: PC === '#000' || PC === '#1F1B24' ? 1.2 : 0,
+          borderColor: 'rgba(255,255,255,0.5)',
         },
       ]}
       onPress={() =>
@@ -107,7 +120,7 @@ const Favbox = ({details, index, navigation, colorlist}) => {
       </TouchableOpacity>
 
       <View style={[styles.packagebox, {backgroundColor: TC}]}>
-        <Text style={[styles.packagetext, {color: SC}]}>
+        <Text numberOfLines={2} style={[styles.packagetext, {color: SC}]}>
           {details?.packagename}
         </Text>
       </View>
@@ -145,17 +158,18 @@ export default connect(mapStateToProps)(Favbox);
 
 const styles = StyleSheet.create({
   box: {
+    marginTop: 10,
+    marginHorizontal: 5,
     elevation: 2,
-    width: (windowWidth * 46) / 100,
+    width: (windowWidth - 20) / 2,
     height: 210,
-    margin: (windowWidth * 2) / 100,
     alignItems: 'center',
-    borderRadius: 6,
-    borderWidth: 1.1,
+    borderRadius: 5,
     overflow: 'hidden',
   },
   packagetext: {
     fontSize: 25,
+    fontWeight: '500',
   },
   versiontext: {
     fontSize: 28,
@@ -185,7 +199,6 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   menubtn: {
-    zIndex: 2,
     position: 'absolute',
     width: 36,
     height: 36,
@@ -196,6 +209,7 @@ const styles = StyleSheet.create({
     margin: 7,
     top: 0,
     right: 0,
+    zIndex: 2,
   },
   trashbtn: {
     zIndex: -1,

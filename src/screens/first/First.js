@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
 import {
-  ScrollView,
+  FlatList,
   TouchableOpacity,
   Vibration,
   StyleSheet,
@@ -53,56 +53,60 @@ const First = ({navigation, colorlist, onPress, initialState}) => {
   const [isLoaded, setIsLoaded] = useState(false);
   setTimeout(() => {
     setIsLoaded(true);
-  }, 5000);
+  }, 4000);
 
-  const Shrey = (item, index) => {
+  const Shrey = ({item}) => {
     return (
-      <Center key={index} w="100%" style={{marginTop: 10}}>
+      <Center key={item.id} w="100%" style={{marginTop: 10}}>
         <Box w="90%" maxWidth="400">
           <VStack
             maxWidth="400"
-            shadow={3}
+            shadow={2}
             background={PC}
-            borderWidth="1"
-            space={8}
+            borderWidth={PC === '#000' || PC === '#1F1B24' ? 1 : 0}
             overflow="hidden"
-            rounded="md"
-            borderColor={
-              PC === '#000' || PC === '#1F1B24' ? '#F9F9F9' : '#000'
-            }>
-            <Skeleton h="40" isLoaded={isLoaded}>
+            borderRadius={5}
+            borderColor={'rgba(255,255,255,0.5)'}>
+            <Skeleton style={{height: 180}} isLoaded={isLoaded}>
               <Image
                 alt="_"
-                h="40"
-                source={{
-                  uri: item.image,
-                }}
+                style={{height: 180}}
+                resizeMode={'cover'}
+                source={item.image}
               />
             </Skeleton>
-            <Skeleton.Text lines={4} px="4" isLoaded={isLoaded}>
+            <Skeleton.Text marginTop={'4'} lines={2} px="4" isLoaded={isLoaded}>
               <Text
                 style={{
                   color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
                 }}
+                marginTop="4"
                 px="4"
                 fontSize={'md'}
+                numberOfLines={4}
+                fontWeight={'normal'}
                 lineHeight={'20px'}>
                 {item.data}
               </Text>
             </Skeleton.Text>
             <Skeleton
-              px="4"
-              mb="4"
+              marginY="4"
+              width={'90%'}
+              alignSelf="center"
               rounded="md"
               startColor="primary.100"
               isLoaded={isLoaded}>
               <Button
                 m="4"
-                style={{backgroundColor: TC, elevation: 2}}
+                style={{backgroundColor: TC}}
                 onPress={() => {
                   Linking.openURL(item.url);
                 }}>
-                <Text style={{color: TC === '#000' ? '#fff' : '#000'}}>
+                <Text
+                  fontSize={'md'}
+                  numberOfLines={1}
+                  fontWeight={'medium'}
+                  style={{color: TC === '#000' ? '#fff' : '#000'}}>
                   Explore
                 </Text>
               </Button>
@@ -115,11 +119,13 @@ const First = ({navigation, colorlist, onPress, initialState}) => {
 
   return (
     <>
-      <ScrollView
+      <FlatList
+        contentContainerStyle={styles.container}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.container}>
-        {PackagesApi.map((item, index) => Shrey(item, index))}
-      </ScrollView>
+        data={PackagesApi}
+        renderItem={Shrey}
+        keyExtractor={item => item.id}
+      />
       <Notify />
     </>
   );
@@ -137,8 +143,7 @@ export default connect(mapStateToProps)(First);
 
 const styles = StyleSheet.create({
   container: {
-    borderBottomWidth: 0.5,
-    paddingBottom: 10,
+    paddingBottom: 65,
   },
   text: {
     fontSize: 40,

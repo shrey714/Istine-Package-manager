@@ -5,6 +5,7 @@ import {
   Dimensions,
   SafeAreaView,
   StyleSheet,
+  Text,
   Animated,
   TextInput,
   Vibration,
@@ -15,8 +16,8 @@ import axios from 'axios';
 import Accordion from './Accordion';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 const shortid = require('shortid');
-const screenheight = Dimensions.get('screen').height;
 const CARD_HEIGHT = 140;
 const {height: wHeight} = Dimensions.get('window');
 const height = wHeight - 58 - getStatusBarHeight();
@@ -102,9 +103,31 @@ const Third = ({navigation, colorlist}) => {
           {...{onScroll}}
           initialScrollIndex={0}
           contentContainerStyle={{
+            flexGrow: 1,
             paddingBottom: getStatusBarHeight() + 5,
             marginTop: getStatusBarHeight(),
           }}
+          ListEmptyComponent={
+            <View
+              style={{
+                position: 'absolute',
+                marginTop: wHeight / 2 - 50,
+                width: '100%',
+                alignItems: 'center',
+              }}>
+              <Icon
+                name="cloud-search-outline"
+                size={100}
+                color={
+                  PC === '#ffffff' || PC === '#F9F9F9'
+                    ? SC === '#ffffff'
+                      ? '#000'
+                      : SC
+                    : SC
+                }
+              />
+            </View>
+          }
           ListHeaderComponent={
             <View
               style={[
@@ -120,6 +143,8 @@ const Third = ({navigation, colorlist}) => {
                 style={[
                   styles.searchbox,
                   {
+                    fontWeight: '500',
+                    fontSize: 18,
                     backgroundColor: TC,
                     color: TC === '#000' ? '#fff' : '#000',
                   },
@@ -161,21 +186,15 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   heading: {
-    // flex: 1,
-    height: 48,
+    paddingVertical: 5,
     alignItems: 'center',
     justifyContent: 'center',
     borderBottomWidth: 0.5,
   },
-  emptybox: {
-    marginTop: (screenheight - 250) / 2,
-    alignSelf: 'center',
-  },
   searchbox: {
-    width: '95.23%',
-    marginHorizontal: 40,
-    height: 40,
-    paddingLeft: 10,
+    width: '94%',
+    paddingVertical: 6,
+    paddingLeft: 20,
     borderRadius: 5,
     alignSelf: 'center',
   },

@@ -1,5 +1,4 @@
 import React from 'react';
-import {Vibration} from 'react-native';
 import First from '../screens/first/First';
 import Second from '../screens/second/Second';
 import Forth from '../screens/forth/Forth';
@@ -13,16 +12,12 @@ const Tab = createBottomTabNavigator();
 const TabNavigator = ({colorlist}) => {
   let PC = colorlist.Primarycolor;
   let SC = colorlist.Secondarycolor;
-  let TC = colorlist.Ternarycolor;
-  const btnvibration = {
-    tabPress: e => {
-      // Vibration.vibrate(5);
-    },
-  };
+  // let TC = colorlist.Ternarycolor;
 
   return (
     <>
       <Tab.Navigator
+        backBehavior="history"
         sceneContainerStyle={{backgroundColor: PC}}
         initialRouteName="First"
         screenOptions={({route}) => {
@@ -58,24 +53,21 @@ const TabNavigator = ({colorlist}) => {
             ],
           };
         }}>
-        <Tab.Screen name="First" listeners={btnvibration} component={First} />
+        <Tab.Screen name="First" component={First} />
         <Tab.Screen
           name="Second"
           component={Second}
           options={{headerShown: false}}
-          listeners={btnvibration}
         />
         <Tab.Screen
           name="Infoandsearch"
-          listeners={btnvibration}
           component={Infoandsearch}
           options={{headerShown: false}}
         />
-        <Tab.Screen name="Forth" listeners={btnvibration} component={Forth} />
+        <Tab.Screen name="Forth" component={Forth} />
         <Tab.Screen
           name="Fifth"
           options={{title: 'Settings'}}
-          listeners={btnvibration}
           component={Fifth}
         />
       </Tab.Navigator>

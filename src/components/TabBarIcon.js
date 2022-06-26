@@ -1,19 +1,19 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Octicons';
 const TabBarIcon = (focused, color, size, tabname) => {
   let iconName;
   if (focused) {
-    size = size + 10;
+    size = size + 8;
   }
   if (tabname === 'First') {
     iconName = 'home';
   } else if (tabname === 'Second') {
-    iconName = 'question-circle';
+    iconName = 'question';
   } else if (tabname === 'Infoandsearch') {
-    iconName = 'wpexplorer';
+    iconName = 'search';
   } else if (tabname === 'Forth') {
-    iconName = 'star-o';
+    iconName = 'star';
   } else if (tabname === 'Fifth') {
     iconName = 'gear';
   }

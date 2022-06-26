@@ -21,14 +21,13 @@ import * as Animatable from 'react-native-animatable';
 import {SharedElement} from 'react-navigation-shared-element';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
-import QuizData from './QuizData';
 const {height} = Dimensions.get('window');
 //===============
 
 //===============
 const Quiz = ({route, colorlist, navigation}) => {
-  // const {name, bg} = route.params;
   const {item, index} = route.params;
+  // console.log(item);
   let PC = colorlist.Primarycolor;
   let SC = colorlist.Secondarycolor;
   let TC = colorlist.Ternarycolor;
@@ -36,9 +35,12 @@ const Quiz = ({route, colorlist, navigation}) => {
   const adUnitId = __DEV__
     ? TestIds.INTERSTITIAL
     : 'ca-app-pub-7393727234144842/5645996548';
-  const {isLoaded, isClosed, load, show} = useInterstitialAd(adUnitId, {
-    requestNonPersonalizedAdsOnly: false,
-  });
+  const {isLoaded, isClosed, load, show} = useInterstitialAd(
+    TestIds.INTERSTITIAL,
+    {
+      requestNonPersonalizedAdsOnly: false,
+    },
+  );
   useEffect(() => {
     load();
   }, [load]);
@@ -50,7 +52,7 @@ const Quiz = ({route, colorlist, navigation}) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isClosed]);
   //=================
-  const allQuestions = QuizData;
+  const allQuestions = item.data;
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [currentOptionSelected, setCurrentOptionSelected] = useState(null);
   const [correctOption, setCorrectOption] = useState(null);
@@ -116,33 +118,61 @@ const Quiz = ({route, colorlist, navigation}) => {
         {/* Question Counter */}
         <View
           style={{
+            width: '100%',
             flexDirection: 'row',
-            alignItems: 'flex-end',
-            backgroundColor: 'rgba(255,255,255,0.6)',
             alignSelf: 'flex-start',
-            paddingVertical: 5,
-            paddingHorizontal: 8,
-            borderRadius: 8,
+            justifyContent: 'space-between',
             marginVertical: 5,
           }}>
-          <Text
+          <View
             style={{
-              color: '#000',
-              fontSize: 20,
-              opacity: 0.6,
-              marginRight: 2,
+              flexDirection: 'row',
+              alignItems: 'flex-end',
+              backgroundColor: 'rgba(255,255,255,0.6)',
+              alignSelf: 'flex-start',
+              paddingVertical: 5,
+              paddingHorizontal: 8,
+              borderRadius: 8,
             }}>
-            {currentQuestionIndex + 1}
-          </Text>
-          <Text style={{color: '#000', fontSize: 18, opacity: 0.6}}>
-            / {allQuestions.length}
-          </Text>
+            <Text
+              style={{
+                color: '#000',
+                fontSize: 20,
+                fontWeight: '500',
+                opacity: 0.6,
+                marginRight: 2,
+              }}>
+              {currentQuestionIndex + 1}
+            </Text>
+            <Text
+              style={{
+                color: '#000',
+                fontWeight: '500',
+                fontSize: 18,
+                opacity: 0.6,
+              }}>
+              / {allQuestions.length}
+            </Text>
+          </View>
+          <TouchableOpacity
+            onPress={() => {
+              setShowScoreModal(true);
+            }}
+            style={{
+              backgroundColor: 'rgba(255,255,255,0.6)',
+              paddingVertical: 5,
+              paddingHorizontal: 8,
+              borderRadius: 8,
+            }}>
+            <Icon name="sign-out" size={23} color={SC} />
+          </TouchableOpacity>
         </View>
         {/* Question */}
         <Text
           style={{
             color: '#000',
             fontSize: 30,
+            fontWeight: '500',
             backgroundColor: 'rgba(255,255,255,0.6)',
             paddingHorizontal: 10,
             paddingVertical: 10,
@@ -177,14 +207,16 @@ const Quiz = ({route, colorlist, navigation}) => {
                   : option === currentOptionSelected
                   ? 'rgba(255,68,68,0.6)' + '20'
                   : 'rgba(255,255,255,0.6)',
-              height: 55,
+              minHeight: 55,
               flexDirection: 'row',
               alignItems: 'center',
               justifyContent: 'space-between',
               paddingHorizontal: 20,
               marginVertical: 5,
             }}>
-            <Text style={{fontSize: 20, color: '#000'}}>{option}</Text>
+            <Text style={{fontSize: 20, fontWeight: '500', color: '#000'}}>
+              {option}
+            </Text>
             {/* Show Check Or Cross Icon based on correct answer*/}
             {option === correctOption ? (
               <View
@@ -295,17 +327,12 @@ const Quiz = ({route, colorlist, navigation}) => {
     <View
       style={{
         flex: 1,
-        // backgroundColor: 'transparent',
       }}>
-      <StatusBar
-        translucent={true}
-        backgroundColor="transparent"
-        // animated={true}
-      />
+      <StatusBar translucent={true} backgroundColor="transparent" />
       {/* ================ */}
       <SharedElement id={`item.${index}.image_url`}>
         <Image
-          source={item}
+          source={item.img}
           style={{
             width: '100%',
             height: height,
@@ -403,7 +430,6 @@ const Quiz = ({route, colorlist, navigation}) => {
               <TouchableOpacity
                 onPress={() => {
                   if (isLoaded) {
-                    console.log(isLoaded);
                     show();
                   } else {
                     restartQuiz();

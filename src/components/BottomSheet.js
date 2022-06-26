@@ -1,7 +1,7 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useCallback, useState, useEffect, useRef, useMemo} from 'react';
 import {StyleSheet, Dimensions, TouchableOpacity, Text} from 'react-native';
 import BottomSheet, {BottomSheetFlatList} from '@gorhom/bottom-sheet';
-import shortid from 'shortid';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 

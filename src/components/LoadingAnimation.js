@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 const LoadingAnimation = props => {
   let PC = props.colorlist.Primarycolor;
   let SC = props.colorlist.Secondarycolor;
-  let TC = props.colorlist.Ternarycolor;
+  // let TC = props.colorlist.Ternarycolor;
   const windowHeight = Dimensions.get('window').height;
   const windowWidth = Dimensions.get('window').width;
 

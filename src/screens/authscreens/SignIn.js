@@ -11,6 +11,12 @@ import {
   Dimensions,
 } from 'react-native';
 import LOGO from '../../assets/images/LOGO.png';
+import auth from '@react-native-firebase/auth';
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
 import {Box, Center, FormControl, Link, Input, Button} from 'native-base';
 const screenwidth = Dimensions.get('window').width;
 const screenheight = Dimensions.get('window').height;
@@ -30,19 +36,61 @@ const SignIn = ({signIn, forgotpass}) => {
     if (email === '' || password === '') {
       Snackbar.show({
         text: 'Please enter your email and password',
-        textColor: '#fff',
-        backgroundColor: 'rgba(0,0,0,0.5)',
+        textColor: '#000',
+        backgroundColor: 'rgba(255,255,255,1)',
       });
     } else {
       signIn({email, password});
     }
   };
+  // ===============
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId:
+        '6484832530-fmjo4h8vt403sqn8lgj0se7tbve6dru5.apps.googleusercontent.com',
+    });
+  }, []);
+  const signIngoogle = async () => {
+    try {
+      const {idToken} = await GoogleSignin.signIn();
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+      return auth().signInWithCredential(googleCredential);
+    } catch (error) {
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        console.log('user cancelled the login flow');
+        Snackbar.show({
+          text: 'user cancelled the login flow',
+          textColor: '#000',
+          backgroundColor: 'rgba(255,255,255,1)',
+        });
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        Snackbar.show({
+          text: 'signin is in progress already',
+          textColor: '#000',
+          backgroundColor: 'rgba(255,255,255,1)',
+        });
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        Snackbar.show({
+          text: 'play services not available or outdated',
+          textColor: '#000',
+          backgroundColor: 'rgba(255,255,255,1)',
+        });
+      } else {
+        Snackbar.show({
+          text: 'signing failed / try to SignUp using your email and password',
+          textColor: '#fff',
+          backgroundColor: 'rgba(0,0,0,0.5)',
+        });
+      }
+    }
+  };
+  // ===============
   const doforgotpass = () => {
     if (email === '') {
       Snackbar.show({
         text: 'Please enter your email',
-        textColor: '#fff',
-        backgroundColor: 'rgba(0,0,0,0.5)',
+        textColor: '#000',
+        backgroundColor: 'rgba(255,255,255,1)',
       });
     } else {
       forgotpass({email});
@@ -174,6 +222,14 @@ const SignIn = ({signIn, forgotpass}) => {
                   SignIn
                 </Text>
               </Button>
+              <GoogleSigninButton
+                style={{
+                  marginBottom: screenheight / 25,
+                }}
+                size={GoogleSigninButton.Size.Standard}
+                color={GoogleSigninButton.Color.Dark}
+                onPress={signIngoogle}
+              />
             </FormControl>
           </ScrollView>
         </Box>
@@ -214,7 +270,7 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingLeft: screenwidth / (16 * 1.18),
     alignItems: 'flex-start',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   heading1: {
     color: '#000',
@@ -229,7 +285,7 @@ const styles = StyleSheet.create({
   button: {
     marginTop: screenheight / 25,
     borderWidth: 1,
-    marginBottom: screenheight / 25,
+    marginBottom: 15,
   },
   buttontxt: {
     fontSize: 24,

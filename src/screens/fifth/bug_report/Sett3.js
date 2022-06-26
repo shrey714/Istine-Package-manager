@@ -219,20 +219,23 @@ const Sett3 = ({colorlist}) => {
       <View style={{width: '100%'}} alignItems="center">
         <Pressable
           style={{
-            backgroundColor:
-              PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
             borderRadius: 4,
+            borderWidth: 1,
+            borderColor:
+              PC === '#000' || PC === '#1F1B24'
+                ? 'rgba(255,255,255,0.8)'
+                : 'rgba(0,0,0,0.7)',
             alignItems: 'center',
             justifyContent: 'center',
             paddingHorizontal: 8,
-            paddingVertical: 4,
+            paddingVertical: 8,
           }}
           onPress={() => {
             setModalVisible(!modalVisible);
           }}>
           <Text
             style={{
-              color: PC === '#000' || PC === '#1F1B24' ? '#000' : '#fff',
+              color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
               fontWeight: '500',
               fontSize: 17,
             }}>
@@ -251,10 +254,14 @@ const Sett3 = ({colorlist}) => {
           marginTop: 12,
           borderBottomWidth: 0.2,
           borderBottomColor:
-            PC === '#000' || PC === '#1F1B24' ? '#c9c9c9' : '#ababab',
+            PC === '#000' || PC === '#1F1B24'
+              ? 'rgba(255,255,255,0.8)'
+              : 'rgba(0,0,0,0.7)',
           borderTopWidth: 0.2,
           borderTopColor:
-            PC === '#000' || PC === '#1F1B24' ? '#c9c9c9' : '#ababab',
+            PC === '#000' || PC === '#1F1B24'
+              ? 'rgba(255,255,255,0.8)'
+              : 'rgba(0,0,0,0.7)',
         }}>
         <ScrollView
           horizontal={true}
@@ -330,10 +337,11 @@ const Sett3 = ({colorlist}) => {
   //===============
   const Submitbtn = () => {
     return (
-      <View style={{width: '100%', marginTop: 12, alignItems: 'center'}}>
+      <View style={{width: '100%', marginTop: 20, alignItems: 'center'}}>
         <Pressable
           style={({pressed}) => [
             {
+              width: '40%',
               backgroundColor: pressed
                 ? TC
                 : PC === '#000' || PC === '#1F1B24'
@@ -343,7 +351,7 @@ const Sett3 = ({colorlist}) => {
               alignItems: 'center',
               justifyContent: 'center',
               paddingHorizontal: 8,
-              paddingVertical: 4,
+              paddingVertical: 6,
               elevation: 5,
             },
           ]}
@@ -365,10 +373,11 @@ const Sett3 = ({colorlist}) => {
             }
           }}>
           <Text
+            numberOfLines={1}
             style={{
               color: PC === '#000' || PC === '#1F1B24' ? '#000' : '#fff',
               fontWeight: '500',
-              fontSize: 17,
+              fontSize: 18,
             }}>
             Submit
           </Text>
@@ -388,21 +397,28 @@ const Sett3 = ({colorlist}) => {
           marginTop: 12,
           borderBottomWidth: 0.2,
           borderBottomColor:
-            PC === '#000' || PC === '#1F1B24' ? '#c9c9c9' : '#ababab',
+            PC === '#000' || PC === '#1F1B24'
+              ? 'rgba(255,255,255,0.8)'
+              : 'rgba(0,0,0,0.7)',
           borderTopWidth: 0.2,
           borderTopColor:
-            PC === '#000' || PC === '#1F1B24' ? '#c9c9c9' : '#ababab',
+            PC === '#000' || PC === '#1F1B24'
+              ? 'rgba(255,255,255,0.8)'
+              : 'rgba(0,0,0,0.7)',
         }}>
         <TextInput
           multiline
           value={textAreaValue}
           onChangeText={setTextAreaValue}
           placeholderTextColor={
-            PC === '#000' || PC === '#1F1B24' ? '#c9c9c9' : '#ababab'
+            PC === '#000' || PC === '#1F1B24'
+              ? 'rgba(255,255,255,0.8)'
+              : 'rgba(0,0,0,0.7)'
           }
           placeholder="What would you like us to improve?"
           style={{
             color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+            fontWeight: '500',
             backgroundColor: 'transparent',
             width: '85%',
             maxWidth: 400,

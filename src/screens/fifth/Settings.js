@@ -14,31 +14,17 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon2 from 'react-native-vector-icons/FontAwesome5';
 import Icon3 from 'react-native-vector-icons/MaterialIcons';
 import Icon4 from 'react-native-vector-icons/AntDesign';
-import {signIn, signOut} from '../../action/auth';
+import {signOut} from '../../action/auth';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {connect} from 'react-redux';
 import propTypes from 'prop-types';
-// import PushNotification from 'react-native-push-notification';
 
 const Settings = ({signOut, navigation, colorlist}) => {
   let PC = colorlist.Primarycolor;
-  let SC = colorlist.Secondarycolor;
+  // let SC = colorlist.Secondarycolor;
   let TC = colorlist.Ternarycolor;
 
   const [isOpen, setIsOpen] = React.useState(false);
-  // const handleNotification = () => {
-  //   PushNotification.getChannels(function (channel_ids) {
-  //     console.log(channel_ids); // ['channel_id_1']
-  //   });
-  //   PushNotification.localNotification({
-  //     channelId: 'test-channel',
-  //     title: 'You clicked on ',
-  //     message: 'helooooo',
-  //     bigText: ' is one of the largest and most beatiful cities in ',
-  //     color: 'red',
-  //     id: 1,
-  //   });
-  // };
-
   return (
     <View style={[styles.container]}>
       <ScrollView
@@ -47,7 +33,6 @@ const Settings = ({signOut, navigation, colorlist}) => {
           {
             flexGrow: 1,
             backgroundColor: TC,
-            borderColor: TC === '#000' ? '#fff' : '#000',
           },
         ]}>
         <View style={styles.bottombox}>
@@ -59,14 +44,15 @@ const Settings = ({signOut, navigation, colorlist}) => {
             style={({pressed}) => [
               styles.settings,
               {
+                borderWidth: TC === '#000' ? 1 : 0,
+                borderColor: 'rgba(255,255,255,0.6)',
                 backgroundColor: pressed ? TC : PC,
-                borderColor: TC === '#000' ? '#fff' : '#000',
               },
             ]}>
             <Icon
               style={styles.icon}
               name="bell"
-              size={18}
+              size={16}
               color={PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'}
             />
             <Text
@@ -82,14 +68,15 @@ const Settings = ({signOut, navigation, colorlist}) => {
             style={({pressed}) => [
               styles.settings,
               {
+                borderWidth: TC === '#000' ? 1 : 0,
+                borderColor: 'rgba(255,255,255,0.6)',
                 backgroundColor: pressed ? TC : PC,
-                borderColor: TC === '#000' ? '#fff' : '#000',
               },
             ]}>
             <Icon2
               style={styles.icon}
               name="palette"
-              size={18}
+              size={16}
               color={PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'}
             />
             <Text
@@ -105,14 +92,15 @@ const Settings = ({signOut, navigation, colorlist}) => {
             style={({pressed}) => [
               styles.settings,
               {
+                borderWidth: TC === '#000' ? 1 : 0,
+                borderColor: 'rgba(255,255,255,0.6)',
                 backgroundColor: pressed ? TC : PC,
-                borderColor: TC === '#000' ? '#fff' : '#000',
               },
             ]}>
             <Icon3
               style={styles.icon}
               name="bug-report"
-              size={18}
+              size={16}
               color={PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'}
             />
             <Text
@@ -129,14 +117,15 @@ const Settings = ({signOut, navigation, colorlist}) => {
             style={({pressed}) => [
               styles.settings,
               {
+                borderWidth: TC === '#000' ? 1 : 0,
+                borderColor: 'rgba(255,255,255,0.6)',
                 backgroundColor: pressed ? TC : PC,
-                borderColor: TC === '#000' ? '#fff' : '#000',
               },
             ]}>
             <Icon
               style={styles.icon}
               name="sign-out"
-              size={18}
+              size={16}
               color={PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'}
             />
             <Text
@@ -237,8 +226,12 @@ const Settings = ({signOut, navigation, colorlist}) => {
                     elevation: 3,
                   },
                 ]}
-                onPress={() => {
-                  signOut();
+                onPress={async () => {
+                  const isIn = await GoogleSignin.isSignedIn();
+                  if (isIn) {
+                    await GoogleSignin.revokeAccess();
+                  }
+                  await signOut();
                 }}>
                 <Text
                   style={{
@@ -279,28 +272,26 @@ const styles = StyleSheet.create({
   },
   settingsbox: {
     width: '100%',
-    borderWidth: 1,
-    borderRadius: 8,
+    borderRadius: 5,
     padding: 10,
     overflow: 'hidden',
     justifyContent: 'space-between',
   },
   settings: {
     elevation: 2,
+    paddingVertical: 12,
     width: '100%',
-    height: 50,
     borderRadius: 4,
-    borderWidth: 1,
     marginVertical: 5,
     flexDirection: 'row',
     alignItems: 'center',
   },
   text: {
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 17,
   },
   icon: {
-    marginHorizontal: 10,
+    marginHorizontal: 9,
   },
   bottombox: {
     flex: 1,

@@ -10,8 +10,8 @@ const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = ({colorlist}) => {
   let PC = colorlist.Primarycolor;
-  let SC = colorlist.Secondarycolor;
-  let TC = colorlist.Ternarycolor;
+  // let SC = colorlist.Secondarycolor;
+  // let TC = colorlist.Ternarycolor;
 
   const winwidth = useWindowDimensions();
 
@@ -25,7 +25,7 @@ const DrawerNavigator = ({colorlist}) => {
           drawerType: winwidth.width >= 810 ? 'permanent' : 'back',
           headerShown: false,
           swipeEnabled: true,
-          swipeEdgeWidth: windowWidth / 3,
+          swipeEdgeWidth: windowWidth / 3.5,
           overlayColor: PC,
           drawerStyle: {
             backgroundColor: PC,

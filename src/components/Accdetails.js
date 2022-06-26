@@ -1,5 +1,7 @@
+/* eslint-disable no-shadow */
+/* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect} from 'react';
-import {Text, ScrollView, StyleSheet, View, Image} from 'react-native';
+import {Text, StyleSheet, View, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
@@ -11,7 +13,7 @@ import WideAd from './WideAd';
 
 const Accdetails = ({getpackages, packageState, colorlist}) => {
   let PC = colorlist.Primarycolor;
-  let SC = colorlist.Secondarycolor;
+  // let SC = colorlist.Secondarycolor;
   let TC = colorlist.Ternarycolor;
   const [obj, setobj] = useState({visited: 0, added: 0});
 
@@ -36,24 +38,31 @@ const Accdetails = ({getpackages, packageState, colorlist}) => {
             styles.settingsbox,
             {
               backgroundColor: TC,
-              borderColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
             },
           ]}>
           <View style={styles.bottombox}>
-            <Image source={LOGO} style={styles.image} />
+            <Image
+              source={
+                firebase.auth()._user.photoURL === null
+                  ? LOGO
+                  : {uri: firebase.auth()._user.photoURL}
+              }
+              style={styles.image}
+            />
           </View>
           <View
             style={[
               styles.settings,
               {
+                borderWidth: TC === '#000' ? 1 : 0,
+                borderColor: 'rgba(255,255,255,0.6)',
                 backgroundColor: PC,
-                borderColor: TC === '#000' ? '#fff' : '#000',
               },
             ]}>
             <Icon
               style={styles.icon}
               name="user-o"
-              size={18}
+              size={16}
               color={PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'}
             />
             <Text
@@ -62,7 +71,9 @@ const Accdetails = ({getpackages, packageState, colorlist}) => {
                 styles.text,
                 {color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'},
               ]}>
-              {firebase.auth()._user.email}
+              {firebase.auth()._user.displayName === null
+                ? firebase.auth()._user.email
+                : firebase.auth()._user.displayName}
             </Text>
           </View>
           <View
@@ -70,13 +81,14 @@ const Accdetails = ({getpackages, packageState, colorlist}) => {
               styles.settings,
               {
                 backgroundColor: PC,
-                borderColor: TC === '#000' ? '#fff' : '#000',
+                borderWidth: TC === '#000' ? 1 : 0,
+                borderColor: 'rgba(255,255,255,0.6)',
               },
             ]}>
             <Icon
               style={styles.icon}
               name="dot-circle-o"
-              size={18}
+              size={16}
               color={PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'}
             />
             <Text
@@ -134,8 +146,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flex: 1,
     width: '100%',
-    borderWidth: 1,
-    borderRadius: 8,
+    borderRadius: 5,
     overflow: 'hidden',
     paddingHorizontal: 10,
   },
@@ -145,18 +156,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    width: 100,
-    height: 100,
+    width: 80,
+    height: 80,
     borderRadius: 150,
     opacity: 1,
   },
   settings: {
     width: '100%',
-    height: 50,
+    paddingVertical: 12,
     elevation: 2,
     overflow: 'hidden',
     borderRadius: 4,
-    borderWidth: 1,
     marginVertical: 5,
     paddingRight: 20,
     flexDirection: 'row',
@@ -164,7 +174,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 17,
     width: '80%',
   },
   icon: {

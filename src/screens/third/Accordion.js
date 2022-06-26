@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   View,
   StyleSheet,
   Pressable,
   LayoutAnimation,
+  Platform,
+  UIManager,
   TouchableOpacity,
 } from 'react-native';
 import {Divider, Heading, Flex} from 'native-base';
@@ -18,7 +20,11 @@ const Accordion = props => {
   let TC = props.colorlist.Ternarycolor;
 
   const [expanded, setexpanded] = useState(false);
-
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      UIManager.setLayoutAnimationEnabledExperimental(true);
+    }
+  }, []);
   const toggleExpand = () => {
     // Vibration.vibrate(5);
     if (expanded === false) {
@@ -47,7 +53,10 @@ const Accordion = props => {
       style={[
         styles.box,
         {
-          borderColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+          borderColor:
+            PC === '#000' || PC === '#1F1B24'
+              ? 'rgba(255,255,255,0.6)'
+              : 'rgba(0,0,0,0.6)',
         },
       ]}>
       <TouchableOpacity
@@ -69,7 +78,14 @@ const Accordion = props => {
           {props.item.package.name}
         </Heading>
       </TouchableOpacity>
-      <Divider my="2" />
+      <Divider
+        my="2"
+        bg={
+          PC === '#000' || PC === '#1F1B24'
+            ? 'rgba(255,255,255,0.4)'
+            : 'rgba(0,0,0,0.4)'
+        }
+      />
       <Flex
         mx="3"
         direction="row"
@@ -99,7 +115,15 @@ const Accordion = props => {
               .join('-')}
           </Heading>
         </View>
-        <Divider orientation="vertical" mx="3" />
+        <Divider
+          orientation="vertical"
+          mx="3"
+          bg={
+            PC === '#000' || PC === '#1F1B24'
+              ? 'rgba(255,255,255,0.4)'
+              : 'rgba(0,0,0,0.4)'
+          }
+        />
         <Pressable onPress={() => toggleExpand()}>
           <Icon
             name={expanded ? 'arrow-circle-up' : 'arrow-circle-down'}
@@ -120,7 +144,9 @@ const Accordion = props => {
             styles.expandbox,
             {
               borderTopColor:
-                PC === '#000' || PC === '#1F1B24' ? '#9c9c9c' : '#636363',
+                PC === '#000' || PC === '#1F1B24'
+                  ? 'rgba(255,255,255,0.4)'
+                  : 'rgba(0,0,0,0.4)',
             },
           ]}>
           <Text
@@ -150,8 +176,8 @@ const styles = StyleSheet.create({
   box: {
     width: '95.23%',
     minHeight: 110,
-    borderRadius: 6,
-    borderWidth: 1,
+    borderRadius: 5,
+    borderWidth: 1.4,
     alignSelf: 'center',
     marginTop: 5,
     padding: 8,
@@ -187,7 +213,7 @@ const styles = StyleSheet.create({
   expandbox: {
     marginTop: 8,
     width: '100%',
-    borderTopWidth: 0.5,
+    borderTopWidth: 0.8,
     paddingTop: 8,
   },
   expandtext: {

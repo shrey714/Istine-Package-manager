@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {Vibration, Dimensions} from 'react-native';
+import {Dimensions} from 'react-native';
 import SignIn from '../screens/authscreens/SignIn';
 import SignUp from '../screens/authscreens/SignUp';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
@@ -14,12 +14,6 @@ const AuthNavigation = () => {
       channelId: 'test-channel',
       channelName: 'Test Channel',
     });
-  };
-
-  const btnvibration = {
-    tabPress: e => {
-      // Vibration.vibrate(5);
-    },
   };
 
   useEffect(() => {
@@ -47,16 +41,8 @@ const AuthNavigation = () => {
           },
           tabBarPressColor: '#000',
         }}>
-        <TopTab.Screen
-          name="SignIn"
-          listeners={btnvibration}
-          component={SignIn}
-        />
-        <TopTab.Screen
-          name="SignUp"
-          listeners={btnvibration}
-          component={SignUp}
-        />
+        <TopTab.Screen name="SignIn" component={SignIn} />
+        <TopTab.Screen name="SignUp" component={SignUp} />
       </TopTab.Navigator>
     </>
   );
