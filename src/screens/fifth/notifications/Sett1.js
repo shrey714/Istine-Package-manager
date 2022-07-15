@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   text: {
-    fontWeight: '600',
+    fontFamily: 'Quicksand-Bold',
     fontSize: 16,
   },
 });

@@ -109,6 +109,7 @@ const Accdetails = ({getpackages, packageState, colorlist}) => {
               styles.text,
               {
                 fontSize: 15,
+                fontFamily: 'Quicksand-Bold',
                 color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
               },
             ]}>
@@ -173,8 +174,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
-    fontWeight: 'bold',
-    fontSize: 17,
+    fontFamily: 'Quicksand-Bold',
+    fontSize: 20,
     width: '80%',
   },
   icon: {

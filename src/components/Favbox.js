@@ -169,11 +169,11 @@ const styles = StyleSheet.create({
   },
   packagetext: {
     fontSize: 25,
-    fontWeight: '500',
+    fontFamily: 'Quicksand-Bold',
   },
   versiontext: {
     fontSize: 28,
-    fontWeight: 'bold',
+    fontFamily: 'Quicksand-Bold',
   },
   packagebox: {
     height: 150,

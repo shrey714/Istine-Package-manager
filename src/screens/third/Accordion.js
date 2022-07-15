@@ -74,6 +74,7 @@ const Accordion = props => {
         }>
         <Heading
           isTruncated
+          fontWeight="normal"
           style={[styles.firsttext, {color: TC === SC ? '#000' : SC}]}>
           {props.item.package.name}
         </Heading>
@@ -95,6 +96,7 @@ const Accordion = props => {
         <View style={styles.secondbox}>
           <Heading
             isTruncated
+            fontWeight="normal"
             style={[
               styles.secondtext,
               {color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'},
@@ -103,6 +105,7 @@ const Accordion = props => {
           </Heading>
           <Heading
             isTruncated
+            fontWeight="normal"
             style={[
               styles.secondtext,
               {color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'},
@@ -193,7 +196,7 @@ const styles = StyleSheet.create({
   },
   firsttext: {
     fontSize: 28,
-    fontWeight: 'bold',
+    fontFamily: 'Quicksand-Bold',
   },
   secondmainbox: {
     height: 54,
@@ -208,7 +211,7 @@ const styles = StyleSheet.create({
   },
   secondtext: {
     fontSize: 18,
-    fontWeight: '500',
+    fontFamily: 'Quicksand-Bold',
   },
   expandbox: {
     marginTop: 8,
@@ -218,6 +221,6 @@ const styles = StyleSheet.create({
   },
   expandtext: {
     fontSize: 17,
-    fontWeight: '400',
+    fontFamily: 'Quicksand-Medium',
   },
 });

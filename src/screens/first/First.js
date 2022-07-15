@@ -1,22 +1,17 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
-import {
-  FlatList,
-  TouchableOpacity,
-  Vibration,
-  StyleSheet,
-  Linking,
-} from 'react-native';
+import {FlatList, TouchableOpacity, StyleSheet, Linking} from 'react-native';
 import GreetingText from './GreetingText';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
-import Snackbar from 'react-native-snackbar';
 import Notify from './Notify';
 import PackagesApi from './PackagesApi';
 import {Center, Image, Button, Text, Box, VStack, Skeleton} from 'native-base';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Entypo';
+import {useNavigation} from '@react-navigation/native';
 const First = ({navigation, colorlist, onPress, initialState}) => {
   const greettext = GreetingText();
+  const chatnavigation = useNavigation();
   let PC = colorlist.Primarycolor;
   let SC = colorlist.Secondarycolor;
   let TC = colorlist.Ternarycolor;
@@ -29,26 +24,15 @@ const First = ({navigation, colorlist, onPress, initialState}) => {
           <TouchableOpacity
             style={styles.buttonarea}
             onPress={() => {
-              Vibration.vibrate(5);
-              Snackbar.show({
-                text: 'Empty',
-                textColor:
-                  PC === '#000' || PC === '#1F1B24' || PC === '#949398FF'
-                    ? '#fff'
-                    : '#000',
-                backgroundColor:
-                  PC === '#000' || PC === '#1F1B24' || PC === '#949398FF'
-                    ? '#000'
-                    : '#fff',
-              });
+              chatnavigation.navigate('Chat');
             }}>
-            <Icon name="bell-o" size={23} color={SC} />
+            <Icon name="chat" size={23} color={SC} />
           </TouchableOpacity>
         </>
       ),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [PC]);
+  }, [SC]);
 
   const [isLoaded, setIsLoaded] = useState(false);
   setTimeout(() => {
@@ -84,7 +68,7 @@ const First = ({navigation, colorlist, onPress, initialState}) => {
                 px="4"
                 fontSize={'md'}
                 numberOfLines={4}
-                fontWeight={'normal'}
+                fontFamily={'Quicksand-SemiBold'}
                 lineHeight={'20px'}>
                 {item.data}
               </Text>
@@ -98,14 +82,16 @@ const First = ({navigation, colorlist, onPress, initialState}) => {
               isLoaded={isLoaded}>
               <Button
                 m="4"
-                style={{backgroundColor: TC}}
+                style={{
+                  backgroundColor: TC,
+                }}
                 onPress={() => {
                   Linking.openURL(item.url);
                 }}>
                 <Text
-                  fontSize={'md'}
+                  fontSize={'lg'}
                   numberOfLines={1}
-                  fontWeight={'medium'}
+                  fontFamily={'Quicksand-Bold'}
                   style={{color: TC === '#000' ? '#fff' : '#000'}}>
                   Explore
                 </Text>

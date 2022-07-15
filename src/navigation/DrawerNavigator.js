@@ -1,9 +1,11 @@
 import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import TabNavigator from './TabNavigator';
+import ChatNavigator from './ChatNavigator';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Accdetails from '../components/Accdetails';
+import {TransitionPresets} from '@react-navigation/stack';
 import {Dimensions, useWindowDimensions} from 'react-native';
 const windowWidth = Dimensions.get('window').width;
 const Drawer = createDrawerNavigator();
@@ -37,6 +39,15 @@ const DrawerNavigator = ({colorlist}) => {
             drawerItemStyle: {display: 'none'},
           }}
           component={TabNavigator}
+        />
+        <Drawer.Screen
+          name="Chat"
+          options={{
+            drawerItemStyle: {display: 'none'},
+            ...TransitionPresets.ModalSlideFromBottomIOS,
+            cardStyle: {backgroundColor: PC},
+          }}
+          component={ChatNavigator}
         />
       </Drawer.Navigator>
     </>

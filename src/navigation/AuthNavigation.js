@@ -27,7 +27,7 @@ const AuthNavigation = () => {
           tabBarAllowFontScaling: true,
           tabBarBounces: true,
           tabBarLabelStyle: {
-            fontWeight: 'bold',
+            fontFamily: 'Quicksand-Bold',
             fontSize: 23,
             color: '#000',
           },

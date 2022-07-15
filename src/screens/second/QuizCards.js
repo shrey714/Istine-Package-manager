@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {ScrollView} from 'react-native';
 import propTypes from 'prop-types';
@@ -19,9 +20,9 @@ const imgarray = [
 const ITEM_WIDTH = width * 0.9;
 const ITEM_HEIGHT = ITEM_WIDTH * 0.8;
 const Second = ({navigation, colorlist}) => {
-  let PC = colorlist.Primarycolor;
-  let SC = colorlist.Secondarycolor;
-  let TC = colorlist.Ternarycolor;
+  // let PC = colorlist.Primarycolor;
+  // let SC = colorlist.Secondarycolor;
+  // let TC = colorlist.Ternarycolor;
   return (
     <Animatable.View
       animation="fadeInUp"

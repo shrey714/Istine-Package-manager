@@ -25,7 +25,7 @@ const Fifth = ({colorlist}) => {
         },
         headerTintColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
         headerTitleStyle: {
-          fontWeight: '200',
+          fontFamily: 'Quicksand-Bold',
           fontSize: 20,
         },
       }}>

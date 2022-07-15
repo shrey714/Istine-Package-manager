@@ -97,6 +97,7 @@ const SignUp = ({signUp}) => {
             </Box>
             <Input
               fontSize="19"
+              fontFamily="Quicksand-Bold"
               type="email"
               variant="underlined"
               marginVertical={5}
@@ -115,6 +116,7 @@ const SignUp = ({signUp}) => {
             />
             <Input
               fontSize="19"
+              fontFamily="Quicksand-Bold"
               type="password"
               variant="underlined"
               marginVertical={5}
@@ -194,11 +196,11 @@ const styles = StyleSheet.create({
   heading1: {
     color: '#000',
     fontSize: 27,
-    fontWeight: 'bold',
+    fontFamily: 'Quicksand-Bold',
   },
   heading2: {
     color: '#ADADAD',
-    fontWeight: '500',
+    fontFamily: 'Quicksand-SemiBold',
     fontSize: 18,
   },
   button: {
@@ -208,7 +210,7 @@ const styles = StyleSheet.create({
   },
   buttontxt: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontFamily: 'Quicksand-Bold',
     alignSelf: 'center',
   },
 });

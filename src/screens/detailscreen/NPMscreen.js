@@ -5,6 +5,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Text,
+  ToastAndroid,
   View,
   Linking,
 } from 'react-native';
@@ -13,9 +14,11 @@ import Icon2 from 'react-native-vector-icons/FontAwesome5';
 import shortid from 'shortid';
 import Markdown from 'react-native-markdown-display';
 import propTypes from 'prop-types';
+import Addtofavbtn from '../../components/Addtofavbtn';
 import {connect} from 'react-redux';
+import Clipboard from '@react-native-community/clipboard';
 
-const NPMscreen = ({detailsdata, readme, colorlist}) => {
+const NPMscreen = ({detailsdata, navigation, readme, colorlist}) => {
   let PC = colorlist.Primarycolor;
   let SC = colorlist.Secondarycolor;
   let TC = colorlist.Ternarycolor;
@@ -27,6 +30,20 @@ const NPMscreen = ({detailsdata, readme, colorlist}) => {
       setreaddata(await readme);
     };
     loaddata();
+  }, [detailsdata, readme]);
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <>
+          <Addtofavbtn
+            link={detailsdata?.homepage}
+            packagename={detailsdata?.name}
+            packageversion={detailsdata?.version}
+          />
+        </>
+      ),
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [detailsdata, readme]);
   const Separator = () => (
     <View
@@ -58,7 +75,6 @@ const NPMscreen = ({detailsdata, readme, colorlist}) => {
             styles.text,
             {
               fontSize: 18,
-              fontWeight: 'bold',
               color:
                 PC === '#ffffff' || PC === '#F9F9F9'
                   ? SC === '#ffffff'
@@ -75,7 +91,6 @@ const NPMscreen = ({detailsdata, readme, colorlist}) => {
             styles.text,
             {
               fontSize: 18,
-              fontWeight: 'bold',
               color:
                 PC === '#ffffff' || PC === '#F9F9F9'
                   ? SC === '#ffffff'
@@ -93,7 +108,6 @@ const NPMscreen = ({detailsdata, readme, colorlist}) => {
               styles.text,
               {
                 fontSize: 18,
-                fontWeight: 'bold',
                 marginRight: 4,
                 color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
               },
@@ -187,16 +201,27 @@ const NPMscreen = ({detailsdata, readme, colorlist}) => {
       </Text>
       <View
         style={[
-          styles.thirdbox,
-          styles.mainbox,
-          {borderColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000'},
+          {
+            flex: 1,
+            borderWidth: 1,
+            borderRadius: 5,
+            marginVertical: 5,
+            overflow: 'hidden',
+            borderColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          },
         ]}>
         <Text
+          numberOfLines={1}
           style={[
             styles.text,
             {
+              flex: 1,
+              marginVertical: 10,
+              marginLeft: 10,
+              marginRight: 5,
               fontSize: 19,
-              fontWeight: 'bold',
               color:
                 PC === '#ffffff' || PC === '#F9F9F9'
                   ? SC === '#ffffff'
@@ -205,8 +230,27 @@ const NPMscreen = ({detailsdata, readme, colorlist}) => {
                   : SC,
             },
           ]}>
-          npm install {data.name}
+          npm i {data.name}@{data?.version}
         </Text>
+        <TouchableOpacity
+          style={{
+            marginLeft: 5,
+            width: 40,
+            backgroundColor: TC,
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginRight: 0,
+          }}
+          onPress={() => {
+            Clipboard.setString(`npm i ${data.name}@${data?.version}`);
+            ToastAndroid.showWithGravity(
+              'Copied to clipboard!',
+              ToastAndroid.SHORT,
+              ToastAndroid.CENTER,
+            );
+          }}>
+          <Icon name={'clipboard'} size={18} color={SC} />
+        </TouchableOpacity>
       </View>
       <Separator />
       <View
@@ -220,7 +264,6 @@ const NPMscreen = ({detailsdata, readme, colorlist}) => {
             styles.text,
             {
               color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
-              fontWeight: 'bold',
             },
           ]}>
           KEYWORDS
@@ -249,7 +292,6 @@ const NPMscreen = ({detailsdata, readme, colorlist}) => {
             styles.text,
             {
               color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
-              fontWeight: 'bold',
             },
           ]}>
           ENGINES
@@ -284,7 +326,6 @@ const NPMscreen = ({detailsdata, readme, colorlist}) => {
             styles.text,
             {
               color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
-              fontWeight: 'bold',
             },
           ]}>
           DEPENDENCIES
@@ -327,7 +368,6 @@ const NPMscreen = ({detailsdata, readme, colorlist}) => {
             styles.text,
             {
               color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
-              fontWeight: 'bold',
             },
           ]}>
           TOTALFILES
@@ -354,7 +394,6 @@ const NPMscreen = ({detailsdata, readme, colorlist}) => {
             styles.text,
             {
               color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
-              fontWeight: 'bold',
             },
           ]}>
           SIZE
@@ -381,7 +420,6 @@ const NPMscreen = ({detailsdata, readme, colorlist}) => {
             styles.text,
             {
               color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
-              fontWeight: 'bold',
             },
           ]}>
           DOWNLOADS
@@ -474,7 +512,10 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
   },
   titletext: {
-    fontWeight: 'bold',
+    fontFamily: 'Quicksand-Bold',
+  },
+  text: {
+    fontFamily: 'Quicksand-Bold',
   },
   separator: {
     marginVertical: 8,

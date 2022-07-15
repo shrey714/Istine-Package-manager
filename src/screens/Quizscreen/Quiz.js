@@ -136,9 +136,9 @@ const Quiz = ({route, colorlist, navigation}) => {
             }}>
             <Text
               style={{
+                fontFamily: 'Quicksand-Bold',
                 color: '#000',
                 fontSize: 20,
-                fontWeight: '500',
                 opacity: 0.6,
                 marginRight: 2,
               }}>
@@ -147,7 +147,7 @@ const Quiz = ({route, colorlist, navigation}) => {
             <Text
               style={{
                 color: '#000',
-                fontWeight: '500',
+                fontFamily: 'Quicksand-Bold',
                 fontSize: 18,
                 opacity: 0.6,
               }}>
@@ -172,7 +172,7 @@ const Quiz = ({route, colorlist, navigation}) => {
           style={{
             color: '#000',
             fontSize: 30,
-            fontWeight: '500',
+            fontFamily: 'Quicksand-Bold',
             backgroundColor: 'rgba(255,255,255,0.6)',
             paddingHorizontal: 10,
             paddingVertical: 10,
@@ -214,7 +214,12 @@ const Quiz = ({route, colorlist, navigation}) => {
               paddingHorizontal: 20,
               marginVertical: 5,
             }}>
-            <Text style={{fontSize: 20, fontWeight: '500', color: '#000'}}>
+            <Text
+              style={{
+                fontFamily: 'Quicksand-Bold',
+                fontSize: 20,
+                color: '#000',
+              }}>
               {option}
             </Text>
             {/* Show Check Or Cross Icon based on correct answer*/}
@@ -278,7 +283,7 @@ const Quiz = ({route, colorlist, navigation}) => {
                 style={{
                   fontSize: 27,
                   color: '#000',
-                  fontWeight: 'bold',
+                  fontFamily: 'Quicksand-Bold',
                   textAlign: 'center',
                 }}>
                 Next
@@ -398,7 +403,7 @@ const Quiz = ({route, colorlist, navigation}) => {
               <Text
                 style={{
                   fontSize: 30,
-                  fontWeight: 'bold',
+                  fontFamily: 'Quicksand-Bold',
                   color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
                 }}>
                 {score > allQuestions.length / 2 ? 'Congratulations!' : 'Oops!'}
@@ -413,6 +418,7 @@ const Quiz = ({route, colorlist, navigation}) => {
                 <Text
                   style={{
                     fontSize: 30,
+                    fontFamily: 'Quicksand-Bold',
                     color:
                       score > allQuestions.length / 2 ? '#00C851' : '#ff4444',
                   }}>
@@ -421,6 +427,7 @@ const Quiz = ({route, colorlist, navigation}) => {
                 <Text
                   style={{
                     fontSize: 20,
+                    fontFamily: 'Quicksand-Bold',
                     color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
                   }}>
                   / {allQuestions.length}
@@ -444,6 +451,7 @@ const Quiz = ({route, colorlist, navigation}) => {
                 <Text
                   style={{
                     textAlign: 'center',
+                    fontFamily: 'Quicksand-Bold',
                     color: TC === '#000' ? '#fff' : '#000',
                     fontSize: 20,
                   }}>

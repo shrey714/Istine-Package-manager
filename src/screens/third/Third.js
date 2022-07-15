@@ -1,15 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Dimensions,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  Animated,
-  TextInput,
-  Vibration,
-} from 'react-native';
+import React, {useState} from 'react';
+import {View, Dimensions, StyleSheet, FlatList, TextInput} from 'react-native';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 import LoadingAnimation from '../../components/LoadingAnimation';
 import axios from 'axios';
@@ -18,17 +9,17 @@ import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 const shortid = require('shortid');
-const CARD_HEIGHT = 140;
+// const CARD_HEIGHT = 140;
 const {height: wHeight} = Dimensions.get('window');
-const height = wHeight - 58 - getStatusBarHeight();
+// const height = wHeight - 58 - getStatusBarHeight();
 const Third = ({navigation, colorlist}) => {
   let PC = colorlist.Primarycolor;
   let SC = colorlist.Secondarycolor;
   let TC = colorlist.Ternarycolor;
-  const y = new Animated.Value(0);
-  const onScroll = Animated.event([{nativeEvent: {contentOffset: {y}}}], {
-    useNativeDriver: true,
-  });
+  // const y = new Animated.Value(0);
+  // const onScroll = Animated.event([{nativeEvent: {contentOffset: {y}}}], {
+  //   useNativeDriver: true,
+  // });
 
   const [inputSearch, setInputSearch] = useState('');
   const [details, setdetails] = useState(null);
@@ -51,44 +42,45 @@ const Third = ({navigation, colorlist}) => {
   // }, [startsearch]);
 
   const renderaccordian = (item, index) => {
-    const position = Animated.subtract(index * CARD_HEIGHT, y);
-    const isDisappearing = -CARD_HEIGHT;
-    const isTop = 0;
-    const isBottom = height - CARD_HEIGHT;
-    const isAppearing = height;
-    const translateY = Animated.add(
-      Animated.add(
-        y,
-        y.interpolate({
-          inputRange: [0, 0.00001 + index * CARD_HEIGHT],
-          outputRange: [0, -index * CARD_HEIGHT],
-          // extrapolateRight: 'clamp',
-        }),
-      ),
-      position.interpolate({
-        inputRange: [isBottom, isAppearing],
-        outputRange: [0, -CARD_HEIGHT / 4],
-        extrapolate: 'clamp',
-      }),
-    );
-    const scale = position.interpolate({
-      inputRange: [isDisappearing, isTop, isBottom, isAppearing],
-      outputRange: [0.5, 1, 1, 0.5],
-      // extrapolate: 'clamp',
-    });
-    const opacity = position.interpolate({
-      inputRange: [isDisappearing, isTop, isBottom, isAppearing],
-      outputRange: [0.5, 1, 1, 0.5],
-    });
+    // const position = Animated.subtract(index * CARD_HEIGHT, y);
+    // const isDisappearing = -CARD_HEIGHT;
+    // const isTop = 0;
+    // const isBottom = height - CARD_HEIGHT;
+    // const isAppearing = height;
+    // const translateY = Animated.add(
+    //   Animated.add(
+    //     y,
+    //     y.interpolate({
+    //       inputRange: [0, 0.00001 + index * CARD_HEIGHT],
+    //       outputRange: [0, -index * CARD_HEIGHT],
+    //       // extrapolateRight: 'clamp',
+    //     }),
+    //   ),
+    //   position.interpolate({
+    //     inputRange: [isBottom, isAppearing],
+    //     outputRange: [0, -CARD_HEIGHT / 4],
+    //     extrapolate: 'clamp',
+    //   }),
+    // );
+    // const scale = position.interpolate({
+    //   inputRange: [isDisappearing, isTop, isBottom, isAppearing],
+    //   outputRange: [0.5, 1, 1, 0.5],
+    //   // extrapolate: 'clamp',
+    // });
+    // const opacity = position.interpolate({
+    //   inputRange: [isDisappearing, isTop, isBottom, isAppearing],
+    //   outputRange: [0.5, 1, 1, 0.5],
+    // });
     return (
-      <Animated.View
-        key={index}
-        style={{
-          opacity,
-          transform: [{translateY}, {scale}],
-        }}>
-        <Accordion index={index} navigation={navigation} item={item} />
-      </Animated.View>
+      // <Animated.View
+      // key={index}
+      // style={{
+      // opacity,
+      // transform: [{translateY}, {scale}],
+      // }}
+      // >
+      <Accordion index={index} navigation={navigation} item={item} />
+      // </Animated.View>
     );
   };
 
@@ -99,8 +91,8 @@ const Third = ({navigation, colorlist}) => {
           <LoadingAnimation />
         </View>
       ) : (
-        <Animated.FlatList
-          {...{onScroll}}
+        <FlatList
+          // {...{onScroll}}
           initialScrollIndex={0}
           contentContainerStyle={{
             flexGrow: 1,
@@ -192,6 +184,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
   },
   searchbox: {
+    fontFamily: 'Quicksand-Bold',
     width: '94%',
     paddingVertical: 6,
     paddingLeft: 20,

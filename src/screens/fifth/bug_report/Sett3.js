@@ -147,6 +147,7 @@ const Sett3 = ({colorlist}) => {
                     color: '#000',
                     fontSize: 17,
                     fontWeight: '500',
+                    fontFamily: 'Quicksand-Bold',
                   }}>
                   Bug type?
                 </Text>
@@ -171,7 +172,13 @@ const Sett3 = ({colorlist}) => {
                   setModalVisible(!modalVisible);
                   setbugtype(type1);
                 }}>
-                <Text style={{color: '#000', fontSize: 17, fontWeight: '400'}}>
+                <Text
+                  style={{
+                    color: '#000',
+                    fontSize: 17,
+                    fontWeight: '400',
+                    fontFamily: 'Quicksand-SemiBold',
+                  }}>
                   {type1}
                 </Text>
               </Pressable>
@@ -188,7 +195,13 @@ const Sett3 = ({colorlist}) => {
                   setModalVisible(!modalVisible);
                   setbugtype(type2);
                 }}>
-                <Text style={{color: '#000', fontSize: 17, fontWeight: '400'}}>
+                <Text
+                  style={{
+                    color: '#000',
+                    fontSize: 17,
+                    fontWeight: '400',
+                    fontFamily: 'Quicksand-SemiBold',
+                  }}>
                   {type2}
                 </Text>
               </Pressable>
@@ -203,7 +216,13 @@ const Sett3 = ({colorlist}) => {
                   setModalVisible(!modalVisible);
                   setbugtype(type3);
                 }}>
-                <Text style={{color: '#000', fontSize: 17, fontWeight: '400'}}>
+                <Text
+                  style={{
+                    color: '#000',
+                    fontSize: 17,
+                    fontWeight: '400',
+                    fontFamily: 'Quicksand-SemiBold',
+                  }}>
                   {type3}
                 </Text>
               </Pressable>
@@ -235,6 +254,7 @@ const Sett3 = ({colorlist}) => {
           }}>
           <Text
             style={{
+              fontFamily: 'Quicksand-Bold',
               color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
               fontWeight: '500',
               fontSize: 17,
@@ -323,10 +343,22 @@ const Sett3 = ({colorlist}) => {
               alignItems: 'center',
               backgroundColor: 'rgba(0,0,0,0.4)',
             }}>
-            <Text style={{fontSize: 30, fontWeight: 'bold', color: '#fff'}}>
+            <Text
+              style={{
+                fontFamily: 'Quicksand-Bold',
+                fontSize: 30,
+                fontWeight: 'bold',
+                color: '#fff',
+              }}>
               {countimages}
             </Text>
-            <Text style={{fontSize: 20, fontWeight: 'bold', color: '#ADADAD'}}>
+            <Text
+              style={{
+                fontFamily: 'Quicksand-Bold',
+                fontSize: 20,
+                fontWeight: 'bold',
+                color: '#ADADAD',
+              }}>
               /{uploadedimg.length}
             </Text>
           </View>
@@ -375,6 +407,7 @@ const Sett3 = ({colorlist}) => {
           <Text
             numberOfLines={1}
             style={{
+              fontFamily: 'Quicksand-Bold',
               color: PC === '#000' || PC === '#1F1B24' ? '#000' : '#fff',
               fontWeight: '500',
               fontSize: 18,
@@ -417,6 +450,7 @@ const Sett3 = ({colorlist}) => {
           }
           placeholder="What would you like us to improve?"
           style={{
+            fontFamily: 'Quicksand-Bold',
             color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
             fontWeight: '500',
             backgroundColor: 'transparent',

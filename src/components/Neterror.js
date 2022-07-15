@@ -55,6 +55,7 @@ const Neterror = ({colorlist}) => {
             }}>
             <Text
               style={{
+                fontFamily: 'Quicksand-Bold',
                 color:
                   PC === '#000' || PC === '#1F1B24' || PC === '#949398FF'
                     ? '#fff'
@@ -82,6 +83,7 @@ const Neterror = ({colorlist}) => {
             }}>
             <Text
               style={{
+                fontFamily: 'Quicksand-Bold',
                 color:
                   PC === '#000' || PC === '#1F1B24' || PC === '#949398FF'
                     ? '#fff'

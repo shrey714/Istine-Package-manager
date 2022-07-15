@@ -5,14 +5,13 @@ import BottomSheet from '../../components/BottomSheet';
 import axios from 'axios';
 import LoadingAnimation from '../../components/LoadingAnimation';
 import NPMscreen from '../detailscreen/NPMscreen';
-import Addtofavbtn from '../../components/Addtofavbtn';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 const Infopage = ({route, navigation, colorlist}) => {
-  let PC = colorlist.Primarycolor;
-  let SC = colorlist.Secondarycolor;
-  let TC = colorlist.Ternarycolor;
+  // let PC = colorlist.Primarycolor;
+  // let SC = colorlist.Secondarycolor;
+  // let TC = colorlist.Ternarycolor;
   const {packagename, packageversion} = route.params;
   const [details, setdetails] = useState(null);
   const [readme, setreadme] = useState(null);
@@ -45,12 +44,6 @@ const Infopage = ({route, navigation, colorlist}) => {
   useEffect(() => {
     navigation.setOptions({
       title: packagename + '(' + packageversion + ')',
-      headerRight: () => (
-        <Addtofavbtn
-          packagename={packagename}
-          packageversion={packageversion}
-        />
-      ),
     });
     if (bool) {
       async function wait() {
@@ -62,7 +55,11 @@ const Infopage = ({route, navigation, colorlist}) => {
   }, [route]);
   return details ? (
     <>
-      <NPMscreen detailsdata={maindata} readme={readme} />
+      <NPMscreen
+        detailsdata={maindata}
+        navigation={navigation}
+        readme={readme}
+      />
       <BottomSheet
         packagename={packagename}
         navigation={navigation}

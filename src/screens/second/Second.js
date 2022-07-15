@@ -23,8 +23,8 @@ const Second = ({colorlist}) => {
         },
         headerTintColor: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
         headerTitleStyle: {
-          fontWeight: '200',
-          fontSize: 24,
+          fontFamily: 'Quicksand-Bold',
+          fontSize: 28,
         },
       }}>
       <Stack.Screen

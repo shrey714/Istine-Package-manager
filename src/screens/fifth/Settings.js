@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   StyleSheet,
   Pressable,
@@ -23,6 +23,12 @@ const Settings = ({signOut, navigation, colorlist}) => {
   let PC = colorlist.Primarycolor;
   // let SC = colorlist.Secondarycolor;
   let TC = colorlist.Ternarycolor;
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId:
+        '6484832530-fmjo4h8vt403sqn8lgj0se7tbve6dru5.apps.googleusercontent.com',
+    });
+  }, []);
 
   const [isOpen, setIsOpen] = React.useState(false);
   return (
@@ -175,9 +181,9 @@ const Settings = ({signOut, navigation, colorlist}) => {
               }}>
               <Text
                 style={{
+                  fontFamily: 'Quicksand-Bold',
                   color: '#000',
                   fontSize: 17,
-                  fontWeight: '500',
                 }}>
                 Confirm?
               </Text>
@@ -196,7 +202,12 @@ const Settings = ({signOut, navigation, colorlist}) => {
                 borderBottomWidth: 0.2,
                 borderBottomColor: '#ADADAD',
               }}>
-              <Text style={{color: '#000', fontSize: 14, fontWeight: '400'}}>
+              <Text
+                style={{
+                  fontFamily: 'Quicksand-SemiBold',
+                  color: '#000',
+                  fontSize: 14,
+                }}>
                 This will remove all settings related to Istine. This action
                 cannot be reversed. Deleted data can not be recovered.
               </Text>
@@ -235,6 +246,7 @@ const Settings = ({signOut, navigation, colorlist}) => {
                 }}>
                 <Text
                   style={{
+                    fontFamily: 'Quicksand-Bold',
                     color: PC === '#000' || PC === '#1F1B24' ? '#000' : '#fff',
                     fontWeight: '500',
                     fontSize: 15,
@@ -287,7 +299,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
-    fontWeight: 'bold',
+    fontFamily: 'Quicksand-Bold',
     fontSize: 17,
   },
   icon: {
