@@ -15,9 +15,13 @@ import SplashScreen from 'react-native-splash-screen';
 import auth from '@react-native-firebase/auth';
 import {NavigationContainer} from '@react-navigation/native';
 import {useNetInfo} from '@react-native-community/netinfo';
-const RootApp = ({authState, colorlist}) => {
+// import {useNavigation} from '@react-navigation/native';
+import LRSlide from './screens/LRSlide/LRSlide';
+import shutter from './action/shutter';
+const RootApp = ({authState, shutter, shutterstatus, colorlist}) => {
   const dispatch = useDispatch();
   const netinfo = useNetInfo();
+  // const chatnavigation = useNavigation();
   let PC = colorlist.Primarycolor;
   let SC = colorlist.Secondarycolor;
   let TC = colorlist.Ternarycolor;
@@ -34,6 +38,16 @@ const RootApp = ({authState, colorlist}) => {
       });
     }
   };
+  useEffect(() => {
+    setTimeout(() => {
+      if (shutterstatus === true) {
+        // chatnavigation.navigate('Chat');
+        setTimeout(() => {
+          shutter(false);
+        }, 1200);
+      }
+    }, 800);
+  }, [shutter, shutterstatus]);
   useEffect(() => {
     changeNavigationBarColor(
       PC === '#000' || PC === '#1F1B24' || PC === '#949398FF'
@@ -95,17 +109,23 @@ const RootApp = ({authState, colorlist}) => {
             <Stack.Screen name="mainpage" component={DrawerNavigator} />
           )}
         </Stack.Navigator>
+        {shutterstatus ? <LRSlide /> : <></>}
       </NavigationContainer>
     </>
   );
 };
+const mapDispatchToProps = {
+  shutter: data => shutter(data),
+};
 const mapStateToProps = state => ({
   authState: state.auth,
+  shutterstatus: state.shutterreducer,
   colorlist: state.colorreducer.colours,
 });
 
 RootApp.prototype = {
   colorlist: propTypes.object.isRequired,
+  shutter: propTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(RootApp);
+export default connect(mapStateToProps, mapDispatchToProps)(RootApp);

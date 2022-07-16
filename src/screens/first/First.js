@@ -1,6 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
-import {FlatList, TouchableOpacity, StyleSheet, Linking} from 'react-native';
+import {
+  FlatList,
+  TouchableOpacity,
+  View,
+  StyleSheet,
+  StatusBar,
+  Linking,
+} from 'react-native';
 import GreetingText from './GreetingText';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
@@ -8,26 +15,37 @@ import Notify from './Notify';
 import PackagesApi from './PackagesApi';
 import {Center, Image, Button, Text, Box, VStack, Skeleton} from 'native-base';
 import Icon from 'react-native-vector-icons/Entypo';
-import {useNavigation} from '@react-navigation/native';
-const First = ({navigation, colorlist, onPress, initialState}) => {
+import shutter from '../../action/shutter';
+import ChatButton from '../../components/ChatButton';
+import {useIsFocused} from '@react-navigation/native';
+const First = ({navigation, shutter, colorlist, onPress, initialState}) => {
   const greettext = GreetingText();
-  const chatnavigation = useNavigation();
   let PC = colorlist.Primarycolor;
   let SC = colorlist.Secondarycolor;
   let TC = colorlist.Ternarycolor;
 
+  function FocusAwareStatusBar(props) {
+    const isFocused = useIsFocused();
+
+    return isFocused ? <StatusBar {...props} /> : null;
+  }
   useEffect(() => {
     navigation.setOptions({
       title: greettext,
       headerRight: () => (
         <>
-          <TouchableOpacity
-            style={styles.buttonarea}
-            onPress={() => {
-              chatnavigation.navigate('Chat');
-            }}>
-            <Icon name="chat" size={23} color={SC} />
-          </TouchableOpacity>
+          <View style={styles.rings}>
+            <View style={{position: 'absolute'}}>
+              <ChatButton />
+            </View>
+            <TouchableOpacity
+              style={styles.buttonarea}
+              onPress={() => {
+                shutter(true);
+              }}>
+              <Icon name="chat" size={23} color={SC} />
+            </TouchableOpacity>
+          </View>
         </>
       ),
     });
@@ -42,6 +60,7 @@ const First = ({navigation, colorlist, onPress, initialState}) => {
   const Shrey = ({item}) => {
     return (
       <Center key={item.id} w="100%" style={{marginTop: 10}}>
+        <FocusAwareStatusBar backgroundColor="transparent" />
         <Box w="90%" maxWidth="400">
           <VStack
             maxWidth="400"
@@ -102,7 +121,6 @@ const First = ({navigation, colorlist, onPress, initialState}) => {
       </Center>
     );
   };
-
   return (
     <>
       <FlatList
@@ -117,15 +135,20 @@ const First = ({navigation, colorlist, onPress, initialState}) => {
   );
 };
 
+const mapDispatchToProps = {
+  shutter: data => shutter(data),
+};
+
 const mapStateToProps = state => ({
   colorlist: state.colorreducer.colours,
 });
 
 First.prototype = {
   colorlist: propTypes.object.isRequired,
+  shutter: propTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(First);
+export default connect(mapStateToProps, mapDispatchToProps)(First);
 
 const styles = StyleSheet.create({
   container: {
@@ -135,6 +158,13 @@ const styles = StyleSheet.create({
     fontSize: 40,
   },
   buttonarea: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 2,
+  },
+  rings: {
+    elevation: 2,
+    zIndex: 1,
     marginRight: 8,
     backgroundColor: '#000',
     width: 40,
