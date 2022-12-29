@@ -1,6 +1,6 @@
 <h1 align="center">
   <img src="https://user-images.githubusercontent.com/76216765/183026274-ea00fea9-4767-405e-86d3-cf06316d4483.png" width="100"><br>
-  <a href="https://github.com/shrey714/Istine-Package-manager" style="color: black"><span>ISTINE</span></a><br>
+  <a href="https://github.com/shrey714/Istine-Package-manager" style="color: black"><span>ISTINE..</span></a><br>
 </h1>
 
 <p align="center">
