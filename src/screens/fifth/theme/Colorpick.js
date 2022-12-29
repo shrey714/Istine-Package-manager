@@ -123,7 +123,9 @@ function ColorPickerDemo({type, setPST, colorlist, ColorTheme}) {
           },
         ]}
         onPress={() => {
-          letsadd();
+          if (selectedColor !== '') {
+            letsadd();
+          }
         }}>
         <Icon
           name="circle-o"

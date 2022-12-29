@@ -1,5 +1,5 @@
 const ColorTheme = {
-  colour1: ['#000', '#1F1B24', '#949398FF', '#F9F9F9', '#ffffff'],
+  colour1: ['#000', '#1F1B24', '#949398', '#F9F9F9', '#ffffff'],
   colour2: ['#ffffff', '#900', '#F4DF4EFF', '#00239CFF', '#006B38FF'],
   colour3: ['#000', '#ADADAD', '#eae7dc', '#fff'],
 };

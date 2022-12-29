@@ -1,5 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
+import {BackHandler, Alert} from 'react-native';
 import {View} from 'react-native';
 import BottomSheet from '../../components/BottomSheet';
 import axios from 'axios';
@@ -18,7 +19,23 @@ const Infopage = ({route, navigation, colorlist}) => {
   const [loading, setloading] = useState(false);
   const [maindata, setmaindata] = useState(null);
   const [bool, setbool] = useState(false);
+  //back button handeler
+  // useEffect(() => {
+  //   const backAction = () => {
+  //     navigation.navigate('Infoandsearch', {
+  //       screen: 'Third',
+  //     });
+  //     return true;
+  //   };
 
+  //   const backHandler = BackHandler.addEventListener(
+  //     'hardwareBackPress',
+  //     backAction,
+  //   );
+
+  //   return () => backHandler.remove();
+  // }, []);
+  //==================
   const fetchdetails = async () => {
     try {
       setloading(true);
@@ -39,7 +56,7 @@ const Infopage = ({route, navigation, colorlist}) => {
   useEffect(() => {
     fetchdetails();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [packagename]);
 
   useEffect(() => {
     navigation.setOptions({
@@ -47,13 +64,15 @@ const Infopage = ({route, navigation, colorlist}) => {
     });
     if (bool) {
       async function wait() {
+        setloading(true);
         setmaindata(await details[packageversion]);
+        setloading(false);
       }
       wait();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [route]);
-  return details ? (
+  }, [packageversion]);
+  return details && !loading ? (
     <>
       <NPMscreen
         detailsdata={maindata}

@@ -3,14 +3,14 @@ import {ScrollView, StyleSheet} from 'react-native';
 import {BannerAd, TestIds} from 'react-native-google-mobile-ads';
 const adUnitId = __DEV__
   ? TestIds.BANNER
-  : 'ca-app-pub-7393727234144842/8422249415';
+  : 'ca-app-pub-7393727234144842/9919162282';
 const WideAd = () => {
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
       contentContainerStyle={styles.adcontainer}>
       <BannerAd
-        unitId={TestIds.BANNER}
+        unitId={adUnitId}
         size={'WIDE_SKYSCRAPER'}
         onAdFailedToLoad={error => {
           console.log(error);

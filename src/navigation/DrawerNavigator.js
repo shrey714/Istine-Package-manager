@@ -5,7 +5,7 @@ import ChatNavigator from './ChatNavigator';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Accdetails from '../components/Accdetails';
-import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
+import {TransitionPresets} from '@react-navigation/stack';
 import {Dimensions, useWindowDimensions} from 'react-native';
 const windowWidth = Dimensions.get('window').width;
 const Drawer = createDrawerNavigator();

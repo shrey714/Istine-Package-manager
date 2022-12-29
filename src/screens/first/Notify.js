@@ -3,13 +3,13 @@ import {View, StyleSheet} from 'react-native';
 import {BannerAd, BannerAdSize, TestIds} from 'react-native-google-mobile-ads';
 const adUnitId = __DEV__
   ? TestIds.BANNER
-  : 'ca-app-pub-7393727234144842/8422249415';
+  : 'ca-app-pub-7393727234144842/9919162282';
 
 const Notify = () => {
   return (
     <View style={styles.adcontainer}>
       <BannerAd
-        unitId={TestIds.BANNER}
+        unitId={adUnitId}
         size={BannerAdSize.BANNER}
         onAdFailedToLoad={error => {
           console.log(error);

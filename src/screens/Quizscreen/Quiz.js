@@ -34,13 +34,10 @@ const Quiz = ({route, colorlist, navigation}) => {
   //=================
   const adUnitId = __DEV__
     ? TestIds.INTERSTITIAL
-    : 'ca-app-pub-7393727234144842/5645996548';
-  const {isLoaded, isClosed, load, show} = useInterstitialAd(
-    TestIds.INTERSTITIAL,
-    {
-      requestNonPersonalizedAdsOnly: false,
-    },
-  );
+    : 'ca-app-pub-7393727234144842/1082813812';
+  const {isLoaded, isClosed, load, show} = useInterstitialAd(adUnitId, {
+    requestNonPersonalizedAdsOnly: false,
+  });
   useEffect(() => {
     load();
   }, [load]);

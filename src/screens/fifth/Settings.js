@@ -6,10 +6,8 @@ import {
   ScrollView,
   Text,
   View,
-  Image,
   Modal,
 } from 'react-native';
-import LOGO from '../../assets/images/LOGO.png';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon2 from 'react-native-vector-icons/FontAwesome5';
 import Icon3 from 'react-native-vector-icons/MaterialIcons';
@@ -18,10 +16,11 @@ import {signOut} from '../../action/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {connect} from 'react-redux';
 import propTypes from 'prop-types';
+import LOGOSVG from '../../assets/images/LOGOSVG.svg';
 
 const Settings = ({signOut, navigation, colorlist}) => {
   let PC = colorlist.Primarycolor;
-  // let SC = colorlist.Secondarycolor;
+  let SC = colorlist.Secondarycolor;
   let TC = colorlist.Ternarycolor;
   useEffect(() => {
     GoogleSignin.configure({
@@ -42,7 +41,43 @@ const Settings = ({signOut, navigation, colorlist}) => {
           },
         ]}>
         <View style={styles.bottombox}>
-          <Image source={LOGO} style={styles.image} />
+          <View
+            style={{
+              width: 100,
+              height: 100,
+              backgroundColor: PC,
+              borderRadius: 150,
+              overflow: 'hidden',
+            }}>
+            <LOGOSVG width={100} height={100} />
+          </View>
+          <View
+            style={{
+              paddingHorizontal: 10,
+              flexDirection: 'row',
+              alignItems: 'flex-end',
+            }}>
+            <Text
+              style={[
+                {
+                  color: '#900',
+                  fontFamily: 'Quicksand-Bold',
+                  fontSize: 70,
+                },
+              ]}>
+              V
+            </Text>
+            <Text
+              style={[
+                {
+                  color: '#900',
+                  fontSize: 17,
+                  fontFamily: 'Quicksand-Bold',
+                },
+              ]}>
+              1.0
+            </Text>
+          </View>
         </View>
         <View>
           <Pressable
@@ -306,16 +341,10 @@ const styles = StyleSheet.create({
     marginHorizontal: 9,
   },
   bottombox: {
-    flex: 1,
     width: '100%',
-    height: '100%',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  image: {
-    width: 100,
     height: 100,
-    borderRadius: 150,
-    opacity: 1,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+    flexDirection: 'row',
   },
 });

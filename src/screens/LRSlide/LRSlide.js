@@ -1,9 +1,10 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
 import {StyleSheet, Image, Dimensions, Modal, View} from 'react-native';
 import {connect} from 'react-redux';
 import propTypes from 'prop-types';
-import LOGOL from '../../assets/images/LOGOL.png';
-import LOGOR from '../../assets/images/LOGOR.png';
+import LOGOR from '../../assets/images/LOGOR.svg';
+import LOGOL from '../../assets/images/LOGOL.svg';
 import * as Animatable from 'react-native-animatable';
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
@@ -46,14 +47,36 @@ const LRSlide = ({colorlist, navigation}) => {
             duration={400}
             useNativeDriver={true}
             style={[styles.containerL, {backgroundColor: PC}]}>
-            <Image source={LOGOL} style={styles.imageL} />
+            <View
+              style={{
+                backgroundColor:
+                  PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+                width: 50,
+                height: 100,
+                borderTopLeftRadius: 150,
+                borderBottomLeftRadius: 150,
+                overflow: 'hidden',
+              }}>
+              <LOGOL width={50} height={100} />
+            </View>
           </Animatable.View>
           <Animatable.View
             animation={AnimationTypeR}
             duration={400}
             useNativeDriver={true}
             style={[styles.containerR, {backgroundColor: PC}]}>
-            <Image source={LOGOR} style={styles.imageR} />
+            <View
+              style={{
+                backgroundColor:
+                  PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
+                width: 50,
+                height: 100,
+                borderTopRightRadius: 150,
+                borderBottomRightRadius: 150,
+                overflow: 'hidden',
+              }}>
+              <LOGOR width={50} height={100} />
+            </View>
           </Animatable.View>
         </View>
       </Modal>
@@ -82,19 +105,5 @@ const styles = StyleSheet.create({
     height: windowHeight,
     alignItems: 'flex-start',
     justifyContent: 'center',
-  },
-  imageL: {
-    width: 50,
-    height: 100,
-    borderTopLeftRadius: 150,
-    borderBottomLeftRadius: 150,
-    opacity: 1,
-  },
-  imageR: {
-    width: 50,
-    height: 100,
-    borderTopRightRadius: 150,
-    borderBottomRightRadius: 150,
-    opacity: 1,
   },
 });

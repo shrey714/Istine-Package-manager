@@ -10,7 +10,7 @@ import {
   ScrollView,
   Dimensions,
 } from 'react-native';
-import LOGO from '../../assets/images/LOGO.png';
+import LOGOSVG from '../../assets/images/LOGOSVG.svg';
 import Snackbar from 'react-native-snackbar';
 import {Box, Center, FormControl, Input, Button} from 'native-base';
 const screenwidth = Dimensions.get('window').width;
@@ -74,17 +74,17 @@ const SignUp = ({signUp}) => {
           contentContainerStyle={{flexGrow: 1}}
           showsVerticalScrollIndicator={false}>
           <Center paddingY={5}>
-            <Animated.Image
+            <Animated.View
               style={{
                 borderRadius: 150,
                 width: 100,
                 height: 100,
+                overflow: 'hidden',
+                backgroundColor: '#dedede',
                 transform: [{rotate: spin}],
-              }}
-              resizeMode={'contain'}
-              source={LOGO}
-              alt="Alternate Text"
-            />
+              }}>
+              <LOGOSVG width={100} height={100} />
+            </Animated.View>
           </Center>
           <FormControl isRequired style={styles.signinbox}>
             <Box marginBottom={2}>

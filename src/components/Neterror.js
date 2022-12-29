@@ -23,7 +23,7 @@ const Neterror = ({colorlist}) => {
             justifyContent: 'center',
             alignItems: 'center',
             backgroundColor:
-              PC === '#000' || PC === '#1F1B24' || PC === '#949398FF'
+              PC === '#000' || PC === '#1F1B24' || PC === '#949398'
                 ? 'rgba(0,0,0,0.6)'
                 : 'rgba(255,255,255,0.4)',
           },
@@ -31,7 +31,7 @@ const Neterror = ({colorlist}) => {
         <View
           style={{
             backgroundColor:
-              PC === '#000' || PC === '#1F1B24' || PC === '#949398FF'
+              PC === '#000' || PC === '#1F1B24' || PC === '#949398'
                 ? '#000'
                 : '#fff',
             width: '68%',
@@ -40,7 +40,7 @@ const Neterror = ({colorlist}) => {
             flexDirection: 'column',
             borderRadius: 4,
             borderWidth:
-              PC === '#000' || PC === '#1F1B24' || PC === '#949398FF' ? 0.2 : 0,
+              PC === '#000' || PC === '#1F1B24' || PC === '#949398' ? 0.2 : 0,
             borderColor: '#ADADAD',
           }}>
           <View
@@ -57,7 +57,7 @@ const Neterror = ({colorlist}) => {
               style={{
                 fontFamily: 'Quicksand-Bold',
                 color:
-                  PC === '#000' || PC === '#1F1B24' || PC === '#949398FF'
+                  PC === '#000' || PC === '#1F1B24' || PC === '#949398'
                     ? '#fff'
                     : '#000',
                 fontSize: 20,
@@ -69,7 +69,7 @@ const Neterror = ({colorlist}) => {
               name="signal-wifi-off"
               size={23}
               color={
-                PC === '#000' || PC === '#1F1B24' || PC === '#949398FF'
+                PC === '#000' || PC === '#1F1B24' || PC === '#949398'
                   ? '#fff'
                   : '#000'
               }
@@ -85,7 +85,7 @@ const Neterror = ({colorlist}) => {
               style={{
                 fontFamily: 'Quicksand-Bold',
                 color:
-                  PC === '#000' || PC === '#1F1B24' || PC === '#949398FF'
+                  PC === '#000' || PC === '#1F1B24' || PC === '#949398'
                     ? '#fff'
                     : '#000',
                 fontSize: 16,

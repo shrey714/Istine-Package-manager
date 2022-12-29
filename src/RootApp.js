@@ -50,9 +50,7 @@ const RootApp = ({authState, shutter, shutterstatus, colorlist}) => {
   }, [shutter, shutterstatus]);
   useEffect(() => {
     changeNavigationBarColor(
-      PC === '#000' || PC === '#1F1B24' || PC === '#949398FF'
-        ? 'black'
-        : 'white',
+      PC === '#000' || PC === '#1F1B24' || PC === '#949398' ? 'black' : 'white',
       true,
       true,
     );

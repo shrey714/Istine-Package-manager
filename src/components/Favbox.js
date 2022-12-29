@@ -29,16 +29,26 @@ const Favbox = ({details, index, navigation, colorlist}) => {
         .ref(`/packages/${maile}/`)
         .child(`${details.id}`)
         .remove(() => {
-          //removed
+          const dref = database().ref(`/counter/${details.packagename}`);
+          dref.once('value', async snapshot => {
+            if (snapshot.val() > 0) {
+              let currentvalue = await snapshot.val();
+              await database()
+                .ref(`/counter/${details.packagename}`)
+                .set(currentvalue - 1);
+            } else {
+              //do nothing
+            }
+          });
         });
       Snackbar.show({
         text: 'Package deleted',
         textColor:
-          PC === '#000' || PC === '#1F1B24' || PC === '#949398FF'
+          PC === '#000' || PC === '#1F1B24' || PC === '#949398'
             ? '#fff'
             : '#000',
         backgroundColor:
-          PC === '#000' || PC === '#1F1B24' || PC === '#949398FF'
+          PC === '#000' || PC === '#1F1B24' || PC === '#949398'
             ? '#000'
             : '#fff',
       });
@@ -47,11 +57,11 @@ const Favbox = ({details, index, navigation, colorlist}) => {
       Snackbar.show({
         text: 'Failed to delete the package',
         textColor:
-          PC === '#000' || PC === '#1F1B24' || PC === '#949398FF'
+          PC === '#000' || PC === '#1F1B24' || PC === '#949398'
             ? '#fff'
             : '#000',
         backgroundColor:
-          PC === '#000' || PC === '#1F1B24' || PC === '#949398FF'
+          PC === '#000' || PC === '#1F1B24' || PC === '#949398'
             ? '#000'
             : '#fff',
       });

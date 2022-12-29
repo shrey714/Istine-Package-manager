@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
 import getpackages from '../action/package';
-import LOGO from '.././assets/images/LOGO.png';
+import LOGOSVG from '../assets/images/LOGOSVG.svg';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 import {firebase} from '@react-native-firebase/auth';
 import WideAd from './WideAd';
@@ -40,15 +40,15 @@ const Accdetails = ({getpackages, packageState, colorlist}) => {
               backgroundColor: TC,
             },
           ]}>
-          <View style={styles.bottombox}>
-            <Image
-              source={
-                firebase.auth()._user.photoURL === null
-                  ? LOGO
-                  : {uri: firebase.auth()._user.photoURL}
-              }
-              style={styles.image}
-            />
+          <View style={[styles.bottombox, {backgroundColor: PC}]}>
+            {firebase.auth()._user.photoURL === null ? (
+              <LOGOSVG width={80} height={80} />
+            ) : (
+              <Image
+                source={{uri: firebase.auth()._user.photoURL}}
+                style={styles.image}
+              />
+            )}
           </View>
           <View
             style={[
@@ -153,14 +153,17 @@ const styles = StyleSheet.create({
   },
   bottombox: {
     marginVertical: 10,
-    width: '100%',
+    alignSelf: 'center',
     alignItems: 'center',
-  },
-  image: {
     width: 80,
     height: 80,
     borderRadius: 150,
+    overflow: 'hidden',
+  },
+  image: {
     opacity: 1,
+    width: 80,
+    height: 80,
   },
   settings: {
     width: '100%',

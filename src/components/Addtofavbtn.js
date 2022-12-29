@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Share, View, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Snackbar from 'react-native-snackbar';
@@ -16,10 +16,31 @@ import {
   MenuTrigger,
 } from 'react-native-popup-menu';
 
-const Addtofavbtn = ({packagename, link, colorlist, packageversion}) => {
+const Addtofavbtn = ({
+  packagename,
+  packageState,
+  link,
+  colorlist,
+  packageversion,
+}) => {
   let PC = colorlist.Primarycolor;
   let SC = colorlist.Secondarycolor;
   // let TC = colorlist.Ternarycolor;
+  const [Disable, setDisable] = useState(false);
+  useEffect(() => {
+    for (let i = 0; i < packageState.packages.length; i++) {
+      if (
+        packageState.packages[i].packagename === packagename &&
+        packageState.packages[i].packageversion === packageversion
+      ) {
+        setDisable(true);
+        break;
+      } else {
+        setDisable(false);
+      }
+    }
+  }, [packagename, packageversion, packageState]);
+
   const onShare = async () => {
     try {
       Share.share({
@@ -33,11 +54,11 @@ ${link}
       Snackbar.show({
         text: 'Failed to share',
         textColor:
-          PC === '#000' || PC === '#1F1B24' || PC === '#949398FF'
+          PC === '#000' || PC === '#1F1B24' || PC === '#949398'
             ? '#fff'
             : '#000',
         backgroundColor:
-          PC === '#000' || PC === '#1F1B24' || PC === '#949398FF'
+          PC === '#000' || PC === '#1F1B24' || PC === '#949398'
             ? '#000'
             : '#fff',
       });
@@ -47,19 +68,34 @@ ${link}
     try {
       const uidp = shortid.generate();
       let maile = await firebase.auth()._user.uid;
-      await database().ref(`/packages/${maile}/${uidp}`).set({
-        packagename,
-        packageversion,
-        id: uidp,
-      });
+      await database()
+        .ref(`/packages/${maile}/${uidp}`)
+        .set({
+          packagename,
+          packageversion,
+          id: uidp,
+        })
+        .then(async onfulfilled => {
+          const dref = database().ref(`/counter/${packagename}`);
+          dref.once('value', async snapshot => {
+            if (snapshot.exists()) {
+              let currentvalue = await snapshot.val();
+              await database()
+                .ref(`/counter/${packagename}`)
+                .set(currentvalue + 1);
+            } else {
+              await database().ref(`/counter/${packagename}`).set(1);
+            }
+          });
+        });
       Snackbar.show({
         text: 'Package added to favourite',
         textColor:
-          PC === '#000' || PC === '#1F1B24' || PC === '#949398FF'
+          PC === '#000' || PC === '#1F1B24' || PC === '#949398'
             ? '#fff'
             : '#000',
         backgroundColor:
-          PC === '#000' || PC === '#1F1B24' || PC === '#949398FF'
+          PC === '#000' || PC === '#1F1B24' || PC === '#949398'
             ? '#000'
             : '#fff',
       });
@@ -68,7 +104,7 @@ ${link}
       Snackbar.show({
         text: 'Package added to favourite failed',
         textColor:
-          PC === '#000' || PC === '#1F1B24' || PC === '#949398FF'
+          PC === '#000' || PC === '#1F1B24' || PC === '#949398'
             ? '#fff'
             : '#000',
         backgroundColor:
@@ -111,10 +147,12 @@ ${link}
           },
         }}>
         <MenuOption
+          disabled={Disable}
           customStyles={{
-            optionWrapper: {
-              flexDirection: 'row',
-            },
+            optionWrapper: [
+              Disable ? {opacity: 0.4} : {},
+              {flexDirection: 'row'},
+            ],
           }}
           onSelect={() => addpackage()}>
           <Icon style={{marginRight: 10}} name="flag-o" size={23} color={SC} />
@@ -149,11 +187,13 @@ ${link}
 };
 
 const mapStateToProps = state => ({
+  packageState: state.addpackage,
   colorlist: state.colorreducer.colours,
 });
 
 Addtofavbtn.prototype = {
   colorlist: propTypes.object.isRequired,
+  packageState: propTypes.object.isRequired,
 };
 
 export default connect(mapStateToProps)(Addtofavbtn);

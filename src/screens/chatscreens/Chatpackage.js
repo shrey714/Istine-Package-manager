@@ -1,27 +1,64 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
   View,
   Text,
   ScrollView,
+  Image,
 } from 'react-native';
 import getpackages from '../../action/package';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import LoadingAnimation from '../../components/LoadingAnimation';
 import * as Animatable from 'react-native-animatable';
 import propTypes from 'prop-types';
+import TRALOGO from '../../assets/images/TRALOGO.png';
 import {connect} from 'react-redux';
+import database from '@react-native-firebase/database';
 
 const Chatpackage = ({colorlist, packageState, navigation}) => {
   let PC = colorlist.Primarycolor;
   let SC = colorlist.Secondarycolor;
   let TC = colorlist.Ternarycolor;
+  const [Data, setData] = useState(0);
   useEffect(() => {
+    getData();
     getpackages();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const getData = () => {
+    database()
+      .ref('/counter/')
+      .on('value', async snapshot => {
+        setData(snapshot.val());
+      });
+  };
+  const Counter = ({count}) => {
+    return (
+      <View
+        style={{
+          flexDirection: 'row',
+          borderWidth: 0.6,
+          borderRadius: 3,
+          marginLeft: 12,
+          paddingHorizontal: 5,
+          borderColor: TC === '#000' ? '#fff' : '#000',
+          alignItems: 'center',
+        }}>
+        <Icon name="user" size={14} color={TC === '#000' ? '#fff' : '#000'} />
+        <Text
+          style={{
+            marginLeft: 5,
+            fontFamily: 'Quicksand-Bold',
+            color: TC === '#000' ? '#fff' : '#000',
+            fontSize: 14,
+          }}>
+          {Data[count]}
+        </Text>
+      </View>
+    );
+  };
+
   if (packageState.loading) {
     return <LoadingAnimation />;
   }
@@ -47,7 +84,11 @@ const Chatpackage = ({colorlist, packageState, navigation}) => {
         <ScrollView
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.contentcontainer}>
-          {packageState.packages.map((item, index) => (
+          {[
+            ...new Map(
+              packageState.packages.map(item => [item['packagename'], item]),
+            ).values(),
+          ].map((item, index) => (
             <Animatable.View
               animation="fadeIn"
               duration={400}
@@ -67,20 +108,18 @@ const Chatpackage = ({colorlist, packageState, navigation}) => {
                     packagename: item.packagename,
                   });
                 }}>
+                <Image source={TRALOGO} style={styles.image} />
                 <Text
                   numberOfLines={1}
                   style={{
+                    maxWidth: '70%',
                     fontFamily: 'Quicksand-Bold',
                     color: TC === '#000' ? '#fff' : '#000',
                     fontSize: 19,
                   }}>
                   {item.packagename}
                 </Text>
-                <Icon
-                  name="arrow-circle-o-right"
-                  size={20}
-                  color={TC === '#fff' ? (SC === '#ffffff' ? '#000' : SC) : SC}
-                />
+                <Counter count={item.packagename} />
               </TouchableOpacity>
             </Animatable.View>
           ))}
@@ -128,13 +167,21 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingVertical: 10,
     paddingHorizontal: 22,
+    paddingRight: 100,
     elevation: 2,
     overflow: 'hidden',
     borderRadius: 4,
     marginTop: 10,
-    paddingRight: 20,
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  image: {
+    width: 100,
+    height: 100,
+    position: 'absolute',
+    alignSelf: 'center',
+    right: 0,
+    opacity: 1,
   },
 });

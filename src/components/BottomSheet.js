@@ -20,7 +20,7 @@ const BottomSheett = props => {
     };
     loaddata();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [props]);
 
   const data = useMemo(() => Object.keys(packagedata).reverse(), [packagedata]);
   const snapPoints = useMemo(() => [24, '90%'], []);

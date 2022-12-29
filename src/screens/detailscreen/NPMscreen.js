@@ -83,7 +83,7 @@ const NPMscreen = ({detailsdata, navigation, readme, colorlist}) => {
                   : SC,
             },
           ]}>
-          {data.name}
+          {data?.name}
         </Text>
         <Separator />
         <Text
@@ -99,7 +99,7 @@ const NPMscreen = ({detailsdata, navigation, readme, colorlist}) => {
                   : SC,
             },
           ]}>
-          v{data.version}
+          v{data?.version}
         </Text>
         <Separator />
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -112,7 +112,7 @@ const NPMscreen = ({detailsdata, navigation, readme, colorlist}) => {
                 color: PC === '#000' || PC === '#1F1B24' ? '#fff' : '#000',
               },
             ]}>
-            {data.license}
+            {data?.license}
           </Text>
           <Icon
             name={'bookmark'}
@@ -129,7 +129,7 @@ const NPMscreen = ({detailsdata, navigation, readme, colorlist}) => {
               color: PC === '#000' || PC === '#1F1B24' ? '#ffffff' : '#212121',
             },
           ]}>
-          {data.description}
+          {data?.description}
         </Text>
       </View>
       <Separator />
@@ -230,7 +230,7 @@ const NPMscreen = ({detailsdata, navigation, readme, colorlist}) => {
                   : SC,
             },
           ]}>
-          npm i {data.name}@{data?.version}
+          npm i {data?.name}@{data?.version}
         </Text>
         <TouchableOpacity
           style={{
@@ -270,7 +270,7 @@ const NPMscreen = ({detailsdata, navigation, readme, colorlist}) => {
         </Text>
         <Separator />
         <View style={[styles.spebox, {backgroundColor: TC}]}>
-          {data.keywords?.map(e => (
+          {data?.keywords?.map(e => (
             <View
               key={shortid.generate()}
               style={[styles.textbox, {backgroundColor: PC}]}>
@@ -298,7 +298,7 @@ const NPMscreen = ({detailsdata, navigation, readme, colorlist}) => {
         </Text>
         <Separator />
         <View style={[styles.spebox, {backgroundColor: TC}]}>
-          {data.engines ? (
+          {data?.engines ? (
             Object.entries(data?.engines).map(val => (
               <View
                 key={shortid.generate()}
@@ -332,7 +332,7 @@ const NPMscreen = ({detailsdata, navigation, readme, colorlist}) => {
         </Text>
         <Separator />
         <View style={[styles.spebox, {backgroundColor: TC}]}>
-          {data.dependencies ? (
+          {data?.dependencies ? (
             Object.entries(data?.dependencies).map(val => (
               <View
                 key={shortid.generate()}

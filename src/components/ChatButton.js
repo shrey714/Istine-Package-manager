@@ -79,7 +79,6 @@ const mapStateToProps = state => ({
   colorlist: state.colorreducer.colours,
 });
 ChatButton.prototypes = {
-  signOut: propTypes.func.isRequired,
   colorlist: propTypes.object.isRequired,
 };
 
