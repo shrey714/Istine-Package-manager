@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="https://user-images.githubusercontent.com/76216765/170068954-275ca5d7-59e4-4937-a0b7-01a44a6e912d.png" width="100"><br>
+  <img src="https://user-images.githubusercontent.com/76216765/183026274-ea00fea9-4767-405e-86d3-cf06316d4483.png" width="100"><br>
   <a href="https://github.com/shrey714/Istine-Package-manager" style="color: black"><span>ISTINE</span></a><br>
 </h1>
 
@@ -13,7 +13,7 @@
 
 With a single click of the button below, and download ISTINE apk(suitable for your mobile architecture).
 <!-- BEGIN LATEST DOWNLOAD BUTTON -->
-[![Download zip](https://custom-icon-badges.herokuapp.com/badge/-Download-blue?style=for-the-badge&logo=download&logoColor=white "Download zip")](https://drive.google.com/drive/folders/1aI15rwsxlFoEcswGoKKOaOGj1bPAxuxg?usp=sharing)
+[![Download zip](https://custom-icon-badges.herokuapp.com/badge/-Download-blue?style=for-the-badge&logo=download&logoColor=white "Download zip")](https://play.google.com/store/apps/details?id=com.istine)
 <!-- END LATEST DOWNLOAD BUTTON -->
 
 ## Overview
@@ -21,7 +21,7 @@ With a single click of the button below, and download ISTINE apk(suitable for yo
 NPM package manager apk. Developed using [React Native](https://facebook.github.io/react-native/) and NPM-REGISTRY API.
 
 ## Screenshot
-<img src="https://user-images.githubusercontent.com/76216765/171994239-f4b525cb-049b-4720-b2bc-d86efeae67c5.png" width="200" /><img src="https://user-images.githubusercontent.com/76216765/171994240-5f5eb124-2e95-4d2b-a705-392e7b40dcff.png" width="200" /><img src="https://user-images.githubusercontent.com/76216765/171994241-035de696-6fb4-4d05-9ef0-50ca83dbbb04.png" width="200" /><img src="https://user-images.githubusercontent.com/76216765/171994248-c9f4bbe2-2857-4b32-8d8f-cce066c43051.png" width="200" /><img src="https://user-images.githubusercontent.com/76216765/171994250-03916217-2536-4e1c-9fa4-502f980e1447.png" width="200" /><img src="https://user-images.githubusercontent.com/76216765/171994251-5d304934-5f48-45aa-aa42-90be2ef774e5.png" width="200" /><img src="https://user-images.githubusercontent.com/76216765/171994253-78e524d7-bd9b-4521-ba74-d96fe206072f.png" width="200" /><img src="https://user-images.githubusercontent.com/76216765/171994255-1a71d20f-c4fe-45e0-986b-dfbbbb2248d1.png" width="200"/> <img src="https://user-images.githubusercontent.com/76216765/171994256-c2150831-48e9-4701-9852-bc55bfeadf25.png" width="200" /><img src="https://user-images.githubusercontent.com/76216765/171994257-e9a91ca5-0010-42b7-8e91-840fb6d72d84.png" width="200" /><img src="https://user-images.githubusercontent.com/76216765/171994261-85a288e0-f4ea-4b9d-a501-560c81d1e18a.png" width="200" /><img src="https://user-images.githubusercontent.com/76216765/171994265-18d89720-a430-47cb-9994-a157b5bd6be9.png" width="200" />
+<img src="https://user-images.githubusercontent.com/76216765/183025641-f43b011c-5f8c-407a-860c-75b9c8e0a0ff.png" width="200" /><img src="https://user-images.githubusercontent.com/76216765/183025649-22f95c23-00bd-4c81-b993-46ca8f7fdb64.png" width="200" /><img src="https://user-images.githubusercontent.com/76216765/183025654-f2f8a7c4-65a2-4410-872d-3af83083ef5e.png" width="200" /><img src="https://user-images.githubusercontent.com/76216765/183025664-ae1ca0fb-05bd-4a60-a6de-d4701d1670e1.png" width="200" /><img src="https://user-images.githubusercontent.com/76216765/183025658-296c42ad-0f60-465b-b99c-b49d2e7f399d.png" width="200" /><img src="https://user-images.githubusercontent.com/76216765/183025666-e38bbbc3-419c-4b37-b9f6-aef28bfab6aa.png" width="200" /><img src="https://user-images.githubusercontent.com/76216765/183025671-17ac72b0-4a15-47e4-93bc-d35b447a0de6.png" width="200" />
 ## Features
 
 • Search NPM packages
