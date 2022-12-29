@@ -11,7 +11,7 @@
 
 ## DOWNLOAD APK
 
-With a single click of the button below, and download ISTINE apk(suitable for your mobile architecture).
+With a single click of the button below, and download ISTINE apk from play store(Android).
 <!-- BEGIN LATEST DOWNLOAD BUTTON -->
 [![Download zip](https://custom-icon-badges.herokuapp.com/badge/-Download-blue?style=for-the-badge&logo=download&logoColor=white "Download zip")](https://play.google.com/store/apps/details?id=com.istine)
 <!-- END LATEST DOWNLOAD BUTTON -->
